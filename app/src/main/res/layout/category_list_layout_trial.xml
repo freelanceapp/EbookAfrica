@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Art and Idea"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Buisnedd and leadership"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Biography and memory"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Children's"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Coocking Food"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Craft and hobbies"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Fantasy"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Fiction and Literature"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Health and wellness"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="History"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/icons_8_muted_grey"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Humor"
+        android:gravity="center|left"
+        android:paddingLeft="30dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_greydark"/>
+
+
+
+
+
+</LinearLayout>

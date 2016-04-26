@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/textcolor"
+    android:layout_marginTop="5dp">
+
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="200dp"
+      android:layout_marginTop="3dp"
+       android:background="@android:color/white">
+         <!--<ImageView-->
+           <!--android:layout_width="match_parent"-->
+           <!--android:layout_height="wrap_content"-->
+           <!--android:scaleType="fitXY"-->
+           <!--android:background="@color/counter_text_color"/>-->
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="130dp"
+          android:orientation="horizontal"
+          android:padding="10dp"
+          android:layout_weight="0.5">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_weight="1">
+
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:background="@drawable/thelightning_thief"/>
+
+         </LinearLayout>
+          <LinearLayout
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_weight="0.5"
+              android:layout_marginLeft="10dp">
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+
+                  <views.TypefaceTextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="READ THE MAN BOOKER PRIZE WINNER 2015"
+                      android:textColor="@color/colorPrimary"
+                      android:textSize="10dp"
+                      geekui:customTypeface="fonts/AllerDisplay.ttf"/>
+
+                  <views.TypefaceTextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="AFTER LIFE"
+                      android:textColor="@color/colorPrimary"
+                      android:textSize="15dp"
+                      android:layout_marginTop="2dp"
+                      geekui:customTypeface="fonts/AllerDisplay.ttf"                      />
+
+                  <views.TypefaceTextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="ERIC KENT EDSTROM"
+                      android:textColor="@color/colorPrimary"
+                      android:textSize="10dp"
+                      android:layout_marginTop="3dp"
+                      geekui:customTypeface="fonts/AllerDisplay.ttf"/>
+
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="USD-404.99"
+                      android:textColor="#000"
+                      android:textSize="13dp"
+                      android:textStyle="bold"
+                      />
+
+                </LinearLayout>
+
+              <views.TypefaceTextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="Buy Now"
+                  android:background="@drawable/textlayout1"
+                  android:textSize="12dp"
+                  android:padding="6dp"
+                  geekui:customTypeface="fonts/AllerDisplay.ttf"
+                  android:gravity="center"
+                  android:layout_marginTop="5dp"
+                  android:textColor="#000"/>
+
+              <views.TypefaceTextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="Save Preview"
+                  android:background="@drawable/textlayout1"
+                  android:textSize="12dp"
+                  android:padding="6dp"
+                  geekui:customTypeface="fonts/AllerDisplay.ttf"
+                  android:gravity="center"
+                  android:layout_marginTop="5dp"
+                  android:textColor="#000"/>
+
+          </LinearLayout>
+
+      </LinearLayout>
+
+
+
+       </LinearLayout>
+   </FrameLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorPrimary">#4183D7</color>
+    <color name="textcolor">#ffffff</color>
+    <color name="yello_light">#F4D03F</color>
+
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#58e1cfcf</color>
+    <color name="back_home_color">#ecf0f1</color>
+
+
+
+
+    <color name="muted_black">#3f3f3f</color>
+
+
+
+    ///// other colours used in app
+    <color name="facebook_logo_colour">#3a589a</color>
+
+    <color name="linked_in_logo_colour">#007bb5</color>
+    <color name="primary_colour_blue">#63adec</color>
+
+    <color name="primary_colour_blue_transparent">#9663adec</color>
+    <color name="secondry_colour_blue">#0e3066</color>
+    <color name="tabindicator_colour">#426a92</color>
+
+
+    //////////// calendar colours
+    <color name="custom_header_text">#85B100</color>
+    <color name="custom_selected">#A8D324</color>
+    <color name="custom_background">#F0F8DB</color>
+    <color name="custom_background_today">#FF9105</color>
+    <color name="custom_background_disabled">#F0F8DB</color>
+    <color name="custom_text_selected">#FFFFFFFF</color>
+    <color name="custom_text_inactive">#7f778088</color>
+    <color name="transparent">#00000000</color>
+
+</resources>

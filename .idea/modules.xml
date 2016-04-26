@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BottomNavigationViewLibrary/BottomNavigationViewLibrary.iml" filepath="$PROJECT_DIR$/BottomNavigationViewLibrary/BottomNavigationViewLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EbookAfrica.iml" filepath="$PROJECT_DIR$/EbookAfrica.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter/adapter.iml" filepath="$PROJECT_DIR$/adapter/adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/drawme/drawme.iml" filepath="$PROJECT_DIR$/drawme/drawme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialsearchview/materialsearchview.iml" filepath="$PROJECT_DIR$/materialsearchview/materialsearchview.iml" />
+    </modules>
+  </component>
+</project>

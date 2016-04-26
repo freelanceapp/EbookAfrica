@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:drawme="http://schemas.android.com/apk/res-auto"
+    xmlns:geekui="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <views.TypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="SUMMARY"
+        android:textColor="@color/title"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        geekui:customTypeface="fonts/AllerDisplay.ttf" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/icons_8_muted_green_1"
+            android:text="Computer"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:padding="5dp"
+            geekui:customTypeface="fonts/AllerDisplay.ttf" />
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/icons_8_muted_green_2_dark"
+            android:text="IT Infrastructure"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            geekui:customTypeface="fonts/AllerDisplay.ttf" />
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/icons_8_muted_blue"
+            android:text="Coding"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            geekui:customTypeface="fonts/AllerDisplay.ttf" />
+
+
+
+
+    </LinearLayout>
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This book is here to help you tale your  understanding of IT Interview JAVA Programming Fundamentals, Concepts, Probleams, Analysis, and Multiple Solutions to the next level, to help you apply....."
+        android:textColor="@color/icons_8_muted_grey"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        geekui:customTypeface="fonts/AllerDisplay.ttf" />
+
+
+    <views.TypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/icons_8_muted_green_1"
+        android:text="MORE"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        geekui:customTypeface="fonts/AllerDisplay.ttf" />
+
+
+</LinearLayout>

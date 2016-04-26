@@ -1,0 +1,47 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+
+
+
+
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_action_search"
+        android:orderInCategory="100"
+        android:title="@string/abc_search_hint"
+        app:showAsAction="always" />
+
+
+    <item android:id="@+id/action_setting"
+
+        android:title="text size 15"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
+
+    <item android:id="@+id/action_faq"
+        android:title="text size 18"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
+
+    <item android:id="@+id/action_tandc"
+        android:title="text size 20"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
+
+    <item android:id="@+id/action_privacy"
+        android:title="text size 23"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
+
+    <item android:id="@+id/action_logout"
+        android:title="text size 25"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
+
+
+
+</menu>

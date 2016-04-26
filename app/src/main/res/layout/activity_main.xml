@@ -1,0 +1,74 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="49dp"
+        android:layout_marginBottom="49dp"
+        android:id="@+id/main_container"></FrameLayout>
+
+
+
+    <!-- Must be last for right layering display -->
+    <FrameLayout
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/icons_8_muted_green_1" >
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:text="ebook "
+                android:textSize="20dp"
+                android:textColor="@color/icons_8_muted_offWhite"/>
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textSize="20dp"
+                android:text="africa"
+                android:textColor="@color/icons_8_muted_offWhite"/>
+        </android.support.v7.widget.Toolbar>
+
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:id="@+id/search_view"
+            style="@style/MaterialSearchViewStyle"
+            geekui:customTypeface="fonts/AllerDisplay.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.6dp"
+        android:background="@color/icons_8_muted_green_1"
+        android:layout_marginBottom="50dp"/>
+
+
+    <com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"/>
+
+
+</FrameLayout>

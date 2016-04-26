@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:gravity="center|top">
+
+
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:background="@drawable/cover_2"/>
+
+    <views.TypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name Of the book Goes here"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/title"/>
+
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_green_1"/>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <views.CustomRatingBarGreen
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/rating_bar_top"></views.CustomRatingBarGreen>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  ( 81 Rating )"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="240 pages"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            geekui:customTypeface="fonts/Confessions Font.otf"/>
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 hours"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            geekui:customTypeface="fonts/Confessions Font.otf"/>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="@color/icons_8_muted_green_1">
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_dollar_icon"/>
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy Now"
+                android:gravity="center"
+                android:textColor="@color/icons_8_muted_offWhite"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                geekui:customTypeface="fonts/AllerDisplay.ttf"/>
+
+
+        </LinearLayout>
+
+
+
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/button_iimage"
+                android:scaleType="centerCrop"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#a8000000"></RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp"
+                android:id="@+id/preview">
+
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_read_book_preview"/>
+
+                <views.TypefaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Preview"
+                    android:gravity="center"
+                    android:textColor="@color/icons_8_muted_offWhite"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    geekui:customTypeface="fonts/AllerDisplay.ttf"/>
+
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

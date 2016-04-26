@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="separator_line">#ECECEC</color>
+    <color name="title">#2a2a2a</color>
+    <color name="subtitle">#999999</color>
+
+
+    <color name="icons_8_muted_red">#e74c3c</color>
+    <color name="icons_8_muted_red_dark">#c0392b</color>
+
+    <color name="icons_8_muted_yellow">#f1c40f</color>
+    <color name="icons_8_muted_yellow_dark">#f39c12</color>
+
+    <color name="icons_8_muted_orange">#e67e22</color>
+    <color name="icons_8_muted_orange_dark">#d35400</color>
+
+    <color name="icons_8_muted_green_1">#2ecc71</color>
+    <color name="icons_8_muted_green_1_transparent">#cb2ecc71</color>
+    <color name="icons_8_muted_green_1_dark">#27ae60</color>
+
+    <color name="icons_8_muted_green_2">#1abc9c</color>
+    <color name="icons_8_muted_green_2_dark">#16a085</color>
+
+    <color name="icons_8_muted_blue">#3498db</color>
+    <color name="icons_8_muted_blue_dark">#2980b9</color>
+
+    <color name="icons_8_muted_violet">#9b59b6</color>
+    <color name="icons_8_muted_violet_dark">#8e44ad</color>
+
+    <color name="icons_8_muted_offWhite">#ecf0f1</color>
+    <color name="icons_8_muted_offWhite_dark">#bdc3c7</color>
+
+    <color name="icons_8_muted_grey">#95a5a6</color>
+    <color name="icons_8_muted_greydark">#687576</color>
+
+    <color name="icons_8_muted_blueblack">#34495e</color>
+    <color name="icons_8_muted_blueblack_dark">#2c3e50</color>
+
+</resources>
