@@ -14,12 +14,13 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
             app:stl_indicatorAlwaysInCenter="false"
             app:stl_indicatorWithoutPadding="false"
             app:stl_indicatorInFront="false"
             app:stl_indicatorInterpolation="smart"
             app:stl_indicatorGravity="center"
-            app:stl_indicatorColor="@color/icons_8_muted_greydark"
+            app:stl_indicatorColor="@color/icons_8_muted_green_1_dark"
             app:stl_indicatorThickness="25dp"
             app:stl_indicatorCornerRadius="5dp"
             app:stl_overlineColor="@color/icons_8_muted_green_1"
@@ -37,7 +38,6 @@
             app:stl_distributeEvenly="true"
             app:stl_clickable="true"
             app:stl_titleOffset="24dp"
-            android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             app:stl_drawDecorationAfterTab="false" />
     </LinearLayout>

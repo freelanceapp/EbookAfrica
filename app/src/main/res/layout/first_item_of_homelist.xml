@@ -15,6 +15,25 @@
         android:scaleType="centerCrop"
         android:layout_gravity="center" />
 
+
+
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_height="fill_parent"
+        />
+
+
+
+    <com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        />
+
     <com.rafakob.drawme.DrawMeLinearLayout
         android:layout_width="fill_parent"
         android:layout_height="35dp"

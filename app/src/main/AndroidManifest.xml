@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,15 +29,23 @@
         <activity
             android:name=".lalit.BookViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize"
-            android:label="BookView" >
+            android:label="BookView"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".lalit.LalitActivity"
-            android:label="@string/title_activity_lalit" >
+            android:label="@string/title_activity_lalit"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".specificbook.SpecificBookActivity"
-            android:label="@string/title_activity_specific_book" >
+            android:label="@string/title_activity_specific_book"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".specificcategoryfragment.SpecificCategoryActivity"
+            android:label="@string/title_activity_specific_category"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

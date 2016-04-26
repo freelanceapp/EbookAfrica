@@ -11,13 +11,13 @@ import com.apporio.ebookafrica.R;
 /**
  * Created by spinnosolutions on 4/9/16.
  */
-public class FragmentCollection extends Fragment {
+public class FragmentFavourite extends Fragment {
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.frag_worked, container, false);
+        View v = inflater.inflate(R.layout.frag_favourite, container, false);
         return v;
     }
 
@@ -25,9 +25,9 @@ public class FragmentCollection extends Fragment {
 
 
 
-    public static FragmentCollection newInstance(String text) {
+    public static FragmentFavourite newInstance(String text) {
 
-        FragmentCollection f = new FragmentCollection();
+        FragmentFavourite f = new FragmentFavourite();
         Bundle b = new Bundle();
         b.putString("msg", text);
 

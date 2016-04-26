@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Concet about this fragment is to show all the downloaded content so that user can read those offline as well. "
+        android:text="The user can mark the book as a favourite or read later that will show in this fragment "
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>

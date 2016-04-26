@@ -10,6 +10,7 @@
     <string name="specific_category">Fragment Specific Category </string>
     <string name="title_activity_lalit">LalitActivity</string>
     <string name="title_activity_specific_book">SpecificBookActivity</string>
+    <string name="title_activity_specific_category">SpecificCategoryActivity</string>
 
 
 

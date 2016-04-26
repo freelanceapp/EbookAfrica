@@ -7,7 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/adapter/adapter.iml" filepath="$PROJECT_DIR$/adapter/adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/drawme/drawme.iml" filepath="$PROJECT_DIR$/drawme/drawme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imageslider/imageslider.iml" filepath="$PROJECT_DIR$/imageslider/imageslider.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialsearchview/materialsearchview.iml" filepath="$PROJECT_DIR$/materialsearchview/materialsearchview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stickyheader/stickyheader.iml" filepath="$PROJECT_DIR$/stickyheader/stickyheader.iml" />
     </modules>
   </component>
 </project>

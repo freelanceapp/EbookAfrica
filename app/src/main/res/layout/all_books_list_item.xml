@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:gravity="center|top"
+    android:background="#ffffff"
+    android:padding="10dp">
+
+
+
+    <ImageView
+        android:layout_width="85dp"
+        android:layout_height="125dp"
+        android:id="@+id/imagebook"
+        android:background="@drawable/cover_2"
+        android:layout_marginBottom="5dp"/>
+
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:gravity="top|left"
+        android:padding="5dp">
+
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name Of nobel goes Here"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_greydark"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left">
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type :"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bokname"
+                android:text="Science Fiction"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left">
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="450"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pages"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom|right"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_hamburger_menu_grey"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
