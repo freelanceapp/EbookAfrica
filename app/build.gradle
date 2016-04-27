@@ -31,4 +31,6 @@ dependencies {
     compile 'com.ogaclejapan.smarttablayout:library:1.5.0@aar'
     compile project(':imageslider')
     compile project(':stickyheader')
+    compile 'com.github.tibolte:elasticdownload:1.0.+'
+    compile project(':fillingprogressbar')
 }

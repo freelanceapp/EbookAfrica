@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:geekui="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ru.noties.filldrawable.FillImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fill_image_view_1"
+            app:fiv_drawable="@drawable/ic_book_open_progress"
+            app:fiv_fillColor="@color/icons_8_muted_green_1"
+            app:fiv_normalColor="#b2b2b2"
+            app:fiv_from="left"
+            app:fiv_percent="33"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
