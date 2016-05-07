@@ -4,16 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.apporio.apporiologin.LoginEvent;
-
-import de.greenrobot.event.EventBus;
 
 public class SplashScreen extends AppCompatActivity {
 
 
-    private EventBus bus = EventBus.getDefault();
+
 
     ImageView banner ;
 
@@ -21,7 +16,6 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        bus.register(this);
 
 
         banner = (ImageView) findViewById(R.id.banner);
@@ -53,23 +47,13 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-//        if(new AppOrioLoginPrefrences(SplashScreen.this).getLoginStatus() == 0){
-//            Intent in  = new Intent(SplashScreen.this , AppOrioLoginScreen.class);
-//            in.putExtra("apporio_login_url" ," http://176.32.230.48/kalthegeek.com/kalthegeek.com/ebook/api/api.php?func=login");
-//            in.putExtra("apporio_sign_url" , "http://176.32.230.48/kalthegeek.com/kalthegeek.com/ebook/api/api.php?func=registration");
-//            startActivity(in);
-//        }else {
-//            startActivity(new Intent(SplashScreen.this  , MainActivity.class));
-//        }
-    }
-
-
-
-
-    public void onEvent(LoginEvent Value){
-        Toast.makeText(SplashScreen.this , "Response is " +Value.LoginEvent() ,Toast.LENGTH_SHORT).show();
 
     }
+
+
+
+
+
 
 
 
@@ -79,7 +63,6 @@ public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        bus.unregister(this);
         super.onDestroy();
     }
 }

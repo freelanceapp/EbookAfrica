@@ -12,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.apporio.apporiologin.LoginEvent;
 import com.apporio.ebookafrica.categoryfragment.FragmentCategory;
 import com.apporio.ebookafrica.fragmentyourbooks.FragmentYourBooksMain;
 import com.apporio.ebookafrica.homefragment.FragmentHome;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mainActivity = this ;
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
@@ -203,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
 
 

@@ -1,8 +1,6 @@
 package com.apporio.apporiologin;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -42,13 +40,11 @@ public class AppOrioLoginScreen extends AppCompatActivity {
      String SignUp_Url = "";
 
     RequestQueue queue ;
-    SharedPreferences sharedpreferences  ;
     ImageView   banner    ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-        sharedpreferences = getSharedPreferences(Contants.MyPREFERENCES, Context.MODE_PRIVATE);
 
         queue = VolleySingleton.getInstance(AppOrioLoginScreen.this).getRequestQueue();
         Login_Url = getIntent().getExtras().getString("apporio_login_url");
@@ -96,18 +92,12 @@ public class AppOrioLoginScreen extends AppCompatActivity {
         Login_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(email_edt.getText().toString().equals("")||email_edt.getText().toString() == null ||password_edt.getText().toString().equals("")||password_edt.getText().toString() == null ){
+                    Toast.makeText(AppOrioLoginScreen.this, "Required field missing" , Toast.LENGTH_SHORT).show();
+                }else {
 
-//                SharedPreferences.Editor editor = sharedpreferences.edit();
-//                editor.putInt("login_state", 1);
-//                editor.commit();
-//
-//
-//                levent = new LoginEvent(1);
-//                bus.post(levent);
-
-                doLoginCall("tomas@onjection.com" , "123456");
-
-
+                }
+                doLoginCall(""+email_edt.getText().toString() , ""+password_edt.getText().toString());
             }
         });
 

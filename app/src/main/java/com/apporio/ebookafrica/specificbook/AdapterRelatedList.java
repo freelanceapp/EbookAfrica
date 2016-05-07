@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.apporio.ebookafrica.R;
 
@@ -50,13 +49,8 @@ public class AdapterRelatedList extends BaseAdapter {
         View MyView ;
         inflate = (LayoutInflater) con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         MyView = inflate.inflate(R.layout.item_related_list_view, parent, false);
-
         HorizontalListView h_view = (HorizontalListView) MyView.findViewById(R.id.horizintal_list);
-
         h_view.setAdapter(new AdapterHoriZontalList(comic_images ));
-
-
-        Toast.makeText(con , ""+position , Toast.LENGTH_SHORT).show();
         return MyView;
     }
 

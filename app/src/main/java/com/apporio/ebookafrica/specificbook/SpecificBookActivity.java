@@ -5,8 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.Toast;
 
+import com.apporio.apporiologin.LoginEvent;
 import com.apporio.ebookafrica.R;
+
+import de.greenrobot.event.EventBus;
 
 public class SpecificBookActivity extends FragmentActivity {
 
@@ -16,7 +20,7 @@ public class SpecificBookActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_book);
-
+        EventBus.getDefault().register(this);
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,5 +47,17 @@ public class SpecificBookActivity extends FragmentActivity {
 
 
     }
+
+
+    public void onEvent(LoginEvent Value){
+        Toast.makeText(SpecificBookActivity.this, "Response is " + Value.LoginEvent(), Toast.LENGTH_SHORT).show();
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
 
 }
