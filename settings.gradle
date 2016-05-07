@@ -1,1 +1,1 @@
-include ':app', ':materialsearchview', ':BottomNavigationViewLibrary', ':drawme', ':adapter', ':imageslider', ':stickyheader', ':fillingprogressbar'
+include ':app', ':materialsearchview', ':BottomNavigationViewLibrary', ':drawme', ':adapter', ':imageslider', ':stickyheader', ':fillingprogressbar', ':apporiologin'

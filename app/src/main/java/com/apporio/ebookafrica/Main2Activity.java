@@ -16,18 +16,10 @@ import ru.noties.filldrawable.FillImageView;
 public class Main2Activity extends AppCompatActivity {
 
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
-
-
 
         final List<FillDrawable> drawables = createDrawables();
 

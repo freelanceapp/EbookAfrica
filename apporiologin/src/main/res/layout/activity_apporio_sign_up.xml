@@ -1,0 +1,175 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center|top"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="scribd.apporio.my.com.scribd.StartUpScreens.LoginFragment">
+
+
+
+
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:id="@+id/banner_image"/>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ae000000"></RelativeLayout>
+
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="49dp"
+            android:orientation="horizontal"
+            android:gravity="center|left">
+
+            <LinearLayout
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:id="@+id/back"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_left_back_white"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="49dp">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="40dp">
+
+                <EditText
+                    android:layout_width="@dimen/dim_250"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:id="@+id/first_name_edt"
+                    android:textColorHint="#d0bcbcbc"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="@dimen/dim_250"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    android:id="@+id/last_name_edt"
+                    android:textColorHint="#d0bcbcbc"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"/>
+
+
+                <EditText
+                    android:layout_width="@dimen/dim_250"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/phone_edt"
+                    android:textColorHint="#d0bcbcbc"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:hint="Phone"
+                    android:paddingLeft="10dp"/>
+
+
+                <EditText
+                    android:layout_width="@dimen/dim_250"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/email_edt"
+                    android:textColorHint="#d0bcbcbc"
+                    android:textColor="#ffffff"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:hint="Email"
+                    android:paddingLeft="10dp"/>
+
+
+
+
+                <EditText
+                    android:layout_width="@dimen/dim_250"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:textColorHint="#d0bcbcbc"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:id="@+id/password_edt"
+                    android:paddingLeft="10dp"/>
+
+
+
+                <EditText
+                    android:layout_width="@dimen/dim_250"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:textColorHint="#d0bcbcbc"
+                    android:textColor="#ffffff"
+                    android:gravity="center"                android:hint="Confirm Password"
+                    android:id="@+id/confirm_password_edt"
+                    android:paddingLeft="10dp"/>
+
+
+
+
+
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up "
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/signup_button"/>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </FrameLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

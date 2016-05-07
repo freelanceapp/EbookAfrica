@@ -1,0 +1,86 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="scribd.apporio.my.com.scribd.StartUpScreens.LoginFragment">
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/banner"
+        android:scaleType="centerCrop"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ae000000"></RelativeLayout>
+
+    
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:gravity="center"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <EditText
+        android:layout_width="@dimen/dim_250"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_edt"
+        android:hint="email"
+        android:textColorHint="#d0bcbcbc"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="10dp"/>
+
+
+
+    <EditText
+        android:layout_width="@dimen/dim_250"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_edt"
+        android:paddingLeft="10dp"
+        android:hint="password"
+        android:textColorHint="#d0bcbcbc"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_btn"
+        android:text="Login`"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New Account"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/signup_txt"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff"/>
+
+
+</LinearLayout>
+
+
+
+
+</FrameLayout>
