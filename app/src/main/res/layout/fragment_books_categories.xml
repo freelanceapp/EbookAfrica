@@ -126,7 +126,17 @@
 
 
 
-        <include layout="@layout/category_list_layout_trial"/>
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="2dp"></ListView>
+
+
+
+
+
     </LinearLayout>
 
 </com.nirhart.parallaxscroll.views.ParallaxScrollView>

@@ -3,6 +3,7 @@ package com.apporio.apporiologin;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,20 +30,47 @@ public class ApporioSignUpActivity extends Activity {
 
 
     ImageView  banner_image ;
+    EditText first_name_edt  , last_name_edt  ,phone_edt , email_edt , password_edt , confirm_password_edt   ;
+
+    public static boolean Activity_Is_Open  = false ;
+    public static Activity activity ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apporio_sign_up);
+        activity =this ;
+        Activity_Is_Open = true ;
         queue = VolleySingleton.getInstance(ApporioSignUpActivity.this).getRequestQueue();
+
         banner_image = (ImageView) findViewById(R.id.banner_image);
+        first_name_edt = (EditText) findViewById(R.id.first_name_edt);
+        last_name_edt = (EditText) findViewById(R.id.last_name_edt);
+        phone_edt = (EditText) findViewById(R.id.phone_edt);
+        email_edt = (EditText) findViewById(R.id.email_edt);
+        password_edt = (EditText) findViewById(R.id.password_edt);
+        confirm_password_edt = (EditText) findViewById(R.id.confirm_password_edt);
+
         banner_image.setImageResource(R.drawable.signupbanner);
+
 
 
         findViewById(R.id.signup_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doSignUpCall(getIntent().getExtras().getString("apporio_sign_url") , "samir" , "goel" ,"343245" , "samir@apporio.com" ,"123456");
+                if(!password_edt.getText().toString().equals(confirm_password_edt.getText().toString())){
+
+                    Toast.makeText(ApporioSignUpActivity.this , "Password Does Not Matches" , Toast.LENGTH_SHORT).show();
+                }else {
+
+                    if(new ConnectionDetector(getApplicationContext()).isConnectingToInternet()){
+                        doSignUpCall(getIntent().getExtras().getString("apporio_sign_url") , ""+first_name_edt.getText().toString() , ""+last_name_edt.getText().toString() ,""+phone_edt.getText().toString() , ""+email_edt.getText().toString() ,""+password_edt.getText().toString());
+                    }else {
+                        levent = new LoginEvent("No InterNet Connection Available" , 0);
+                        bus.post(levent);
+                    }
+                }
+
             }
         });
 
@@ -74,14 +102,14 @@ public class ApporioSignUpActivity extends Activity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        levent = new LoginEvent(""+response);
+                        levent = new LoginEvent(""+response , 1);
                         bus.post(levent);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        levent = new LoginEvent(""+error);
+                        levent = new LoginEvent("Server Error ! " , 0);
                         bus.post(levent);
                     }
                 }) {
@@ -94,7 +122,13 @@ public class ApporioSignUpActivity extends Activity {
             }
         };
         queue.add(postRequest);
-        Toast.makeText(ApporioSignUpActivity.this, "Signbing up loader", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ApporioSignUpActivity.this, "Start executing Sign up loader", Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activity_Is_Open  =false ;
+    }
 }

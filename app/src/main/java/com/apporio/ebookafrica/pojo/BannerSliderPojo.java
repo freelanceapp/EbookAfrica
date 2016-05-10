@@ -4,14 +4,17 @@ package com.apporio.ebookafrica.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SignUpUnSuccess {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BannerSliderPojo {
 
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("message")
+    @SerializedName("slider")
     @Expose
-    private String message;
+    private List<Slider> slider = new ArrayList<Slider>();
 
     /**
      * 
@@ -34,19 +37,19 @@ public class SignUpUnSuccess {
     /**
      * 
      * @return
-     *     The message
+     *     The slider
      */
-    public String getMessage() {
-        return message;
+    public List<Slider> getSlider() {
+        return slider;
     }
 
     /**
      * 
-     * @param message
-     *     The message
+     * @param slider
+     *     The slider
      */
-    public void setMessage(String message) {
-        this.message = message;
+    public void setSlider(List<Slider> slider) {
+        this.slider = slider;
     }
 
 }

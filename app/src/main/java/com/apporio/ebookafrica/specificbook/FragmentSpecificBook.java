@@ -1,8 +1,6 @@
 package com.apporio.ebookafrica.specificbook;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,9 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.apporio.apporiologin.AppOrioLoginScreen;
-import com.apporio.apporiologin.Contants;
 import com.apporio.ebookafrica.R;
-import com.apporio.ebookafrica.constants.SharedPrefrencesKey;
+import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.lalit.LalitActivity;
 
@@ -34,7 +31,7 @@ public class FragmentSpecificBook extends Fragment {
     CustomRatingBarGreen  rating_bar_top;
     ImageView button_iimage ;
     LinearLayout buy_now ;
-    SharedPreferences sharedpreferences  ;
+    SessionManager   sm  ;
 
 
     public FragmentSpecificBook(){}
@@ -48,7 +45,7 @@ public class FragmentSpecificBook extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        sharedpreferences = getActivity().getSharedPreferences(Contants.MyPREFERENCES, Context.MODE_PRIVATE);
+        sm = new SessionManager(getActivity());
 
         View rootView = inflater.inflate(R.layout.fragment_specific_book, container, false);
         bottomrelated_listview = (ListView) rootView.findViewById(R.id.related_list);
@@ -77,8 +74,7 @@ public class FragmentSpecificBook extends Fragment {
             @Override
             public void onClick(View v) {
 
-            if(sharedpreferences.getBoolean(SharedPrefrencesKey.LOGIN_STATE, false)){
-
+            if(sm.isLoggedIn()){
                 DownloadBook();
             }else {
                 Intent in  = new Intent(getActivity() , AppOrioLoginScreen.class);

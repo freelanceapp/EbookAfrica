@@ -1,5 +1,6 @@
 package com.apporio.apporiologin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,11 +42,12 @@ public class AppOrioLoginScreen extends AppCompatActivity {
 
     RequestQueue queue ;
     ImageView   banner    ;
+    public static Activity activity ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-
+        activity = this ;
         queue = VolleySingleton.getInstance(AppOrioLoginScreen.this).getRequestQueue();
         Login_Url = getIntent().getExtras().getString("apporio_login_url");
         SignUp_Url = getIntent().getExtras().getString("apporio_sign_url");
@@ -96,8 +98,14 @@ public class AppOrioLoginScreen extends AppCompatActivity {
                     Toast.makeText(AppOrioLoginScreen.this, "Required field missing" , Toast.LENGTH_SHORT).show();
                 }else {
 
+                    if(new ConnectionDetector(getApplicationContext()).isConnectingToInternet()){
+                        doLoginCall(""+email_edt.getText().toString() , ""+password_edt.getText().toString());
+                    }else {
+                        levent = new LoginEvent("No InterNet Connection Available" , 0);
+                        bus.post(levent);
+                    }
+
                 }
-                doLoginCall(""+email_edt.getText().toString() , ""+password_edt.getText().toString());
             }
         });
 
@@ -117,14 +125,14 @@ public class AppOrioLoginScreen extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        levent = new LoginEvent(""+response);
+                        levent = new LoginEvent(""+response , 1);
                         bus.post(levent);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        levent = new LoginEvent(""+error);
+                        levent = new LoginEvent("Server Error ! " , 0 );
                         bus.post(levent);
                     }
                 }) {

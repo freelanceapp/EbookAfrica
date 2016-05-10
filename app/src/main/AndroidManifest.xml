@@ -38,7 +38,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".specificcategoryfragment.SpecificCategoryActivity"
+            android:name=".fragmentspecificcategory.SpecificCategoryActivity"
             android:label="@string/title_activity_specific_category"
             android:screenOrientation="portrait" >
         </activity>

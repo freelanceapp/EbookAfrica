@@ -1,4 +1,4 @@
-package com.apporio.ebookafrica.specificcategoryfragment;
+package com.apporio.ebookafrica.fragmentspecificcategory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.apporio.ebookafrica.R;
-import com.apporio.ebookafrica.fragmentspecificcategory.FragmentSpecificCategory;
 
 public class SpecificCategoryActivity extends AppCompatActivity {
 

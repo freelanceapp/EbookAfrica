@@ -4,14 +4,17 @@ package com.apporio.ebookafrica.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SignUpUnSuccess {
+import java.util.ArrayList;
+import java.util.List;
+
+public class AllCategories {
 
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("message")
+    @SerializedName("categories")
     @Expose
-    private String message;
+    private List<Category> categories = new ArrayList<Category>();
 
     /**
      * 
@@ -34,19 +37,19 @@ public class SignUpUnSuccess {
     /**
      * 
      * @return
-     *     The message
+     *     The categories
      */
-    public String getMessage() {
-        return message;
+    public List<Category> getCategories() {
+        return categories;
     }
 
     /**
      * 
-     * @param message
-     *     The message
+     * @param categories
+     *     The categories
      */
-    public void setMessage(String message) {
-        this.message = message;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
 }
