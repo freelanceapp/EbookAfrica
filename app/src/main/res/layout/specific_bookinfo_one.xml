@@ -10,10 +10,16 @@
 
 
 
-    <ImageView
+
+
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/image_book"
         android:layout_width="200dp"
         android:layout_height="250dp"
-        android:background="@drawable/cover_2"/>
+        android:background="#000000"
+        android:scaleType="fitXY"/>
+
 
     <views.TypefaceTextView
         android:layout_width="wrap_content"
@@ -23,7 +29,8 @@
         android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         geekui:customTypeface="fonts/Confessions Font.otf"
-        android:textColor="@color/title"/>
+        android:textColor="@color/title"
+        android:id="@+id/book_name"/>
 
 
 
@@ -37,7 +44,8 @@
         android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         geekui:customTypeface="fonts/Confessions Font.otf"
-        android:textColor="@color/icons_8_muted_green_1"/>
+        android:textColor="@color/icons_8_muted_green_1"
+        android:id="@+id/author_name"/>
 
 
 
@@ -72,7 +80,8 @@
             android:text="240 pages"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            geekui:customTypeface="fonts/Confessions Font.otf"/>
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:id="@+id/pages"/>
 
         <views.TypefaceTextView
             android:layout_width="wrap_content"
@@ -80,7 +89,7 @@
             android:text="2 hours"
             android:gravity="center"
             android:layout_marginLeft="10dp"
-
+            android:id="@+id/hours"
             android:textAppearance="?android:attr/textAppearanceSmall"
             geekui:customTypeface="fonts/Confessions Font.otf"/>
 
@@ -138,16 +147,23 @@
             android:layout_weight="1"
             android:layout_marginLeft="10dp">
 
-            <ImageView
+
+
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/button_iimage"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/button_iimage"
+                android:background="#000000"
                 android:scaleType="centerCrop"/>
+
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#a8000000"></RelativeLayout>
+
+
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -163,6 +179,9 @@
                     android:layout_height="25dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/ic_read_book_preview"/>
+
+
+
 
                 <views.TypefaceTextView
                     android:layout_width="wrap_content"

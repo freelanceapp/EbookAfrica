@@ -74,6 +74,7 @@
         android:padding="5dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        android:id="@+id/summary"
         geekui:customTypeface="fonts/AllerDisplay.ttf" />
 
 

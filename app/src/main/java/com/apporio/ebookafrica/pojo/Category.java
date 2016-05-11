@@ -51,9 +51,9 @@ public class Category {
     @SerializedName("store_id")
     @Expose
     private String storeId;
-    @SerializedName("child")
+    @SerializedName("product")
     @Expose
-    private List<Child> child = new ArrayList<Child>();
+    private List<Product> product = new ArrayList<Product>();
 
     /**
      * 
@@ -310,19 +310,19 @@ public class Category {
     /**
      * 
      * @return
-     *     The child
+     *     The product
      */
-    public List<Child> getChild() {
-        return child;
+    public List<Product> getProduct() {
+        return product;
     }
 
     /**
      * 
-     * @param child
-     *     The child
+     * @param product
+     *     The product
      */
-    public void setChild(List<Child> child) {
-        this.child = child;
+    public void setProduct(List<Product> product) {
+        this.product = product;
     }
 
 }

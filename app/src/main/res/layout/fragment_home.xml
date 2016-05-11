@@ -12,11 +12,18 @@
 
         <include layout="@layout/first_item_of_homelist"></include>
 
-        <include layout="@layout/second_item_of_homelist"></include>
 
-        <include layout="@layout/third_item_of_home_list"></include>
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list"
+            android:dividerHeight="4dp"
+            android:background="#ffffff"
+            android:nestedScrollingEnabled="true"
+            android:divider="@android:color/transparent"></ListView>
 
-        <include layout="@layout/fourth_item_of_homelist"></include>
+
+
 
     </LinearLayout>
 

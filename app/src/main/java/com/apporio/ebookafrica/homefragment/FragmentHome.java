@@ -2,17 +2,15 @@ package com.apporio.ebookafrica.homefragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -23,11 +21,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.VolleySingleton;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
-import com.apporio.ebookafrica.fragmentspecificcategory.SpecificCategoryActivity;
 import com.apporio.ebookafrica.logger.Logger;
+import com.apporio.ebookafrica.pojo.AllCategories;
 import com.apporio.ebookafrica.pojo.BannerSliderPojo;
+import com.apporio.ebookafrica.pojo.Product;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
-import com.apporio.ebookafrica.specificbook.SpecificBookActivity;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -37,8 +35,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import views.HorizontalListView;
+import java.util.List;
 
 
 /**
@@ -48,17 +45,14 @@ public class FragmentHome extends Fragment {
 
 
     public  SliderLayout image_slider;
+    public ListView list ;
 
-    ImageView top_banner ;
 
     public FragmentHome(){}
 
 
 
-    int [] comic_images = {R.drawable.cover_one , R.drawable.cover_two , R.drawable.cover_three , R.drawable.cover_four , R.drawable.cover_five , R.drawable.cover_six , R.drawable.cover_seven , R.drawable.cover_eight , R.drawable.cover_nine , R.drawable.cover_ten  };
-    int [] nobel_images = {R.drawable.cover_1 , R.drawable.cover_2 , R.drawable.cover_3 , R.drawable.cover_4 , R.drawable.cover_5 , R.drawable.cover_6 , R.drawable.cover_7 , R.drawable.cover_8 , R.drawable.cover_9 , R.drawable.cover_10  };
 
-    HorizontalListView  horizintal_list_one , horizintal_list_two ;
 
     private static RequestQueue queue ;
     private static StringRequest sr;
@@ -79,55 +73,13 @@ public class FragmentHome extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         context  = getActivity() ;
-        top_banner = (ImageView) rootView.findViewById(R.id.top_banner);
         image_slider = (SliderLayout)rootView.findViewById(R.id.slider);
-        horizintal_list_one = (HorizontalListView) rootView.findViewById(R.id.horizontal_list_one);
-        horizintal_list_two = (HorizontalListView) rootView.findViewById(R.id.horizontal_list_two);
-
-
-        top_banner.setImageResource(R.drawable.vintagebooks);
-        horizintal_list_one.setAdapter(new AdapterHorizontalList(getActivity(), comic_images));
-        horizintal_list_two.setAdapter(new AdapterHorizontalList(getActivity(), nobel_images));
+        list  = (ListView) rootView.findViewById(R.id.list);
 
 
 
-        horizintal_list_one.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent in = new Intent(getActivity(), SpecificBookActivity.class);
-                getActivity().startActivity(in);
-            }
-        });
-
-
-        horizintal_list_two.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent in = new Intent(getActivity(), SpecificBookActivity.class);
-                getActivity().startActivity(in);
-            }
-        });
-
-
-        rootView.findViewById(R.id.morebs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(getActivity(), SpecificCategoryActivity.class);
-                getActivity().startActivity(in);
-            }
-        });
-
-
-
-        rootView.findViewById(R.id.more).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(getActivity(), SpecificCategoryActivity.class);
-                getActivity().startActivity(in);
-            }
-        });
-
-        BannerApiExecution();
+        //BannerApiExecution();
+        AllCategoriesIncludingProductsExecution();
 
 
 
@@ -221,6 +173,103 @@ public class FragmentHome extends Fragment {
         queue.add(sr);
 
     }
+
+
+
+
+
+
+
+    public void AllCategoriesIncludingProductsExecution(){
+        String url = UrlsEbookAfrics.AllCategories;
+        url=url.replace(" ","%20");
+        Logger.d("Executing All Categories API   " + url);
+
+
+        sr = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                ResponseChecker rcheck = new ResponseChecker();
+                rcheck = gson.fromJson(response, ResponseChecker.class);
+
+                if(rcheck.getStatus().equals("success")){
+
+                    AllCategories allcategories = new AllCategories();
+                    allcategories = gson.fromJson(response, AllCategories.class);
+
+                    ArrayList<String> Category_name = new ArrayList<>();
+                    ArrayList<String> Category_id = new ArrayList<>();
+                    ArrayList<List<Product>> Category_products  = new ArrayList<>();
+                    for(int i = 0 ; i< allcategories.getCategories().size() ; i++){
+                        Category_name.add(""+allcategories.getCategories().get(i).getName());
+                        Category_id.add(""+allcategories.getCategories().get(i).getCategoryId());
+                        Category_products.add(allcategories.getCategories().get(i).getProduct());
+
+
+                    }
+                    horizontalListLoader(1);
+                    list.setAdapter(new AdapterHomePageList(getActivity(), Category_name, Category_id, Category_products));
+
+                    setListViewHeightBasedOnChildren(list);
+                }else {
+                    Toast.makeText(getActivity(), "No categories available", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Logger.d(""+error);
+            }
+        });
+        sr.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(sr);
+        horizontalListLoader(0);
+    }
+
+
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, AbsListView.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
+
+
+
+     public void horizontalListLoader(int load){
+
+         if(load == 0 ){
+
+         }else  if (load == 1 ){
+
+         }
+
+
+     }
 
 
 

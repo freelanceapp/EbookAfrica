@@ -41,7 +41,7 @@ public class SpecificBookActivity extends FragmentActivity {
                 finish();
             }
         });
-        setfragmentinContainer(new FragmentSpecificBook(), "" + R.string.title_activity_specific_book, 1);
+        setfragmentinContainer(new FragmentSpecificBook("" + getIntent().getExtras().getString("product_id")), "" + R.string.title_activity_specific_book, 1);
     }
 
 
@@ -104,6 +104,18 @@ public class SpecificBookActivity extends FragmentActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

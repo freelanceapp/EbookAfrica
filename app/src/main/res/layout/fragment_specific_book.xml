@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center|top"
+    android:gravity="center"
+
     xmlns:geekui="http://schemas.android.com/apk/res-auto"
     android:paddingTop="10dp">
 
@@ -13,56 +14,76 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:gravity="center|top"
+        android:gravity="center"
         android:paddingTop="10dp">
 
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainlayout"
+            android:orientation="vertical"
+            android:gravity="center|top">
+            <include layout="@layout/specific_bookinfo_one"/>
 
-        <include layout="@layout/specific_bookinfo_one"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/title"
+                android:layout_marginTop="5dp"/>
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/title"
-            android:layout_marginTop="5dp"/>
+            <include layout="@layout/specific_bookinfo_two"/>
 
-        <include layout="@layout/specific_bookinfo_two"/>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/title"
-            android:layout_marginTop="5dp"/>
-
-
-
-
-        <include layout="@layout/specific_bookinfo_three"/>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/title"
-            android:layout_marginTop="5dp"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/title"
+                android:layout_marginTop="5dp"/>
 
 
 
 
+            <include layout="@layout/specific_bookinfo_three"/>
 
-        <include layout="@layout/specific_bookinfo_four"/>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/title"
-            android:layout_marginTop="5dp"/>
-
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/title"
+                android:layout_marginTop="5dp"/>
 
 
 
-        <include layout="@layout/specific_bookinfo_five"/>
 
+
+            <include layout="@layout/specific_bookinfo_four"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/title"
+                android:layout_marginTop="5dp"/>
+
+
+
+
+            <include layout="@layout/specific_bookinfo_five"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loadingbar"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="@color/icons_8_muted_green_1"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>
