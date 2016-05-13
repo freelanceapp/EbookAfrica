@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecificBookSuccessProduct {
+public class ProductSearch {
 
     @SerializedName("product_id")
     @Expose
@@ -32,7 +32,7 @@ public class SpecificBookSuccessProduct {
     private String image;
     @SerializedName("manufacturer_id")
     @Expose
-    private String manufacturerId;
+    private Object manufacturerId;
     @SerializedName("author_id")
     @Expose
     private String authorId;
@@ -107,7 +107,7 @@ public class SpecificBookSuccessProduct {
     private String storeId;
     @SerializedName("manufacturer")
     @Expose
-    private String manufacturer;
+    private Object manufacturer;
     @SerializedName("discount")
     @Expose
     private String discount;
@@ -140,10 +140,7 @@ public class SpecificBookSuccessProduct {
     private List<Object> images = new ArrayList<Object>();
     @SerializedName("author")
     @Expose
-    private String author;
-    @SerializedName("related_product")
-    @Expose
-    private List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct = new ArrayList<SpecificBookSuccessRelatedProduct>();
+    private Object author;
 
     /**
      * 
@@ -276,7 +273,7 @@ public class SpecificBookSuccessProduct {
      * @return
      *     The manufacturerId
      */
-    public String getManufacturerId() {
+    public Object getManufacturerId() {
         return manufacturerId;
     }
 
@@ -285,7 +282,7 @@ public class SpecificBookSuccessProduct {
      * @param manufacturerId
      *     The manufacturer_id
      */
-    public void setManufacturerId(String manufacturerId) {
+    public void setManufacturerId(Object manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
@@ -726,7 +723,7 @@ public class SpecificBookSuccessProduct {
      * @return
      *     The manufacturer
      */
-    public String getManufacturer() {
+    public Object getManufacturer() {
         return manufacturer;
     }
 
@@ -735,7 +732,7 @@ public class SpecificBookSuccessProduct {
      * @param manufacturer
      *     The manufacturer
      */
-    public void setManufacturer(String manufacturer) {
+    public void setManufacturer(Object manufacturer) {
         this.manufacturer = manufacturer;
     }
 
@@ -924,7 +921,7 @@ public class SpecificBookSuccessProduct {
      * @return
      *     The author
      */
-    public String getAuthor() {
+    public Object getAuthor() {
         return author;
     }
 
@@ -933,26 +930,8 @@ public class SpecificBookSuccessProduct {
      * @param author
      *     The author
      */
-    public void setAuthor(String author) {
+    public void setAuthor(Object author) {
         this.author = author;
-    }
-
-    /**
-     * 
-     * @return
-     *     The relatedProduct
-     */
-    public List<SpecificBookSuccessRelatedProduct> getSpecificBookSuccessRelatedProduct() {
-        return specificBookSuccessRelatedProduct;
-    }
-
-    /**
-     * 
-     * @param specificBookSuccessRelatedProduct
-     *     The related_product
-     */
-    public void setSpecificBookSuccessRelatedProduct(List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct) {
-        this.specificBookSuccessRelatedProduct = specificBookSuccessRelatedProduct;
     }
 
 }

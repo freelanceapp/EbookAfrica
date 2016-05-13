@@ -1,13 +1,12 @@
 
 package com.apporio.ebookafrica.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SpecificBookSuccessProduct {
+public class Productcore {
 
     @SerializedName("product_id")
     @Expose
@@ -143,7 +142,7 @@ public class SpecificBookSuccessProduct {
     private String author;
     @SerializedName("related_product")
     @Expose
-    private List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct = new ArrayList<SpecificBookSuccessRelatedProduct>();
+    private List<RelatedProduct> relatedProduct = new ArrayList<RelatedProduct>();
 
     /**
      * 
@@ -942,17 +941,17 @@ public class SpecificBookSuccessProduct {
      * @return
      *     The relatedProduct
      */
-    public List<SpecificBookSuccessRelatedProduct> getSpecificBookSuccessRelatedProduct() {
-        return specificBookSuccessRelatedProduct;
+    public List<RelatedProduct> getRelatedProduct() {
+        return relatedProduct;
     }
 
     /**
      * 
-     * @param specificBookSuccessRelatedProduct
+     * @param relatedProduct
      *     The related_product
      */
-    public void setSpecificBookSuccessRelatedProduct(List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct) {
-        this.specificBookSuccessRelatedProduct = specificBookSuccessRelatedProduct;
+    public void setRelatedProduct(List<RelatedProduct> relatedProduct) {
+        this.relatedProduct = relatedProduct;
     }
 
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.VolleySingleton;
+import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.logger.Logger;
@@ -46,6 +48,7 @@ public class FragmentHome extends Fragment {
 
     public  SliderLayout image_slider;
     public ListView list ;
+    TextView loader ;
 
 
     public FragmentHome(){}
@@ -69,16 +72,17 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        FragmentStatus.GetOpenfragment = "FragmentHome";
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         context  = getActivity() ;
         image_slider = (SliderLayout)rootView.findViewById(R.id.slider);
         list  = (ListView) rootView.findViewById(R.id.list);
+        loader = (TextView) rootView.findViewById(R.id.loader);
 
 
 
-        //BannerApiExecution();
+        BannerApiExecution();
         AllCategoriesIncludingProductsExecution();
 
 
@@ -209,8 +213,13 @@ public class FragmentHome extends Fragment {
 
 
                     }
-                    horizontalListLoader(1);
-                    list.setAdapter(new AdapterHomePageList(getActivity(), Category_name, Category_id, Category_products));
+
+                    if(FragmentStatus.GetOpenfragment.equals("FragmentHome")){
+                        horizontalListLoader(1);
+                        list.setAdapter(new AdapterHomePageList(getActivity(), Category_name, Category_id, Category_products));
+                    }
+
+
 
                     setListViewHeightBasedOnChildren(list);
                 }else {
@@ -232,6 +241,14 @@ public class FragmentHome extends Fragment {
         queue.add(sr);
         horizontalListLoader(0);
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -263,22 +280,20 @@ public class FragmentHome extends Fragment {
      public void horizontalListLoader(int load){
 
          if(load == 0 ){
-
+             loader.setVisibility(View.VISIBLE);
+             list.setVisibility(View.GONE);
          }else  if (load == 1 ){
-
+             loader.setVisibility(View.GONE);
+             list.setVisibility(View.VISIBLE);
          }
 
 
      }
 
 
-
-
-
-
-
-
-
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        queue.cancelAll(sr);
+    }
 }

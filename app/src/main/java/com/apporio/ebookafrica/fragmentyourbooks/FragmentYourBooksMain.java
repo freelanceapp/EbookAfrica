@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
@@ -34,6 +35,7 @@ public class FragmentYourBooksMain extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        FragmentStatus.GetOpenfragment = "FragmentYourBooksMain";
         rootView = inflater.inflate(R.layout.fragment_your_books_main, container, false);
         init();
         viewPager.setAdapter(buildAdapter());

@@ -26,7 +26,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         });
 
 
-        setfragmentinContainer(new FragmentSpecificCategory(), "" + R.string.specific_category, 1);
+        setfragmentinContainer(new FragmentSpecificCategory(""+getIntent().getExtras().getString("category_id")), "" + R.string.specific_category, 1);
 
     }
 

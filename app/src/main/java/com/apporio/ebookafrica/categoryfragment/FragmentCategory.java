@@ -1,11 +1,13 @@
 package com.apporio.ebookafrica.categoryfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -18,8 +20,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.VolleySingleton;
+import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
+import com.apporio.ebookafrica.fragmentspecificcategory.SpecificCategoryActivity;
 import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.AllCategories;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
@@ -39,7 +43,12 @@ public class FragmentCategory extends Fragment {
     private static RequestQueue queue ;
     private static StringRequest sr;
 
-    public FragmentCategory(){}
+
+
+
+    public FragmentCategory(){
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +58,7 @@ public class FragmentCategory extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        FragmentStatus.GetOpenfragment = "FragmentCategory";
         View rootView = inflater.inflate(R.layout.fragment_books_categories, container, false);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         imageone = (ImageView) rootView.findViewById(R.id.im1);
@@ -61,8 +70,17 @@ public class FragmentCategory extends Fragment {
         imageone.setImageResource(R.drawable.editor_choise_banner);
         imagetwo.setImageResource(R.drawable.top_books_banner);
 
-
         CategoryApiExecution();
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent in = new Intent(getActivity(), SpecificCategoryActivity.class);
+                in.putExtra("category_id", "" + CategoryfragmentConstant.Category_id.get(position));
+                getActivity().startActivity(in);
+            }
+        });
 
         return rootView;
     }
@@ -101,13 +119,20 @@ public class FragmentCategory extends Fragment {
                     AllCategories allcategories = new AllCategories();
                     allcategories = gson.fromJson(response, AllCategories.class);
 
-                    ArrayList<String> Category_name = new ArrayList<>();
-                    ArrayList<String> Category_id = new ArrayList<>();
-                    for(int i = 0 ; i< allcategories.getCategories().size() ; i++){
-                        Category_name.add(""+allcategories.getCategories().get(i).getName());
-                        Category_id.add(""+allcategories.getCategories().get(i).getCategoryId());
+                        CategoryfragmentConstant.Category_name.clear();
+                        CategoryfragmentConstant. Category_id.clear();
+
+                        for(int i = 0 ; i< allcategories.getCategories().size() ; i++){
+                            CategoryfragmentConstant.Category_name.add(""+allcategories.getCategories().get(i).getName());
+                            CategoryfragmentConstant.Category_id.add(""+allcategories.getCategories().get(i).getCategoryId());
+                        }
+
+
+                    if(FragmentStatus.GetOpenfragment.equals("FragmentCategory")){
+                        setListView(CategoryfragmentConstant.Category_name ,CategoryfragmentConstant. Category_id);
                     }
-                    setListView(Category_name , Category_id);
+
+
                 }else {
                     Toast.makeText(getActivity() , "No categories available" , Toast.LENGTH_SHORT).show();
                 }
@@ -156,6 +181,12 @@ public class FragmentCategory extends Fragment {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(sr != null){
+            queue.cancelAll(sr);
+        }
 
-
+    }
 }

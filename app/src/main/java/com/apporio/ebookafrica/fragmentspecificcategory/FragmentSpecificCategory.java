@@ -1,27 +1,53 @@
 package com.apporio.ebookafrica.fragmentspecificcategory;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.VolleySingleton;
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
+import com.apporio.ebookafrica.logger.Logger;
+import com.apporio.ebookafrica.pojo.AllCategories;
+import com.apporio.ebookafrica.pojo.ResponseChecker;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
 
 /**
  * Created by spinnosolutions on 4/25/16.
  */
+@SuppressLint("ValidFragment")
 public class FragmentSpecificCategory  extends Fragment {
 
-    int [] comic_images = {R.drawable.cover_one , R.drawable.cover_two , R.drawable.cover_three , R.drawable.cover_four , R.drawable.cover_five , R.drawable.cover_six , R.drawable.cover_seven , R.drawable.cover_eight , R.drawable.cover_nine , R.drawable.cover_ten  };
 
     GridView gridView ;
+    LinearLayout loader ;
     private static RequestQueue queue ;
     private static StringRequest sr;
+    String categoryid ;
+
+
+    @SuppressLint("ValidFragment")
+    public FragmentSpecificCategory(String categoryid){
+        this.categoryid = categoryid ;
+    }
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,10 +61,10 @@ public class FragmentSpecificCategory  extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_specific_category, container, false);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
 
-
         gridView = (GridView) rootView.findViewById(R.id.grid);
-        gridView.setAdapter(new AdapterSpecificGrid(getActivity(), comic_images));
+        loader = (LinearLayout) rootView.findViewById(R.id.loader);
 
+        SpecificCategoryExecution();
 
 
         return rootView;
@@ -53,12 +79,65 @@ public class FragmentSpecificCategory  extends Fragment {
 
 
 
+    public void SpecificCategoryExecution(){
+        String url = UrlsEbookAfrics.AllCategories+categoryid;
+        url=url.replace(" ","%20");
+        Logger.d("Executing Specific Categories API   " + url);
 
 
+        sr = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                ResponseChecker rcheck = new ResponseChecker();
+                rcheck = gson.fromJson(response, ResponseChecker.class);
+
+                if(rcheck.getStatus().equals("success")){
+
+                    AllCategories allcategories = new AllCategories();
+                    allcategories = gson.fromJson(response, AllCategories.class);
+
+                    ArrayList<String> product_image = new ArrayList<>();
+                    ArrayList<String> product_id = new ArrayList<>();
+                    ArrayList<String> product_name = new ArrayList<>();
+                    for(int i = 0 ; i< allcategories.getCategories().get(0).getProduct().size() ; i++){
+                        product_image.add(""+allcategories.getCategories().get(0).getProduct().get(i).getImage());
+                        product_id.add(""+allcategories.getCategories().get(0).getProduct().get(i).getProductId());
+                        product_name.add(""+allcategories.getCategories().get(0).getProduct().get(i).getName());
+                    }
+                    horizontalListLoader(1);
+                    gridView.setAdapter(new AdapterSpecificGrid(getActivity() , product_name , product_image , product_id));
+                }else {
+                    Toast.makeText(getActivity(), "No categories available", Toast.LENGTH_SHORT).show();
+                }
 
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Logger.d(""+error);
+            }
+        });
+        sr.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(sr);
+        horizontalListLoader(0);
+    }
 
+    private void horizontalListLoader(int i) {
+        if(i ==0 ){
+            loader.setVisibility(View.VISIBLE);
+            gridView.setVisibility(View.GONE);
+        }else if (i == 1 ){
 
+            loader.setVisibility(View.GONE);
+            gridView.setVisibility(View.VISIBLE);
+        }
+    }
 
 
 }

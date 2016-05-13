@@ -4,6 +4,9 @@ package com.apporio.ebookafrica.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Slider {
 
     @SerializedName("banner_image_id")
@@ -12,9 +15,6 @@ public class Slider {
     @SerializedName("banner_id")
     @Expose
     private String bannerId;
-    @SerializedName("link")
-    @Expose
-    private String link;
     @SerializedName("image")
     @Expose
     private String image;
@@ -29,7 +29,7 @@ public class Slider {
     private String title;
     @SerializedName("category_id")
     @Expose
-    private Integer categoryId;
+    private List<String> categoryId = new ArrayList<String>();
 
     /**
      * 
@@ -65,24 +65,6 @@ public class Slider {
      */
     public void setBannerId(String bannerId) {
         this.bannerId = bannerId;
-    }
-
-    /**
-     * 
-     * @return
-     *     The link
-     */
-    public String getLink() {
-        return link;
-    }
-
-    /**
-     * 
-     * @param link
-     *     The link
-     */
-    public void setLink(String link) {
-        this.link = link;
     }
 
     /**
@@ -162,7 +144,7 @@ public class Slider {
      * @return
      *     The categoryId
      */
-    public Integer getCategoryId() {
+    public List<String> getCategoryId() {
         return categoryId;
     }
 
@@ -171,7 +153,7 @@ public class Slider {
      * @param categoryId
      *     The category_id
      */
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(List<String> categoryId) {
         this.categoryId = categoryId;
     }
 

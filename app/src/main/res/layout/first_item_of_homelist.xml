@@ -29,35 +29,35 @@
         android:gravity="center"
         />
 
-    <com.rafakob.drawme.DrawMeLinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        drawme:backColor="@color/icons_8_muted_green_1_transparent"
-        drawme:backColorPressed="@color/icons_8_muted_orange_dark"
-        drawme:backColorDisabled="@color/icons_8_muted_red_dark"
-        drawme:radius="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center|left"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+    <!--<com.rafakob.drawme.DrawMeLinearLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="35dp"-->
+        <!--drawme:backColor="@color/icons_8_muted_green_1_transparent"-->
+        <!--drawme:backColorPressed="@color/icons_8_muted_orange_dark"-->
+        <!--drawme:backColorDisabled="@color/icons_8_muted_red_dark"-->
+        <!--drawme:radius="10dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:gravity="center|left"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:orientation="horizontal">-->
 
 
-    <views.TypefaceTextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Shop Books  Magazines"
-            android:textColor="@color/textcolor"
-            android:gravity="center"
-            android:textSize="15dp"
-            android:padding="5dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            geekui:customTypeface="fonts/AllerDisplay.ttf"
-            />
+    <!--<views.TypefaceTextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:text="Shop Books  Magazines"-->
+            <!--android:textColor="@color/textcolor"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="15dp"-->
+            <!--android:padding="5dp"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--geekui:customTypeface="fonts/AllerDisplay.ttf"-->
+            <!--/>-->
 
-    </com.rafakob.drawme.DrawMeLinearLayout>
+    <!--</com.rafakob.drawme.DrawMeLinearLayout>-->
 
 
 

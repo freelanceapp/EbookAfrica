@@ -1,8 +1,9 @@
-package com.apporio.ebookafrica;
+package com.apporio.ebookafrica.FileDownloader;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,12 +13,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.logger.Logger;
+
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+
 
 public class DownloadActivity extends Activity {
 
@@ -33,18 +38,19 @@ public class DownloadActivity extends Activity {
     // File url to download
     private static String file_url = "http://api.androidhive.info/progressdialog/hive.jpg";
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download);
 
-        // show progress bar button
+
+
+
         btnShowProgress = (Button) findViewById(R.id.btnProgressBar);
-        // Image view to show image after downloading
         my_image = (ImageView) findViewById(R.id.my_image);
-        /**
-         * Show Progress bar click event
-         * */
+
         btnShowProgress.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -55,9 +61,7 @@ public class DownloadActivity extends Activity {
         });
     }
 
-    /**
-     * Showing Dialog
-     * */
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -75,24 +79,32 @@ public class DownloadActivity extends Activity {
         }
     }
 
-    /**
-     * Background Async Task to download file
-     * */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
-        /**
-         * Before starting background thread
-         * Show Progress Bar Dialog
-         * */
+
+
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             showDialog(progress_bar_type);
         }
 
-        /**
-         * Downloading file in background thread
-         * */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -100,14 +112,20 @@ public class DownloadActivity extends Activity {
                 URL url = new URL(f_url[0]);
                 URLConnection conection = url.openConnection();
                 conection.connect();
-                // this will be useful so that you can show a tipical 0-100% progress bar
                 int lenghtOfFile = conection.getContentLength();
 
                 // download the file
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-                // Output stream
-                OutputStream output = new FileOutputStream("/sdcard/downloadedfile.jpg");
+
+
+
+                File cacheDir = getDataFolder(DownloadActivity.this);
+                File cacheFile = new File(cacheDir, "localFileName333.jpg");
+                Logger.d("file path "+cacheFile);
+                FileOutputStream output = new FileOutputStream(cacheFile);
+
+
 
                 byte data[] = new byte[1024];
 
@@ -137,29 +155,53 @@ public class DownloadActivity extends Activity {
             return null;
         }
 
-        /**
-         * Updating progress bar
-         * */
+
+
+
+
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
             pDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
-        /**
-         * After completing background task
-         * Dismiss the progress dialog
-         * **/
+
         @Override
         protected void onPostExecute(String file_url) {
-            // dismiss the dialog after the file was downloaded
             dismissDialog(progress_bar_type);
-
-            // Displaying downloaded image into image view
-            // Reading image path from sdcard
             String imagePath = Environment.getExternalStorageDirectory().toString() + "/downloadedfile.jpg";
-            // setting downloaded into image view
-            my_image.setImageDrawable(Drawable.createFromPath(imagePath));
+            my_image.setImageDrawable(Drawable.createFromPath("/data/user/0/com.apporio.ebookafrica/files/localFileName333.jpg"));
         }
 
     }
+
+
+
+
+
+
+
+
+    public File getDataFolder(Context context) {
+        File dataDir = null;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            dataDir = new File(Environment.getExternalStorageDirectory(), "ebbok_data");
+            if(!dataDir.isDirectory()) {
+                dataDir.mkdirs();
+            }
+        }
+
+        if(!dataDir.isDirectory()) {
+            dataDir = context.getFilesDir();
+        }
+
+        return dataDir;
+    }
+
+
+
+
+
+
+
+
 }

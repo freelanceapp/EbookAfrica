@@ -16,7 +16,7 @@
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/image_book"
         android:layout_width="200dp"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
         android:background="#000000"
         android:scaleType="fitXY"/>
 
@@ -27,7 +27,7 @@
         android:text="Name Of the book Goes here"
         android:gravity="center"
         android:layout_marginTop="5dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         geekui:customTypeface="fonts/Confessions Font.otf"
         android:textColor="@color/title"
         android:id="@+id/book_name"/>
@@ -49,21 +49,21 @@
 
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <views.CustomRatingBarGreen
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:id="@+id/rating_bar_top"></views.CustomRatingBarGreen>
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center">-->
+        <!--<views.CustomRatingBarGreen-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:id="@+id/rating_bar_top"></views.CustomRatingBarGreen>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="  ( 81 Rating )"/>
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="  ( 81 Rating )"/>-->
+    <!--</LinearLayout>-->
 
 
     <LinearLayout
@@ -95,6 +95,44 @@
 
 
     </LinearLayout>
+    
+    
+    <View
+        android:layout_width="130dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/icons_8_muted_grey"/>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price : "
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_green_1_dark"/>
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="232 $"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_green_1_dark"
+            android:id="@+id/price"/>
+
+
+    </LinearLayout>
 
 
 
@@ -118,6 +156,8 @@
             android:padding="10dp"
             android:id="@+id/buy_now"
             android:background="@color/icons_8_muted_green_1">
+
+
 
 
             <ImageView

@@ -1,13 +1,12 @@
 
 package com.apporio.ebookafrica.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SpecificBookSuccessProduct {
+public class SpecificBookSuccessRelatedProduct {
 
     @SerializedName("product_id")
     @Expose
@@ -18,9 +17,24 @@ public class SpecificBookSuccessProduct {
     @SerializedName("sku")
     @Expose
     private String sku;
+    @SerializedName("upc")
+    @Expose
+    private String upc;
+    @SerializedName("ean")
+    @Expose
+    private String ean;
+    @SerializedName("jan")
+    @Expose
+    private String jan;
     @SerializedName("isbn")
     @Expose
     private String isbn;
+    @SerializedName("mpn")
+    @Expose
+    private String mpn;
+    @SerializedName("location")
+    @Expose
+    private String location;
     @SerializedName("quantity")
     @Expose
     private String quantity;
@@ -69,6 +83,9 @@ public class SpecificBookSuccessProduct {
     @SerializedName("length_class_id")
     @Expose
     private String lengthClassId;
+    @SerializedName("subtract")
+    @Expose
+    private String subtract;
     @SerializedName("minimum")
     @Expose
     private String minimum;
@@ -102,6 +119,12 @@ public class SpecificBookSuccessProduct {
     @SerializedName("meta_title")
     @Expose
     private String metaTitle;
+    @SerializedName("meta_description")
+    @Expose
+    private String metaDescription;
+    @SerializedName("meta_keyword")
+    @Expose
+    private String metaKeyword;
     @SerializedName("store_id")
     @Expose
     private String storeId;
@@ -138,12 +161,6 @@ public class SpecificBookSuccessProduct {
     @SerializedName("images")
     @Expose
     private List<Object> images = new ArrayList<Object>();
-    @SerializedName("author")
-    @Expose
-    private String author;
-    @SerializedName("related_product")
-    @Expose
-    private List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct = new ArrayList<SpecificBookSuccessRelatedProduct>();
 
     /**
      * 
@@ -202,6 +219,60 @@ public class SpecificBookSuccessProduct {
     /**
      * 
      * @return
+     *     The upc
+     */
+    public String getUpc() {
+        return upc;
+    }
+
+    /**
+     * 
+     * @param upc
+     *     The upc
+     */
+    public void setUpc(String upc) {
+        this.upc = upc;
+    }
+
+    /**
+     * 
+     * @return
+     *     The ean
+     */
+    public String getEan() {
+        return ean;
+    }
+
+    /**
+     * 
+     * @param ean
+     *     The ean
+     */
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
+    /**
+     * 
+     * @return
+     *     The jan
+     */
+    public String getJan() {
+        return jan;
+    }
+
+    /**
+     * 
+     * @param jan
+     *     The jan
+     */
+    public void setJan(String jan) {
+        this.jan = jan;
+    }
+
+    /**
+     * 
+     * @return
      *     The isbn
      */
     public String getIsbn() {
@@ -215,6 +286,42 @@ public class SpecificBookSuccessProduct {
      */
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    /**
+     * 
+     * @return
+     *     The mpn
+     */
+    public String getMpn() {
+        return mpn;
+    }
+
+    /**
+     * 
+     * @param mpn
+     *     The mpn
+     */
+    public void setMpn(String mpn) {
+        this.mpn = mpn;
+    }
+
+    /**
+     * 
+     * @return
+     *     The location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * 
+     * @param location
+     *     The location
+     */
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     /**
@@ -508,6 +615,24 @@ public class SpecificBookSuccessProduct {
     /**
      * 
      * @return
+     *     The subtract
+     */
+    public String getSubtract() {
+        return subtract;
+    }
+
+    /**
+     * 
+     * @param subtract
+     *     The subtract
+     */
+    public void setSubtract(String subtract) {
+        this.subtract = subtract;
+    }
+
+    /**
+     * 
+     * @return
      *     The minimum
      */
     public String getMinimum() {
@@ -701,6 +826,42 @@ public class SpecificBookSuccessProduct {
      */
     public void setMetaTitle(String metaTitle) {
         this.metaTitle = metaTitle;
+    }
+
+    /**
+     * 
+     * @return
+     *     The metaDescription
+     */
+    public String getMetaDescription() {
+        return metaDescription;
+    }
+
+    /**
+     * 
+     * @param metaDescription
+     *     The meta_description
+     */
+    public void setMetaDescription(String metaDescription) {
+        this.metaDescription = metaDescription;
+    }
+
+    /**
+     * 
+     * @return
+     *     The metaKeyword
+     */
+    public String getMetaKeyword() {
+        return metaKeyword;
+    }
+
+    /**
+     * 
+     * @param metaKeyword
+     *     The meta_keyword
+     */
+    public void setMetaKeyword(String metaKeyword) {
+        this.metaKeyword = metaKeyword;
     }
 
     /**
@@ -917,42 +1078,6 @@ public class SpecificBookSuccessProduct {
      */
     public void setImages(List<Object> images) {
         this.images = images;
-    }
-
-    /**
-     * 
-     * @return
-     *     The author
-     */
-    public String getAuthor() {
-        return author;
-    }
-
-    /**
-     * 
-     * @param author
-     *     The author
-     */
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    /**
-     * 
-     * @return
-     *     The relatedProduct
-     */
-    public List<SpecificBookSuccessRelatedProduct> getSpecificBookSuccessRelatedProduct() {
-        return specificBookSuccessRelatedProduct;
-    }
-
-    /**
-     * 
-     * @param specificBookSuccessRelatedProduct
-     *     The related_product
-     */
-    public void setSpecificBookSuccessRelatedProduct(List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct) {
-        this.specificBookSuccessRelatedProduct = specificBookSuccessRelatedProduct;
     }
 
 }

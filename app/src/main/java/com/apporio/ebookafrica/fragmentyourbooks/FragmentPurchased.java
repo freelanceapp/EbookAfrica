@@ -13,7 +13,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 /**
  * Created by spinnosolutions on 4/9/16.
  */
-public class FragmentAll extends Fragment {
+public class FragmentPurchased extends Fragment {
 
 
     StickyListHeadersListView list ;
@@ -35,9 +35,9 @@ public class FragmentAll extends Fragment {
 
 
 
-    public static FragmentAll newInstance(String text) {
+    public static FragmentPurchased newInstance(String text) {
 
-        FragmentAll f = new FragmentAll();
+        FragmentPurchased f = new FragmentPurchased();
         Bundle b = new Bundle();
         b.putString("msg", text);
 

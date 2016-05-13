@@ -1,0 +1,68 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context="com.apporio.ebookafrica.order.ConfirmOrder">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView android:text="We Just Have BY Pass The Payment Gateway for the time being and executing two Api in a sequence that is Confirm order Api and PLace Order APi . NOTE it is being assumed that payment has been done aftward download link has been captured by device  "
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_id"/>
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Link we are using to download file "
+            android:textColor="@color/icons_8_muted_green_1"
+            android:layout_marginTop="10dp"/>
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="loading..."
+            android:id="@+id/capturedownloadlink"/>
+
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Download"
+            android:id="@+id/download"/>
+
+
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/image_book"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
+            android:background="#000000"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Open Book "
+            android:layout_marginTop="10dp"
+            android:id="@+id/openbook"/>
+    </LinearLayout>
+
+
+
+
+
+</ScrollView>

@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.CustomVolleyRequestQueue;
+import com.apporio.ebookafrica.fragmentspecificcategory.SpecificCategoryActivity;
 import com.apporio.ebookafrica.pojo.Product;
 import com.apporio.ebookafrica.specificbook.SpecificBookActivity;
 
@@ -56,14 +59,38 @@ public class AdapterHomePageList extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View MyView;
         inflate = (LayoutInflater) con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         MyView = inflate.inflate(R.layout.item_related_list_view, parent, false);
         HorizontalListView h_view = (HorizontalListView) MyView.findViewById(R.id.horizintal_list);
         TextView categoryname  = (TextView) MyView.findViewById(R.id.heading_horizontal_list);
-        categoryname.setText(""+category_names.get(position));
+        LinearLayout category_link = (LinearLayout) MyView.findViewById(R.id.category_link);
+        categoryname.setText(""+category_names.get(position)+ " >");
         h_view.setAdapter(new AdapterHoriZontalList(Category_products.get(position)));
+
+        category_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(con, SpecificCategoryActivity.class);
+                in.putExtra("category_id" , "" + category_id.get(position));
+                con.startActivity(in);
+            }
+        });
+
+
+        h_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int positionnew, long id) {
+
+                Intent in = new Intent(con, SpecificBookActivity.class);
+                in.putExtra("product_id", "" + Category_products.get(position).get(positionnew).getProductId());
+                in.putExtra("product_name" , ""+Category_products.get(position).get(positionnew).getName());
+                con.startActivity(in);
+
+            }
+        });
+
         return MyView;
     }
 
@@ -105,14 +132,6 @@ public class AdapterHomePageList extends BaseAdapter {
             mImageLoader.get(products.get(position).getImage(), ImageLoader.getImageListener(imagebook, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
             imagebook.setImageUrl(products.get(position).getImage(), mImageLoader);
 
-            MyView_h_list.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent in  = new Intent(con , SpecificBookActivity.class);
-                    in.putExtra("product_id" , ""+products.get(position).getProductId());
-                    con.startActivity(in);
-                }
-            });
             return MyView_h_list;
         }
     }

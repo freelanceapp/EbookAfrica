@@ -36,6 +36,7 @@
             geekui:customTypeface="fonts/Confessions Font.otf"
             android:textSize="20dp"
             android:text="Name Of Book Goes Here"
+            android:id="@+id/bookname"
             android:textColor="@color/icons_8_muted_offWhite"/>
 
 

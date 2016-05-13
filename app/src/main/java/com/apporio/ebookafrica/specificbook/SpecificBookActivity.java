@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apporio.apporiologin.AppOrioLoginScreen;
@@ -25,6 +26,7 @@ public class SpecificBookActivity extends FragmentActivity {
 
     FragmentTransaction ft ;
     SessionManager  sm ;
+    TextView bookname ;
 
 
 
@@ -32,8 +34,11 @@ public class SpecificBookActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_book);
+        bookname = (TextView) findViewById(R.id.bookname);
         EventBus.getDefault().register(this);
         sm = new SessionManager(SpecificBookActivity.this);
+
+        bookname.setText(""+getIntent().getExtras().getString("product_name"));
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,10 +52,9 @@ public class SpecificBookActivity extends FragmentActivity {
 
 
 
-    private void    setfragmentinContainer(Fragment fragment , String fragment_name , int colour ) {
+    public void    setfragmentinContainer(Fragment fragment, String fragment_name, int colour) {
         ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_container
-                , fragment);
+        ft.add(R.id.main_container, fragment);
         ft.commit();
 
 

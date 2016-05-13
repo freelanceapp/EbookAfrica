@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -30,12 +31,16 @@ import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.lalit.LalitActivity;
 import com.apporio.ebookafrica.logger.Logger;
+import com.apporio.ebookafrica.order.ConfirmOrder;
+import com.apporio.ebookafrica.pojo.RelatedPRoducts;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
 import com.apporio.ebookafrica.pojo.SpecificBookSuccess;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import views.CustomRatingBarGreen;
+import java.util.ArrayList;
+
+import views.HorizontalListView;
 
 /**
  * Created by spinnosolutions on 4/25/16.
@@ -44,9 +49,9 @@ import views.CustomRatingBarGreen;
 public class FragmentSpecificBook extends Fragment {
 
 
-    ListView bottomrelated_listview ;
-    CustomRatingBarGreen  rating_bar_top;
-    LinearLayout buy_now  , loadingbar , mainlayout  ;
+    HorizontalListView horizintal_list ;
+  //  CustomRatingBarGreen  rating_bar_top;
+    LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader   ;
     SessionManager   sm  ;
 
     NetworkImageView imagebook ,button_iimage ;
@@ -57,6 +62,16 @@ public class FragmentSpecificBook extends Fragment {
     private static RequestQueue queue ;
     private static StringRequest sr;
      String product_id ;
+
+    View relatedproductlayout ;
+    ArrayList<String> book_name = new ArrayList<>();
+    ArrayList<String> book_id = new ArrayList<>();
+    ArrayList<String> book_image = new ArrayList<>();
+
+    TextView price ;
+    String bookimage  ;
+
+
 
     @SuppressLint("ValidFragment")
     public FragmentSpecificBook(String productid){
@@ -78,8 +93,8 @@ public class FragmentSpecificBook extends Fragment {
 
 
         View rootView = inflater.inflate(R.layout.fragment_specific_book, container, false);
-        bottomrelated_listview = (ListView) rootView.findViewById(R.id.related_list);
-        rating_bar_top = (CustomRatingBarGreen) rootView.findViewById(R.id.rating_bar_top);
+        horizintal_list = (HorizontalListView) rootView.findViewById(R.id.horizintal_list);
+      //  rating_bar_top = (CustomRatingBarGreen) rootView.findViewById(R.id.rating_bar_top);
         button_iimage = (NetworkImageView) rootView.findViewById(R.id.button_iimage);
         imagebook = (NetworkImageView) rootView.findViewById(R.id.image_book);
         buy_now = (LinearLayout) rootView.findViewById(R.id.buy_now);
@@ -90,13 +105,12 @@ public class FragmentSpecificBook extends Fragment {
         pages = (TextView) rootView.findViewById(R.id.pages);
         hours = (TextView) rootView.findViewById(R.id.hours);
         summary = (TextView) rootView.findViewById(R.id.summary);
+        relatedproductlayout  = rootView.findViewById(R.id.relatedproductlayout);
+        related_loader  = (LinearLayout) rootView.findViewById(R.id.related_loader);
+        price  = (TextView) rootView.findViewById(R.id.price);
 
 
-        button_iimage.setImageResource(R.drawable.cover_2);
-
-        bottomrelated_listview.setAdapter(new AdapterRelatedList(getActivity()));
-        setListViewHeightBasedOnChildren(bottomrelated_listview);
-        rating_bar_top.setScore(3);
+     //   rating_bar_top.setScore(3);
 
 
         rootView.findViewById(R.id.preview).setOnClickListener(new View.OnClickListener() {
@@ -124,8 +138,22 @@ public class FragmentSpecificBook extends Fragment {
         });
 
 
+        horizintal_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getActivity().finish();
+                Intent in = new Intent(getActivity(), SpecificBookActivity.class);
+                in.putExtra("product_id", "" + book_id.get(position));
+                getActivity().startActivity(in);
+            }
+        });
+
+
+
+
 
         SpecificProductExecution();
+
 
         return rootView;
     }
@@ -168,7 +196,10 @@ public class FragmentSpecificBook extends Fragment {
 
 
     private void DownloadBook() {
-        Toast.makeText(getActivity() , "Starts Downloading" , Toast.LENGTH_SHORT).show();
+        Intent in = new Intent(getActivity(), ConfirmOrder.class);
+        in.putExtra("product_id", product_id);
+        in.putExtra("image_key" ,bookimage );
+        startActivity(in);
     }
 
 
@@ -199,11 +230,15 @@ public class FragmentSpecificBook extends Fragment {
                     imagebook.setImageUrl(sbs.getSpecificBookSuccessProduct().getImage(), mImageLoader);
                     mImageLoader.get(sbs.getSpecificBookSuccessProduct().getImage(), ImageLoader.getImageListener(button_iimage, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
                     button_iimage.setImageUrl(sbs.getSpecificBookSuccessProduct().getImage(), mImageLoader);
-                    bookname.setText(""+sbs.getSpecificBookSuccessProduct().getName());
-                    authorname.setText("author id "+sbs.getSpecificBookSuccessProduct().getAuthorId());
+                    bookname.setText("" + sbs.getSpecificBookSuccessProduct().getName());
+                    authorname.setText(""+sbs.getSpecificBookSuccessProduct().getAuthor());
                     summary.setText(""+sbs.getSpecificBookSuccessProduct().getDescription());
+                    price.setText(""+sbs.getSpecificBookSuccessProduct().getPrice());
 
 
+                    bookimage = sbs.getSpecificBookSuccessProduct().getImage() ;
+
+                    relatedproducts();
 
                 } else {
                     Toast.makeText(getActivity(), "Failurre", Toast.LENGTH_SHORT).show();
@@ -227,6 +262,67 @@ public class FragmentSpecificBook extends Fragment {
         loader(0);
     }
 
+
+
+    public void relatedproducts(){
+        String url = UrlsEbookAfrics.relatedproducts +product_id;
+        url=url.replace(" ","%20");
+        Logger.d("Executing Related Product API   " + url);
+
+
+        sr = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                ResponseChecker rcheck = new ResponseChecker();
+                rcheck = gson.fromJson(response, ResponseChecker.class);
+
+                if(rcheck.getStatus().equals("success")){
+
+                    RelatedPRoducts relatedproducts = new RelatedPRoducts();
+                    relatedproducts = gson.fromJson(response, RelatedPRoducts.class);
+
+                    book_name.clear();
+                    book_id.clear();
+                    book_image.clear();
+
+                    for(int i = 0 ; i< relatedproducts.getProductcore().getRelatedProduct().size() ; i++){
+                        book_name.add("" + relatedproducts.getProductcore().getRelatedProduct().get(i).getName());
+                        book_id.add(""+relatedproducts.getProductcore().getRelatedProduct().get(i).getProductId());
+                        book_image.add(""+relatedproducts.getProductcore().getRelatedProduct().get(i).getImage());
+
+
+                    }
+                    loaderrelated(1);
+                    horizintal_list.setAdapter(new AdapterRelatedList(getActivity(), book_name, book_id, book_image));
+
+                } else {
+                    Toast.makeText(getActivity(), "Failurre", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Logger.d(""+error);
+            }
+        });
+        sr.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(sr);
+        loaderrelated(0);
+    }
+
+
+
+
+
     private void loader(int i) {
         if(i == 0 ){
             loadingbar.setVisibility(View.VISIBLE);
@@ -236,6 +332,22 @@ public class FragmentSpecificBook extends Fragment {
             mainlayout.setVisibility(View.VISIBLE);
         }
     }
+
+
+
+    private void loaderrelated (int i ){
+        if(i == 0 ){
+            related_loader.setVisibility(View.VISIBLE);
+            relatedproductlayout.setVisibility(View.GONE);
+        }else if (i == 1){
+            related_loader.setVisibility(View.GONE);
+            relatedproductlayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+
+
 
 
 }

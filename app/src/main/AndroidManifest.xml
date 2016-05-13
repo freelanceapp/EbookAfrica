@@ -56,17 +56,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".DownloadActivity"
+            android:name=".FileDownloader.DownloadActivity"
             android:label="@string/title_activity_download" >
         </activity>
         <activity
-            android:name=".MandyActivity"
-            android:label="@string/title_activity_mandy" >
-
-
+            android:name=".order.ConfirmOrder"
+            android:label="@string/title_activity_confirm_order" >
         </activity>
     </application>
 
