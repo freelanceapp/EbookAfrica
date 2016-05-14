@@ -44,7 +44,7 @@ public class FragmentPurchased extends Fragment {
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         sm = new SessionManager(getActivity());
         list = (StickyListHeadersListView) v.findViewById(R.id.list);
-        list.setAdapter(new AdapterQuickReturn(getActivity(), prices, dates));
+      //  list.setAdapter(new AdapterQuickReturn(getActivity(), prices, dates));
         purchasedBookExecutionAPI();
         return v;
     }

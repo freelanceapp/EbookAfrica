@@ -255,7 +255,8 @@ public class ConfirmOrder extends Activity {
 
 
                 File cacheDir = getDataFolder(ConfirmOrder.this);
-                File cacheFile = new File(cacheDir, BookNAME+".epub");
+                String newbookname = BookNAME.replace(" " , "_");
+                File cacheFile = new File(cacheDir, newbookname+".epub");
                 Logger.d("file path " + cacheFile);
                 FileOutputStream output = new FileOutputStream(cacheFile);
 

@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class YourBooksFragmentViewPagerAdapter extends FragmentPagerAdapter {
 
 
-    String [] titles = {"Purchased" ,"Offline"  };
+    String [] titles = {"Offline"  };
 
     public YourBooksFragmentViewPagerAdapter(FragmentActivity activity, FragmentManager fm) {
         super(fm);
@@ -21,8 +21,8 @@ public class YourBooksFragmentViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int pos) {
         switch(pos) {
 
-            case 0: return FragmentPurchased.newInstance("FragmentPurchased, Instance 1");
-            case 1: return FragmentOffline.newInstance("FragmentBooked, Instance 2");
+          //  case 0: return FragmentPurchased.newInstance("FragmentPurchased, Instance 1");
+            case 0: return FragmentOffline.newInstance("FragmentBooked, Instance 2");
             default: return FragmentPurchased.newInstance("FragmentApplied, Default");
         }
     }
@@ -35,6 +35,6 @@ public class YourBooksFragmentViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 1;
     }
 }

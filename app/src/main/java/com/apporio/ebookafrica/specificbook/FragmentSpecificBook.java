@@ -265,7 +265,7 @@ public class FragmentSpecificBook extends Fragment {
 
                     bookimage = sbs.getSpecificBookSuccessProduct().getImage() ;
 
-                  //  relatedproducts();
+                    relatedproducts();
 
                 } else {
                     Toast.makeText(getActivity(), "Failurre", Toast.LENGTH_SHORT).show();

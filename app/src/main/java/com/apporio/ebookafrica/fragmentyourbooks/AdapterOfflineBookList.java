@@ -47,7 +47,7 @@ public class AdapterOfflineBookList extends BaseAdapter {
         inflate = (LayoutInflater) con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         MyView = inflate.inflate(R.layout.simple_list_item, parent, false);
         TextView text = (TextView) MyView.findViewById(R.id.bookname);
-        text.setText(""+theNamesOfFiles[position]);
+        text.setText(""+theNamesOfFiles[position].replace("_" , " "));
 
         return MyView;
     }
