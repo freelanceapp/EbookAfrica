@@ -11,11 +11,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
-        <TextView android:text="We Just Have BY Pass The Payment Gateway for the time being and executing two Api in a sequence that is Confirm order Api and PLace Order APi . NOTE it is being assumed that payment has been done aftward download link has been captured by device  "
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/product_id"/>
+
+
+
+
+        <!--<TextView android:text="We Just Have BY Pass The Payment Gateway for the time being and executing two Api in a sequence that is Confirm order Api and PLace Order APi . NOTE it is being assumed that payment has been done aftward download link has been captured by device  "-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/product_id"/>-->
 
 
         <TextView
@@ -24,6 +28,7 @@
             android:gravity="center"
             android:text="Link we are using to download file "
             android:textColor="@color/icons_8_muted_green_1"
+            android:visibility="gone"
             android:layout_marginTop="10dp"/>
 
 
@@ -32,13 +37,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="loading..."
+            android:visibility="gone"
             android:id="@+id/capturedownloadlink"/>
 
 
 
         <Button
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="Start Download"
             android:id="@+id/download"/>
 
@@ -55,7 +61,7 @@
 
         <Button
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="Open Book "
             android:layout_marginTop="10dp"
             android:id="@+id/openbook"/>

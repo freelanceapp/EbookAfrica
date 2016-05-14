@@ -20,7 +20,7 @@ public class UrlsEbookAfrics {
     public static String specialcategory = " http://modha.me.uk/api/api.php?func=get_category_special&language_id=1";
     public static String ConfirmOrder   = "http://modha.me.uk/api/api.php?func=confirmorder";
     public static String PlaceOrder   = "http://modha.me.uk/api/api.php?func=place_order";
-    public static String GetOrder   = "http://modha.me.uk/api/api.php?func=getorders";
+    public static String PurchasedBooks   = "http://modha.me.uk/api/api.php?func=getorders&customer_id=";
 
 
 }

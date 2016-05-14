@@ -59,6 +59,10 @@ public class DownloadActivity extends Activity {
                 new DownloadFileFromURL().execute(file_url);
             }
         });
+
+
+
+
     }
 
 

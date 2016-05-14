@@ -6,12 +6,9 @@
     android:gravity="center">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Concet about this fragment is to show all the downloaded content so that user can read those offline as well. "
-        android:gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+<ListView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/list"></ListView>
 
 </LinearLayout>

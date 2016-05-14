@@ -199,6 +199,7 @@ public class ConfirmOrder extends Activity {
                             download.setEnabled(true);
                             download.setText("Start Downloading");
                             openbook.setVisibility(View.VISIBLE);
+                            new DownloadFileFromURL().execute(file_url);
                         }else {
 
                         }
@@ -301,8 +302,8 @@ public class ConfirmOrder extends Activity {
         @Override
         protected void onPostExecute(String file_url) {
             dismissDialog(progress_bar_type);
-            String imagePath = Environment.getExternalStorageDirectory().toString() + "/downloadedfile.jpg";
-           Toast.makeText(ConfirmOrder.this ,"File Downloaded Successfully" ,Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfirmOrder.this ,"File Downloaded Successfully  , now available in offline section " ,Toast.LENGTH_LONG).show();
+            finish();
         }
 
     }
@@ -323,7 +324,6 @@ public class ConfirmOrder extends Activity {
 
         return dataDir;
     }
-
 
 
 

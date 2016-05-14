@@ -13,7 +13,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/applogo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -21,17 +21,17 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name=".lalit.BookViewActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize"
-            android:label="BookView"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".lalit.LalitActivity"
-            android:label="@string/title_activity_lalit"
-            android:screenOrientation="portrait" >
-        </activity>
+        <!--<activity-->
+            <!--android:name=".lalit.BookViewActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize"-->
+            <!--android:label="BookView"-->
+            <!--android:screenOrientation="portrait" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".lalit.LalitActivity"-->
+            <!--android:label="@string/title_activity_lalit"-->
+            <!--android:screenOrientation="portrait" >-->
+        <!--</activity>-->
         <activity
             android:name=".specificbook.SpecificBookActivity"
             android:label="@string/title_activity_specific_book"
@@ -49,8 +49,7 @@
         <activity android:name="com.apporio.apporiologin.AppOrioLoginScreen" >
         </activity>
         <activity
-            android:name=".SplashScreen"
-            android:label="@string/title_activity_splash_screen" >
+            android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +63,32 @@
         <activity
             android:name=".order.ConfirmOrder"
             android:label="@string/title_activity_confirm_order" >
+
         </activity>
+
+
+
+
+
+
+        <activity
+            android:name=".epubsamir.MainActivityEPUBSamir"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".epubsamir.BookViewActivityEPUBSamir"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize"
+            android:label="BookView"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+
+
+
+
+
+
+
     </application>
 
 </manifest>

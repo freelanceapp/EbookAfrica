@@ -145,7 +145,6 @@ public class AppOrioLoginScreen extends AppCompatActivity {
             }
         };
         queue.add(postRequest);
-        Toast.makeText(AppOrioLoginScreen.this , "Start Executing in library need to replace it with loader " , Toast.LENGTH_SHORT).show();
 
 
     }
