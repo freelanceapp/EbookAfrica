@@ -16,6 +16,9 @@
     <string name="title_activity_download">DownloadActivity</string>
     <string name="title_activity_mandy">MandyActivity</string>
     <string name="title_activity_confirm_order">ConfirmOrder</string>
+    <string name="title_activity_activity_banner_and_special_category">
+        ActivityBannerAndSpecialCategory
+    </string>
 
 
 

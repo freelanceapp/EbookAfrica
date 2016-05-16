@@ -148,6 +148,12 @@ public class SpecificBookSuccessProduct {
     @SerializedName("images")
     @Expose
     private List<Object> images = new ArrayList<Object>();
+    @SerializedName("full_file")
+    @Expose
+    private String fullFile;
+    @SerializedName("purchase_status")
+    @Expose
+    private String purchaseStatus;
     @SerializedName("author")
     @Expose
     private String author;
@@ -986,6 +992,42 @@ public class SpecificBookSuccessProduct {
     /**
      *
      * @return
+     * The fullFile
+     */
+    public String getFullFile() {
+        return fullFile;
+    }
+
+    /**
+     *
+     * @param fullFile
+     * The full_file
+     */
+    public void setFullFile(String fullFile) {
+        this.fullFile = fullFile;
+    }
+
+    /**
+     *
+     * @return
+     * The purchaseStatus
+     */
+    public String getPurchaseStatus() {
+        return purchaseStatus;
+    }
+
+    /**
+     *
+     * @param purchaseStatus
+     * The purchase_status
+     */
+    public void setPurchaseStatus(String purchaseStatus) {
+        this.purchaseStatus = purchaseStatus;
+    }
+
+    /**
+     *
+     * @return
      * The author
      */
     public String getAuthor() {
@@ -1018,5 +1060,6 @@ public class SpecificBookSuccessProduct {
     public void setRelatedProduct(List<RelatedProduct> relatedProduct) {
         this.relatedProduct = relatedProduct;
     }
+
 
 }

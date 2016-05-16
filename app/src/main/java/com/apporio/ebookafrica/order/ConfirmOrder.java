@@ -145,9 +145,13 @@ public class ConfirmOrder extends Activity {
 
     private void confirmOrderApiExecution( String product_idd) throws JSONException {
 
+
+        Logger.d("Customer Id That i am sending before placing order for book "+sm.getUserDetails().get(SessionManager.CUSTOMER_ID));
+
+
         JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, UrlsEbookAfrics.ConfirmOrder,
 
-                new JSONObject("{\"language_id\":1,\"coupon\":\"\",\"voucher\":\"\",\"customer_id\":\"1\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":2}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\"pooja\",\"payment_lastname\":\"kailiwal\",\"payment_company\":\"onjection\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\"9999722105\",\"payment_email\":\"18793pooja@gmail.com\"},\"payment_method\":{\"title\":\"Cash on Delivery\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}"),
+                new JSONObject("{\"language_id\":1,\"coupon\":\"\",\"voucher\":\"\",\"customer_id\":\""+ sm.getUserDetails().get(SessionManager.CUSTOMER_ID) +"\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":2}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\"pooja\",\"payment_lastname\":\"kailiwal\",\"payment_company\":\"onjection\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\"9999722105\",\"payment_email\":\"18793pooja@gmail.com\"},\"payment_method\":{\"title\":\"Cash on Delivery\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

@@ -51,6 +51,7 @@
                 android:id="@+id/password_edt"
                 android:paddingLeft="10dp"
                 android:hint="password"
+                android:inputType="textPassword"
                 android:textColorHint="#d0bcbcbc"
                 android:textColor="#ffffff"
                 android:gravity="center"

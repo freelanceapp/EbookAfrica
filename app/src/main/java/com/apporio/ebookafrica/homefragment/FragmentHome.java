@@ -2,6 +2,7 @@ package com.apporio.ebookafrica.homefragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,15 +29,13 @@ import com.apporio.ebookafrica.pojo.AllCategories;
 import com.apporio.ebookafrica.pojo.BannerSliderPojo;
 import com.apporio.ebookafrica.pojo.Product;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -56,11 +55,15 @@ public class FragmentHome extends Fragment {
 
 
 
-
     private static RequestQueue queue ;
     private static StringRequest sr;
 
     public static  Context context ;
+    ArrayList<List<String>> categories_id_Array  = new ArrayList<>();
+    ArrayList<String> banner_names = new ArrayList<>();
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,37 +89,46 @@ public class FragmentHome extends Fragment {
         AllCategoriesIncludingProductsExecution();
 
 
+        image_slider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActivityBannerAndSpecialCategory.class));
+            }
+        });
+
+
 
         return rootView;
     }
 
-    private void setImageSlider(ArrayList<String> images) {
+    private void setImageSlider(final ArrayList<String> images) {
 
-        HashMap<String,String> file_maps = new HashMap<String, String>();
-        for(int i = 0 ; i < images.size() ; i++){
-            file_maps.put(""+i, ""+images.get(i));
+
+        for(int i = 0; i<images.size();i ++) {
+            DefaultSliderView defaultSliderView = new DefaultSliderView(getActivity());
+            final int finalI = i;
+            final int finalI1 = i;
+            defaultSliderView.image(images.get(i))
+                    .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                        @Override
+                        public void onSliderClick(BaseSliderView slider) {
+
+                            ArrayList<String> categories =new ArrayList<String>();
+                            for(int j = 0 ; j< categories_id_Array.get(finalI).size() ; j++){
+                                categories.add(categories_id_Array.get(finalI).get(j));
+                            }
+                            Intent in  = new Intent(getActivity() ,ActivityBannerAndSpecialCategory.class);
+                            in.putStringArrayListExtra("array" ,categories);
+
+                            in.putExtra("fragment_name" , ""+banner_names.get(finalI1));
+                            startActivity(in);
+                        }
+                    });
+
+            image_slider.addSlider(defaultSliderView);
+
+
         }
-        for(String name : file_maps.keySet()){
-
-            TextSliderView textSliderView = new TextSliderView(getActivity());
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
-
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle().putString("extra",name);
-
-            image_slider.addSlider(textSliderView);
-        }
-
-
-        image_slider.setPresetTransformer(SliderLayout.Transformer.Default);
-        image_slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        image_slider.setCustomAnimation(new DescriptionAnimation());
-        image_slider.setDuration(4000);
 
     }
 
@@ -156,8 +168,14 @@ public class FragmentHome extends Fragment {
                     BannerSliderPojo bsp = new BannerSliderPojo();
                     bsp = gson.fromJson(response, BannerSliderPojo.class);
                     ArrayList<String> bannerimages  = new ArrayList<>();
+                    bannerimages.clear();
+                    banner_names.clear();
                     for(int i = 0 ; i< bsp.getSlider().size() ; i++){
                         bannerimages.add(bsp.getSlider().get(i).getImage());
+                        categories_id_Array.add(bsp.getSlider().get(i).getCategoryId());
+                        banner_names.add(""+bsp.getSlider().get(i).getTitle());
+
+
                     }
                     setImageSlider(bannerimages);
                 }
@@ -296,4 +314,13 @@ public class FragmentHome extends Fragment {
         super.onDestroy();
         queue.cancelAll(sr);
     }
+
+
+
+
+
+
+
+
+
 }

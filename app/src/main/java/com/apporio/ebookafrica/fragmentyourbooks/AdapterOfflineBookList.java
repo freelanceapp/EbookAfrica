@@ -71,7 +71,6 @@ public class AdapterOfflineBookList extends BaseAdapter {
         mImageLoader.get("" + data.get(position).getImage(), ImageLoader.getImageListener(imagebook, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
         imagebook.setImageUrl(""+data.get(position).getImage(), mImageLoader);
 
-     //   Logger.d("name  "+data.get(position).getImage());
         return MyView;
     }
 }

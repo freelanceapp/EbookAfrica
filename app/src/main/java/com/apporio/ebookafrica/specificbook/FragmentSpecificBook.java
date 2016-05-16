@@ -1,11 +1,8 @@
 package com.apporio.ebookafrica.specificbook;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +39,6 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import views.HorizontalListView;
@@ -55,7 +51,7 @@ public class FragmentSpecificBook extends Fragment {
 
     HorizontalListView horizintal_list ;
   //  CustomRatingBarGreen  rating_bar_top;
-    LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader   ;
+    LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader  ,already_purchased  ;
     SessionManager   sm  ;
 
     NetworkImageView imagebook ,button_iimage ;
@@ -74,8 +70,6 @@ public class FragmentSpecificBook extends Fragment {
 
     TextView price ;
     String BOOKIMAGE , FILE_URL , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE ;
-    private ProgressDialog pDialog;
-    public static final int progress_bar_type = 0;
 
 
 
@@ -117,6 +111,7 @@ public class FragmentSpecificBook extends Fragment {
         summary_txt = (TextView) rootView.findViewById(R.id.summary);
         relatedproductlayout  = rootView.findViewById(R.id.relatedproductlayout);
         related_loader  = (LinearLayout) rootView.findViewById(R.id.related_loader);
+        already_purchased = (LinearLayout) rootView.findViewById(R.id.already_purchased);
         price  = (TextView) rootView.findViewById(R.id.price);
 
 
@@ -223,7 +218,6 @@ public class FragmentSpecificBook extends Fragment {
         in.putExtra("author", AUTHOR);
         in.putExtra("manufacturer", MANUFACTURE);
         startActivity(in);
-       // confirmOrderApiExecution(BOOKID);
     }
 
 
@@ -231,7 +225,7 @@ public class FragmentSpecificBook extends Fragment {
 
 
     public void SpecificProductExecution(){
-        String url = UrlsEbookAfrics.GetSpecificProduct+product_id;
+        String url = UrlsEbookAfrics.GetSpecificProduct+product_id+"&customer_id="+sm.getUserDetails().get(SessionManager.CUSTOMER_ID);
         url=url.replace(" ","%20");
         Logger.d("Executing Specific Product API   " + url);
 
@@ -259,6 +253,16 @@ public class FragmentSpecificBook extends Fragment {
                     pages_txt.setText("Pages "+sbs.getSpecificBookSuccessProduct().getPages());
                     summary_txt.setText("" + sbs.getSpecificBookSuccessProduct().getDescription());
                     price.setText(""+sbs.getSpecificBookSuccessProduct().getPrice());
+
+
+                    if(sbs.getSpecificBookSuccessProduct().getPurchaseStatus().equals("1")){
+                        buy_now.setVisibility(View.GONE);
+                        already_purchased.setVisibility(View.VISIBLE);
+                    }else if (sbs.getSpecificBookSuccessProduct().getPurchaseStatus().equals("0")){
+                        buy_now.setVisibility(View.VISIBLE);
+                        already_purchased.setVisibility(View.GONE);
+                    }
+
 
                     BOOKIMAGE = ""+sbs.getSpecificBookSuccessProduct().getImage() ;
                     BOOKNAME = sbs.getSpecificBookSuccessProduct().getName();
@@ -379,38 +383,6 @@ public class FragmentSpecificBook extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////
-
-
-    public File getDataFolder(Context context) {
-        File dataDir = null;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            dataDir = new File(Environment.getExternalStorageDirectory(), "ebbok_data");
-            if(!dataDir.isDirectory()) {
-                dataDir.mkdirs();
-            }
-        }
-
-        if(!dataDir.isDirectory()) {
-            dataDir = context.getFilesDir();
-        }
-
-        return dataDir;
-    }
 
 
 

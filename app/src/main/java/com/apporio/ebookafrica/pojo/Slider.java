@@ -32,126 +32,126 @@ public class Slider {
     private List<String> categoryId = new ArrayList<String>();
 
     /**
-     * 
+     *
      * @return
-     *     The bannerImageId
+     * The bannerImageId
      */
     public String getBannerImageId() {
         return bannerImageId;
     }
 
     /**
-     * 
+     *
      * @param bannerImageId
-     *     The banner_image_id
+     * The banner_image_id
      */
     public void setBannerImageId(String bannerImageId) {
         this.bannerImageId = bannerImageId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The bannerId
+     * The bannerId
      */
     public String getBannerId() {
         return bannerId;
     }
 
     /**
-     * 
+     *
      * @param bannerId
-     *     The banner_id
+     * The banner_id
      */
     public void setBannerId(String bannerId) {
         this.bannerId = bannerId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The image
+     * The image
      */
     public String getImage() {
         return image;
     }
 
     /**
-     * 
+     *
      * @param image
-     *     The image
+     * The image
      */
     public void setImage(String image) {
         this.image = image;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The sortOrder
+     * The sortOrder
      */
     public String getSortOrder() {
         return sortOrder;
     }
 
     /**
-     * 
+     *
      * @param sortOrder
-     *     The sort_order
+     * The sort_order
      */
     public void setSortOrder(String sortOrder) {
         this.sortOrder = sortOrder;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The languageId
+     * The languageId
      */
     public String getLanguageId() {
         return languageId;
     }
 
     /**
-     * 
+     *
      * @param languageId
-     *     The language_id
+     * The language_id
      */
     public void setLanguageId(String languageId) {
         this.languageId = languageId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The title
+     * The title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * 
+     *
      * @param title
-     *     The title
+     * The title
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The categoryId
+     * The categoryId
      */
     public List<String> getCategoryId() {
         return categoryId;
     }
 
     /**
-     * 
+     *
      * @param categoryId
-     *     The category_id
+     * The category_id
      */
     public void setCategoryId(List<String> categoryId) {
         this.categoryId = categoryId;
