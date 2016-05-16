@@ -98,8 +98,7 @@
             android:name=".epubsamir.BookViewActivityEPUBSamir"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize"
             android:label="BookView"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
 
 

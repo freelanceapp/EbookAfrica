@@ -9,6 +9,7 @@ import java.util.List;
 
 public class SpecificBookSuccessProduct {
 
+
     @SerializedName("product_id")
     @Expose
     private String productId;
@@ -30,6 +31,9 @@ public class SpecificBookSuccessProduct {
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("sample_books")
+    @Expose
+    private String sampleBooks;
     @SerializedName("manufacturer_id")
     @Expose
     private String manufacturerId;
@@ -39,6 +43,12 @@ public class SpecificBookSuccessProduct {
     @SerializedName("shipping")
     @Expose
     private String shipping;
+    @SerializedName("pages")
+    @Expose
+    private String pages;
+    @SerializedName("hours")
+    @Expose
+    private String hours;
     @SerializedName("price")
     @Expose
     private String price;
@@ -143,816 +153,870 @@ public class SpecificBookSuccessProduct {
     private String author;
     @SerializedName("related_product")
     @Expose
-    private List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct = new ArrayList<SpecificBookSuccessRelatedProduct>();
+    private List<RelatedProduct> relatedProduct = new ArrayList<RelatedProduct>();
 
     /**
-     * 
+     *
      * @return
-     *     The productId
+     * The productId
      */
     public String getProductId() {
         return productId;
     }
 
     /**
-     * 
+     *
      * @param productId
-     *     The product_id
+     * The product_id
      */
     public void setProductId(String productId) {
         this.productId = productId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The model
+     * The model
      */
     public String getModel() {
         return model;
     }
 
     /**
-     * 
+     *
      * @param model
-     *     The model
+     * The model
      */
     public void setModel(String model) {
         this.model = model;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The sku
+     * The sku
      */
     public String getSku() {
         return sku;
     }
 
     /**
-     * 
+     *
      * @param sku
-     *     The sku
+     * The sku
      */
     public void setSku(String sku) {
         this.sku = sku;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The isbn
+     * The isbn
      */
     public String getIsbn() {
         return isbn;
     }
 
     /**
-     * 
+     *
      * @param isbn
-     *     The isbn
+     * The isbn
      */
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The quantity
+     * The quantity
      */
     public String getQuantity() {
         return quantity;
     }
 
     /**
-     * 
+     *
      * @param quantity
-     *     The quantity
+     * The quantity
      */
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The stockStatusId
+     * The stockStatusId
      */
     public String getStockStatusId() {
         return stockStatusId;
     }
 
     /**
-     * 
+     *
      * @param stockStatusId
-     *     The stock_status_id
+     * The stock_status_id
      */
     public void setStockStatusId(String stockStatusId) {
         this.stockStatusId = stockStatusId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The image
+     * The image
      */
     public String getImage() {
         return image;
     }
 
     /**
-     * 
+     *
      * @param image
-     *     The image
+     * The image
      */
     public void setImage(String image) {
         this.image = image;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The manufacturerId
+     * The sampleBooks
+     */
+    public String getSampleBooks() {
+        return sampleBooks;
+    }
+
+    /**
+     *
+     * @param sampleBooks
+     * The sample_books
+     */
+    public void setSampleBooks(String sampleBooks) {
+        this.sampleBooks = sampleBooks;
+    }
+
+    /**
+     *
+     * @return
+     * The manufacturerId
      */
     public String getManufacturerId() {
         return manufacturerId;
     }
 
     /**
-     * 
+     *
      * @param manufacturerId
-     *     The manufacturer_id
+     * The manufacturer_id
      */
     public void setManufacturerId(String manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The authorId
+     * The authorId
      */
     public String getAuthorId() {
         return authorId;
     }
 
     /**
-     * 
+     *
      * @param authorId
-     *     The author_id
+     * The author_id
      */
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The shipping
+     * The shipping
      */
     public String getShipping() {
         return shipping;
     }
 
     /**
-     * 
+     *
      * @param shipping
-     *     The shipping
+     * The shipping
      */
     public void setShipping(String shipping) {
         this.shipping = shipping;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The price
+     * The pages
+     */
+    public String getPages() {
+        return pages;
+    }
+
+    /**
+     *
+     * @param pages
+     * The pages
+     */
+    public void setPages(String pages) {
+        this.pages = pages;
+    }
+
+    /**
+     *
+     * @return
+     * The hours
+     */
+    public String getHours() {
+        return hours;
+    }
+
+    /**
+     *
+     * @param hours
+     * The hours
+     */
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    /**
+     *
+     * @return
+     * The price
      */
     public String getPrice() {
         return price;
     }
 
     /**
-     * 
+     *
      * @param price
-     *     The price
+     * The price
      */
     public void setPrice(String price) {
         this.price = price;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The points
+     * The points
      */
     public String getPoints() {
         return points;
     }
 
     /**
-     * 
+     *
      * @param points
-     *     The points
+     * The points
      */
     public void setPoints(String points) {
         this.points = points;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The taxClassId
+     * The taxClassId
      */
     public String getTaxClassId() {
         return taxClassId;
     }
 
     /**
-     * 
+     *
      * @param taxClassId
-     *     The tax_class_id
+     * The tax_class_id
      */
     public void setTaxClassId(String taxClassId) {
         this.taxClassId = taxClassId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The dateAvailable
+     * The dateAvailable
      */
     public String getDateAvailable() {
         return dateAvailable;
     }
 
     /**
-     * 
+     *
      * @param dateAvailable
-     *     The date_available
+     * The date_available
      */
     public void setDateAvailable(String dateAvailable) {
         this.dateAvailable = dateAvailable;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The weight
+     * The weight
      */
     public String getWeight() {
         return weight;
     }
 
     /**
-     * 
+     *
      * @param weight
-     *     The weight
+     * The weight
      */
     public void setWeight(String weight) {
         this.weight = weight;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The weightClassId
+     * The weightClassId
      */
     public String getWeightClassId() {
         return weightClassId;
     }
 
     /**
-     * 
+     *
      * @param weightClassId
-     *     The weight_class_id
+     * The weight_class_id
      */
     public void setWeightClassId(String weightClassId) {
         this.weightClassId = weightClassId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The length
+     * The length
      */
     public String getLength() {
         return length;
     }
 
     /**
-     * 
+     *
      * @param length
-     *     The length
+     * The length
      */
     public void setLength(String length) {
         this.length = length;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The width
+     * The width
      */
     public String getWidth() {
         return width;
     }
 
     /**
-     * 
+     *
      * @param width
-     *     The width
+     * The width
      */
     public void setWidth(String width) {
         this.width = width;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The height
+     * The height
      */
     public String getHeight() {
         return height;
     }
 
     /**
-     * 
+     *
      * @param height
-     *     The height
+     * The height
      */
     public void setHeight(String height) {
         this.height = height;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The lengthClassId
+     * The lengthClassId
      */
     public String getLengthClassId() {
         return lengthClassId;
     }
 
     /**
-     * 
+     *
      * @param lengthClassId
-     *     The length_class_id
+     * The length_class_id
      */
     public void setLengthClassId(String lengthClassId) {
         this.lengthClassId = lengthClassId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The minimum
+     * The minimum
      */
     public String getMinimum() {
         return minimum;
     }
 
     /**
-     * 
+     *
      * @param minimum
-     *     The minimum
+     * The minimum
      */
     public void setMinimum(String minimum) {
         this.minimum = minimum;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The sortOrder
+     * The sortOrder
      */
     public String getSortOrder() {
         return sortOrder;
     }
 
     /**
-     * 
+     *
      * @param sortOrder
-     *     The sort_order
+     * The sort_order
      */
     public void setSortOrder(String sortOrder) {
         this.sortOrder = sortOrder;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The status
+     * The status
      */
     public String getStatus() {
         return status;
     }
 
     /**
-     * 
+     *
      * @param status
-     *     The status
+     * The status
      */
     public void setStatus(String status) {
         this.status = status;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The viewed
+     * The viewed
      */
     public String getViewed() {
         return viewed;
     }
 
     /**
-     * 
+     *
      * @param viewed
-     *     The viewed
+     * The viewed
      */
     public void setViewed(String viewed) {
         this.viewed = viewed;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The dateAdded
+     * The dateAdded
      */
     public String getDateAdded() {
         return dateAdded;
     }
 
     /**
-     * 
+     *
      * @param dateAdded
-     *     The date_added
+     * The date_added
      */
     public void setDateAdded(String dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The dateModified
+     * The dateModified
      */
     public String getDateModified() {
         return dateModified;
     }
 
     /**
-     * 
+     *
      * @param dateModified
-     *     The date_modified
+     * The date_modified
      */
     public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The languageId
+     * The languageId
      */
     public String getLanguageId() {
         return languageId;
     }
 
     /**
-     * 
+     *
      * @param languageId
-     *     The language_id
+     * The language_id
      */
     public void setLanguageId(String languageId) {
         this.languageId = languageId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The name
+     * The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
+     *
      * @param name
-     *     The name
+     * The name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The description
+     * The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
+     *
      * @param description
-     *     The description
+     * The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The tag
+     * The tag
      */
     public String getTag() {
         return tag;
     }
 
     /**
-     * 
+     *
      * @param tag
-     *     The tag
+     * The tag
      */
     public void setTag(String tag) {
         this.tag = tag;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The metaTitle
+     * The metaTitle
      */
     public String getMetaTitle() {
         return metaTitle;
     }
 
     /**
-     * 
+     *
      * @param metaTitle
-     *     The meta_title
+     * The meta_title
      */
     public void setMetaTitle(String metaTitle) {
         this.metaTitle = metaTitle;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The storeId
+     * The storeId
      */
     public String getStoreId() {
         return storeId;
     }
 
     /**
-     * 
+     *
      * @param storeId
-     *     The store_id
+     * The store_id
      */
     public void setStoreId(String storeId) {
         this.storeId = storeId;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The manufacturer
+     * The manufacturer
      */
     public String getManufacturer() {
         return manufacturer;
     }
 
     /**
-     * 
+     *
      * @param manufacturer
-     *     The manufacturer
+     * The manufacturer
      */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The discount
+     * The discount
      */
     public String getDiscount() {
         return discount;
     }
 
     /**
-     * 
+     *
      * @param discount
-     *     The discount
+     * The discount
      */
     public void setDiscount(String discount) {
         this.discount = discount;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The special
+     * The special
      */
     public String getSpecial() {
         return special;
     }
 
     /**
-     * 
+     *
      * @param special
-     *     The special
+     * The special
      */
     public void setSpecial(String special) {
         this.special = special;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The reward
+     * The reward
      */
     public Object getReward() {
         return reward;
     }
 
     /**
-     * 
+     *
      * @param reward
-     *     The reward
+     * The reward
      */
     public void setReward(Object reward) {
         this.reward = reward;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The stockStatus
+     * The stockStatus
      */
     public Object getStockStatus() {
         return stockStatus;
     }
 
     /**
-     * 
+     *
      * @param stockStatus
-     *     The stock_status
+     * The stock_status
      */
     public void setStockStatus(Object stockStatus) {
         this.stockStatus = stockStatus;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The weightClass
+     * The weightClass
      */
     public Object getWeightClass() {
         return weightClass;
     }
 
     /**
-     * 
+     *
      * @param weightClass
-     *     The weight_class
+     * The weight_class
      */
     public void setWeightClass(Object weightClass) {
         this.weightClass = weightClass;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The lengthClass
+     * The lengthClass
      */
     public Object getLengthClass() {
         return lengthClass;
     }
 
     /**
-     * 
+     *
      * @param lengthClass
-     *     The length_class
+     * The length_class
      */
     public void setLengthClass(Object lengthClass) {
         this.lengthClass = lengthClass;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The rating
+     * The rating
      */
     public String getRating() {
         return rating;
     }
 
     /**
-     * 
+     *
      * @param rating
-     *     The rating
+     * The rating
      */
     public void setRating(String rating) {
         this.rating = rating;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The reviews
+     * The reviews
      */
     public String getReviews() {
         return reviews;
     }
 
     /**
-     * 
+     *
      * @param reviews
-     *     The reviews
+     * The reviews
      */
     public void setReviews(String reviews) {
         this.reviews = reviews;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The options
+     * The options
      */
     public List<Object> getOptions() {
         return options;
     }
 
     /**
-     * 
+     *
      * @param options
-     *     The options
+     * The options
      */
     public void setOptions(List<Object> options) {
         this.options = options;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The images
+     * The images
      */
     public List<Object> getImages() {
         return images;
     }
 
     /**
-     * 
+     *
      * @param images
-     *     The images
+     * The images
      */
     public void setImages(List<Object> images) {
         this.images = images;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The author
+     * The author
      */
     public String getAuthor() {
         return author;
     }
 
     /**
-     * 
+     *
      * @param author
-     *     The author
+     * The author
      */
     public void setAuthor(String author) {
         this.author = author;
     }
 
     /**
-     * 
+     *
      * @return
-     *     The relatedProduct
+     * The relatedProduct
      */
-    public List<SpecificBookSuccessRelatedProduct> getSpecificBookSuccessRelatedProduct() {
-        return specificBookSuccessRelatedProduct;
+    public List<RelatedProduct> getRelatedProduct() {
+        return relatedProduct;
     }
 
     /**
-     * 
-     * @param specificBookSuccessRelatedProduct
-     *     The related_product
+     *
+     * @param relatedProduct
+     * The related_product
      */
-    public void setSpecificBookSuccessRelatedProduct(List<SpecificBookSuccessRelatedProduct> specificBookSuccessRelatedProduct) {
-        this.specificBookSuccessRelatedProduct = specificBookSuccessRelatedProduct;
+    public void setRelatedProduct(List<RelatedProduct> relatedProduct) {
+        this.relatedProduct = relatedProduct;
     }
 
 }

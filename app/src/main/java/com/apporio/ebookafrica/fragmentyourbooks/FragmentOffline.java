@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.database.PurchasedProductManager;
 import com.apporio.ebookafrica.epubsamir.FileaName;
 import com.apporio.ebookafrica.epubsamir.MainActivityEPUBSamir;
 import com.apporio.ebookafrica.logger.Logger;
@@ -26,9 +27,12 @@ public class FragmentOffline extends Fragment {
 
     ListView list ;
     String[] theNamesOfFiles ;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_offline, container, false);
+
 
         list = (ListView) v.findViewById(R.id.list);
 
@@ -72,7 +76,6 @@ public class FragmentOffline extends Fragment {
 
 
     public static FragmentOffline newInstance(String text) {
-
         FragmentOffline f = new FragmentOffline();
         Bundle b = new Bundle();
         b.putString("msg", text);

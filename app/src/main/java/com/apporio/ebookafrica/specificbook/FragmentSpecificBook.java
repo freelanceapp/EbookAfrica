@@ -1,15 +1,12 @@
 package com.apporio.ebookafrica.specificbook;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +18,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.AppOrioLoginScreen;
@@ -37,11 +32,8 @@ import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.CustomVolleyRequestQueue;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
-import com.apporio.ebookafrica.epubsamir.FileaName;
-import com.apporio.ebookafrica.epubsamir.MainActivityEPUBSamir;
 import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.order.ConfirmOrder;
-import com.apporio.ebookafrica.pojo.PlaceOrder;
 import com.apporio.ebookafrica.pojo.RelatedPRoducts;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
 import com.apporio.ebookafrica.pojo.SpecificBookSuccess;
@@ -49,17 +41,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import views.HorizontalListView;
 
@@ -69,14 +53,13 @@ import views.HorizontalListView;
 @SuppressLint("ValidFragment")
 public class FragmentSpecificBook extends Fragment {
 
-
     HorizontalListView horizintal_list ;
   //  CustomRatingBarGreen  rating_bar_top;
     LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader   ;
     SessionManager   sm  ;
 
     NetworkImageView imagebook ,button_iimage ;
-    TextView bookname , authorname, pages, hours  , summary ;
+    TextView bookname_txt, authorname_txt, pages_txt, hours_txt, summary_txt;
     ImageLoader mImageLoader;
 
 
@@ -90,10 +73,16 @@ public class FragmentSpecificBook extends Fragment {
     ArrayList<String> book_image = new ArrayList<>();
 
     TextView price ;
-    String bookimage  ;
+    String BOOKIMAGE , FILE_URL , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE ;
     private ProgressDialog pDialog;
     public static final int progress_bar_type = 0;
-    String file_url , BookNAME = "";
+
+
+
+
+
+
+
 
     @SuppressLint("ValidFragment")
     public FragmentSpecificBook(String productid){
@@ -113,7 +102,6 @@ public class FragmentSpecificBook extends Fragment {
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         mImageLoader = CustomVolleyRequestQueue.getInstance(getActivity()).getImageLoader();
 
-
         View rootView = inflater.inflate(R.layout.fragment_specific_book, container, false);
         horizintal_list = (HorizontalListView) rootView.findViewById(R.id.horizintal_list);
       //  rating_bar_top = (CustomRatingBarGreen) rootView.findViewById(R.id.rating_bar_top);
@@ -122,14 +110,16 @@ public class FragmentSpecificBook extends Fragment {
         buy_now = (LinearLayout) rootView.findViewById(R.id.buy_now);
         loadingbar = (LinearLayout) rootView.findViewById(R.id.loadingbar);
         mainlayout = (LinearLayout) rootView.findViewById(R.id.mainlayout);
-        bookname = (TextView) rootView.findViewById(R.id.book_name);
-        authorname = (TextView) rootView.findViewById(R.id.author_name);
-        pages = (TextView) rootView.findViewById(R.id.pages);
-        hours = (TextView) rootView.findViewById(R.id.hours);
-        summary = (TextView) rootView.findViewById(R.id.summary);
+        bookname_txt = (TextView) rootView.findViewById(R.id.book_name);
+        authorname_txt = (TextView) rootView.findViewById(R.id.author_name);
+        pages_txt = (TextView) rootView.findViewById(R.id.pages);
+        hours_txt = (TextView) rootView.findViewById(R.id.hours);
+        summary_txt = (TextView) rootView.findViewById(R.id.summary);
         relatedproductlayout  = rootView.findViewById(R.id.relatedproductlayout);
         related_loader  = (LinearLayout) rootView.findViewById(R.id.related_loader);
         price  = (TextView) rootView.findViewById(R.id.price);
+
+
 
 
      //   rating_bar_top.setScore(3);
@@ -223,10 +213,17 @@ public class FragmentSpecificBook extends Fragment {
 
     private void DownloadBook() throws JSONException {
         Intent in = new Intent(getActivity(), ConfirmOrder.class);
-        in.putExtra("product_id", product_id);
-        in.putExtra("image_key", bookimage);
+        in.putExtra("name_key", BOOKNAME);
+        in.putExtra("product_id", BOOKID);
+        in.putExtra("isbn", ISBN);
+        in.putExtra("image_key", BOOKIMAGE);
+        in.putExtra("pages_txt", PAGES);
+        in.putExtra("hours_txt", HOURS);
+        in.putExtra("price", PRICE);
+        in.putExtra("author", AUTHOR);
+        in.putExtra("manufacturer", MANUFACTURE);
         startActivity(in);
-//        confirmOrderApiExecution(product_id);
+       // confirmOrderApiExecution(BOOKID);
     }
 
 
@@ -252,18 +249,26 @@ public class FragmentSpecificBook extends Fragment {
                     sbs = gson.fromJson(response, SpecificBookSuccess.class);
 
 
-
                     mImageLoader.get(sbs.getSpecificBookSuccessProduct().getImage(), ImageLoader.getImageListener(imagebook, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
                     imagebook.setImageUrl(sbs.getSpecificBookSuccessProduct().getImage(), mImageLoader);
                     mImageLoader.get(sbs.getSpecificBookSuccessProduct().getImage(), ImageLoader.getImageListener(button_iimage, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
                     button_iimage.setImageUrl(sbs.getSpecificBookSuccessProduct().getImage(), mImageLoader);
-                    bookname.setText("" + sbs.getSpecificBookSuccessProduct().getName());
-                    authorname.setText(""+sbs.getSpecificBookSuccessProduct().getAuthor());
-                    summary.setText(""+sbs.getSpecificBookSuccessProduct().getDescription());
+                    bookname_txt.setText("" + sbs.getSpecificBookSuccessProduct().getName());
+                    authorname_txt.setText("" + sbs.getSpecificBookSuccessProduct().getAuthor());
+                    hours_txt.setText("   hours "+sbs.getSpecificBookSuccessProduct().getHours());
+                    pages_txt.setText("Pages "+sbs.getSpecificBookSuccessProduct().getPages());
+                    summary_txt.setText("" + sbs.getSpecificBookSuccessProduct().getDescription());
                     price.setText(""+sbs.getSpecificBookSuccessProduct().getPrice());
 
-
-                    bookimage = sbs.getSpecificBookSuccessProduct().getImage() ;
+                    BOOKIMAGE = ""+sbs.getSpecificBookSuccessProduct().getImage() ;
+                    BOOKNAME = sbs.getSpecificBookSuccessProduct().getName();
+                    BOOKID = sbs.getSpecificBookSuccessProduct().getProductId() ;
+                    ISBN = sbs.getSpecificBookSuccessProduct().getIsbn() ;
+                    PAGES = sbs.getSpecificBookSuccessProduct().getPages();
+                    HOURS = sbs.getSpecificBookSuccessProduct().getHours();
+                    PRICE = sbs.getSpecificBookSuccessProduct().getPrice() ;
+                    AUTHOR = sbs.getSpecificBookSuccessProduct().getAuthor() ;
+                    MANUFACTURE = sbs.getSpecificBookSuccessProduct().getManufacturer() ;
 
                     relatedproducts();
 
@@ -389,223 +394,6 @@ public class FragmentSpecificBook extends Fragment {
 
 
 ///////////////////////////////////////////////////////////////
-
-
-
-
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case progress_bar_type: // we set this to 0
-                pDialog = new ProgressDialog(getActivity());
-                pDialog.setMessage("By Pass Payment Gateway , Downloading file. Please wait...");
-                pDialog.setIndeterminate(false);
-                pDialog.setMax(100);
-                pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                pDialog.setCancelable(true);
-                pDialog.show();
-                return pDialog;
-            default:
-                return null;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-    private void confirmOrderApiExecution( String product_idd) throws JSONException {
-
-        JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, UrlsEbookAfrics.ConfirmOrder,
-
-                new JSONObject("{\"language_id\":1,\"coupon\":\"\",\"voucher\":\"\",\"customer_id\":\"1\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":2}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\"pooja\",\"payment_lastname\":\"kailiwal\",\"payment_company\":\"onjection\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\"9999722105\",\"payment_email\":\"18793pooja@gmail.com\"},\"payment_method\":{\"title\":\"Cash on Delivery\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}"),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        GsonBuilder gsonBuilder = new GsonBuilder();
-                        Gson gson = gsonBuilder.create();
-                        ResponseChecker rcheck = new ResponseChecker();
-                        rcheck = gson.fromJson("" + response, ResponseChecker.class);
-
-                        if(rcheck.getStatus().equals("success")){
-                            com.apporio.ebookafrica.pojo.ConfirmOrder co = new com.apporio.ebookafrica.pojo.ConfirmOrder();
-                            co = gson.fromJson("" + response, com.apporio.ebookafrica.pojo.ConfirmOrder.class);
-                            BookNAME = co.getOrderInfo().getConfirmOrderProducts().get(0).getName();
-                            placeorderApiExecution("" + co.getOrderInfo().getOrderId());
-
-
-                        }else {
-
-                            Toast.makeText(getActivity(), "Invalid json format " , Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity() , "" +error, Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("User-agent", System.getProperty("http.agent"));
-                return headers;
-            }
-        };
-        queue.add(postRequest);
-    }
-
-
-
-
-
-    private void placeorderApiExecution( String order_id) {
-        Map<String, String> jsonParams = new HashMap<String, String>();
-
-        jsonParams.put("order_id", ""+order_id);
-        jsonParams.put("order_status_id", "1");
-
-        JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, UrlsEbookAfrics.PlaceOrder,
-
-                new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        GsonBuilder gsonBuilder = new GsonBuilder();
-                        Gson gson = gsonBuilder.create();
-                        ResponseChecker rcheck = new ResponseChecker();
-                        rcheck = gson.fromJson("" + response, ResponseChecker.class);
-
-                        if(rcheck.getStatus().equals("success")){
-                            PlaceOrder po = new PlaceOrder();
-                            po = gson.fromJson("" + response, PlaceOrder.class);
-                            file_url  =  po.getPlaceOrderOrderDetail().getPlaceOrderProducts().get(0).getDownloadLink() ;
-                            new DownloadFileFromURL().execute(file_url);
-                        }else {
-
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity() , "" +error, Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("User-agent", System.getProperty("http.agent"));
-                return headers;
-            }
-        };
-        queue.add(postRequest);
-    }
-
-
-
-
-
-
-    class DownloadFileFromURL extends AsyncTask<String, String, String> {
-
-        File cacheFile ;
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-           // showDialog(progress_bar_type);
-        }
-
-        @Override
-        protected String doInBackground(String... f_url) {
-            int count;
-            try {
-                URL url = new URL(f_url[0]);
-                URLConnection conection = url.openConnection();
-                conection.connect();
-                int lenghtOfFile = conection.getContentLength();
-
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream(), 8192);
-
-
-
-
-                File cacheDir = getDataFolder(getActivity());
-                cacheFile = new File(cacheDir, BookNAME+".epub");
-                Logger.d("file path -----" + cacheFile);
-                FileOutputStream output = new FileOutputStream(cacheFile);
-
-
-
-                byte data[] = new byte[1024];
-
-                long total = 0;
-
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    // publishing the progress....
-                    // After this onProgressUpdate will be called
-                    publishProgress(""+(int)((total*100)/lenghtOfFile));
-
-                    // writing data to file
-                    output.write(data, 0, count);
-                }
-
-                // flushing output
-                output.flush();
-
-                // closing streams
-                output.close();
-                input.close();
-
-            } catch (Exception e) {
-                Log.e("Error: ", e.getMessage());
-            }
-
-            return null;
-        }
-
-
-
-
-
-        protected void onProgressUpdate(String... progress) {
-            // setting progress percentage
-            pDialog.setProgress(Integer.parseInt(progress[0]));
-
-
-
-
-        }
-
-
-        @Override
-        protected void onPostExecute(String file_url) {
-           // dismissDialog(progress_bar_type);
-            Toast.makeText(getActivity() ,"File Downloaded Successfully" ,Toast.LENGTH_SHORT).show();
-            FileaName.FileNAME = BookNAME ;
-            FileaName.FilePath = ""+cacheFile ;
-            Logger.d("Setting book name and path after download " +BookNAME);
-            Intent in  = new Intent(getActivity()  , MainActivityEPUBSamir.class);
-            startActivity(in);
-        }
-
-    }
 
 
     public File getDataFolder(Context context) {

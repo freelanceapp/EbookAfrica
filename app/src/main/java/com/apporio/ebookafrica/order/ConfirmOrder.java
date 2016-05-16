@@ -26,6 +26,7 @@ import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.CustomVolleyRequestQueue;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
+import com.apporio.ebookafrica.database.PurchasedProductManager;
 import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.PlaceOrder;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
@@ -59,13 +60,18 @@ public class ConfirmOrder extends Activity {
     public static final int progress_bar_type = 0;
     String file_url , BookNAME;
 
-
+    String BOOKIMAGE  , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE ;
+    PurchasedProductManager psm ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_order);
         sm = new SessionManager(ConfirmOrder.this);
+        psm = new PurchasedProductManager(ConfirmOrder.this);
+
+
+
         mImageLoader = CustomVolleyRequestQueue.getInstance(ConfirmOrder.this).getImageLoader();
 
         capturedownloadlink = (TextView) findViewById(R.id.capturedownloadlink);
@@ -78,6 +84,22 @@ public class ConfirmOrder extends Activity {
 
         mImageLoader.get(getIntent().getExtras().getString("image_key"), ImageLoader.getImageListener(imagebook, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
         imagebook.setImageUrl(getIntent().getExtras().getString("image_key"), mImageLoader);
+
+
+
+
+
+        BOOKNAME = getIntent().getExtras().getString("name_key");
+        BOOKID = getIntent().getExtras().getString("product_id");
+        ISBN = getIntent().getExtras().getString("isbn");
+        BOOKIMAGE = getIntent().getExtras().getString("image_key");
+        PAGES = getIntent().getExtras().getString("pages_txt");
+        HOURS = getIntent().getExtras().getString("hours_txt");
+        PRICE = getIntent().getExtras().getString("price");
+        AUTHOR = getIntent().getExtras().getString("author");
+        MANUFACTURE = getIntent().getExtras().getString("manufacturer");
+
+
 
 
 
@@ -303,9 +325,20 @@ public class ConfirmOrder extends Activity {
         @Override
         protected void onPostExecute(String file_url) {
             dismissDialog(progress_bar_type);
+
+//            FileaName.FilePath = ""+getDataFolder(ConfirmOrder.this)+"/"+BookNAME.replace(" " , "_")+".epub";
+//            FileaName.FileNAME = ""+BookNAME.replace(" " , "_"+".epub");
+//            startActivity(new Intent(ConfirmOrder.this, MainActivityEPUBSamir.class));
             Toast.makeText(ConfirmOrder.this ,"File Downloaded Successfully  , now available in offline section " ,Toast.LENGTH_LONG).show();
+            savaBookLocaly();
             finish();
         }
+
+    }
+
+    private void savaBookLocaly() {
+
+        psm.addtoPurchasedProductTable(BOOKNAME , BOOKID , ISBN , BOOKIMAGE , PAGES , HOURS , PRICE , AUTHOR , MANUFACTURE);
 
     }
 
