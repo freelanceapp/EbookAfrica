@@ -40,16 +40,21 @@
                     <RelativeLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:background="#BD000000"></RelativeLayout>
+                        android:background="#BD000000"
+                        android:id="@+id/special_one"></RelativeLayout>
 
 
                     <views.TypefaceTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Editor's Choise"
+                        android:text=""
                         geekui:customTypeface="fonts/AllerDisplay.ttf"
                         android:layout_gravity="center"
-                        android:textColor="#ffffff"/>
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/specialcategory_one"/>
                 </FrameLayout>
 
 
@@ -71,16 +76,21 @@
                     <RelativeLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:background="#bd000000"></RelativeLayout>
+                        android:background="#bd000000"
+                        android:id="@+id/special_two"></RelativeLayout>
 
 
                     <views.TypefaceTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Top Books"
+                        android:text=""
                         geekui:customTypeface="fonts/AllerDisplay.ttf"
                         android:layout_gravity="center"
-                        android:textColor="#ffffff"/>
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/specialcategory_two"/>
 
 
                 </FrameLayout>

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -24,13 +25,16 @@ import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.fragmentspecificcategory.SpecificCategoryActivity;
+import com.apporio.ebookafrica.homefragment.ActivityBannerAndSpecialCategory;
 import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.AllCategories;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
+import com.apporio.ebookafrica.pojo.SpecialCategory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by spinnosolutions on 4/21/16.
@@ -42,6 +46,10 @@ public class FragmentCategory extends Fragment {
     ListView  list ;
     private static RequestQueue queue ;
     private static StringRequest sr;
+    TextView specialcategory_one , specialcategory_two ;
+    ArrayList<List<String>> categories_id_Array  = new ArrayList<>();
+    ArrayList<String> banner_names = new ArrayList<>();
+
 
 
 
@@ -64,12 +72,14 @@ public class FragmentCategory extends Fragment {
         imageone = (ImageView) rootView.findViewById(R.id.im1);
         imagetwo = (ImageView) rootView.findViewById(R.id.im2);
         list  = (ListView) rootView.findViewById(R.id.list);
-
+        specialcategory_one = (TextView) rootView.findViewById(R.id.specialcategory_one);
+        specialcategory_two = (TextView) rootView.findViewById(R.id.specialcategory_two);
 
 
         imageone.setImageResource(R.drawable.editor_choise_banner);
         imagetwo.setImageResource(R.drawable.top_books_banner);
 
+        SpecialCategoryExecution();
         CategoryApiExecution();
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,6 +91,46 @@ public class FragmentCategory extends Fragment {
                 getActivity().startActivity(in);
             }
         });
+
+
+
+
+        rootView.findViewById(R.id.special_one).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ArrayList<String> categories =new ArrayList<String>();
+                for(int j = 0 ; j< categories_id_Array.get(0).size() ; j++){
+                    categories.add(categories_id_Array.get(0).get(j));
+                }
+
+
+                Intent in  = new Intent(getActivity() ,ActivityBannerAndSpecialCategory.class);
+                in.putStringArrayListExtra("array" ,categories);
+                in.putExtra("fragment_name" , ""+banner_names.get(0));
+                startActivity(in);
+            }
+        });
+
+
+
+
+        rootView.findViewById(R.id.special_two).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> categories =new ArrayList<String>();
+                for(int j = 0 ; j< categories_id_Array.get(1).size() ; j++){
+                    categories.add(categories_id_Array.get(1).get(j));
+                }
+                Intent in  = new Intent(getActivity() ,ActivityBannerAndSpecialCategory.class);
+                in.putStringArrayListExtra("array" ,categories);
+                in.putExtra("fragment_name" , ""+banner_names.get(1));
+                startActivity(in);
+            }
+        });
+
+
+
 
         return rootView;
     }
@@ -154,6 +204,59 @@ public class FragmentCategory extends Fragment {
     }
 
 
+
+
+    public void SpecialCategoryExecution(){
+
+        String url = UrlsEbookAfrics.specialcategory;
+        url=url.replace(" ","%20");
+        Logger.d("Executing Special Categories API   " + url);
+
+
+        sr = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                ResponseChecker rcheck = new ResponseChecker();
+                rcheck = gson.fromJson(response, ResponseChecker.class);
+
+
+                if (rcheck.getStatus().equals("success")){
+
+                    SpecialCategory sc = new SpecialCategory();
+                    sc = gson.fromJson(response, SpecialCategory.class);
+
+
+                    banner_names.clear();
+
+
+
+                    for(int i = 0 ; i< sc.getSpecialCategorySlider().size() ; i++){
+                        categories_id_Array.add(sc.getSpecialCategorySlider().get(i).getCategoryId());
+                        banner_names.add("" + sc.getSpecialCategorySlider().get(i).getTitle());
+                    }
+
+                    specialcategory_one.setText(""+sc.getSpecialCategorySlider().get(0).getTitle());
+                    specialcategory_two.setText("" + sc.getSpecialCategorySlider().get(1).getTitle());
+
+                }else {
+                    Toast.makeText(getActivity() , "No categories available" , Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Logger.d(""+error);
+            }
+        });
+        sr.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(sr);
+
+    }
 
 
 

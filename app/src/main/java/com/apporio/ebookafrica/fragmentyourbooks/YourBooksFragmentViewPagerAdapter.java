@@ -13,6 +13,8 @@ public class YourBooksFragmentViewPagerAdapter extends FragmentPagerAdapter {
 
     String [] titles = {"Offline"  };
 
+
+
     public YourBooksFragmentViewPagerAdapter(FragmentActivity activity, FragmentManager fm) {
         super(fm);
     }

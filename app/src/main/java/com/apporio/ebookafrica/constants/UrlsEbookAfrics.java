@@ -17,7 +17,7 @@ public class UrlsEbookAfrics {
     public static String GetSpecificProduct  = "http://modha.me.uk/api/api.php?func=getproduct&language_id=1&product_id=";//53
     public static String relatedproducts  = "http://modha.me.uk/api/api.php?func=getproduct&language_id=1&product_id="; // 57
     public static String search = "http://modha.me.uk/api/api.php?func=getproducts&language_id=1&filter_name=";
-    public static String specialcategory = " http://modha.me.uk/api/api.php?func=get_category_special&language_id=1";
+    public static String specialcategory = "http://modha.me.uk/api/api.php?func=get_category_special&language_id=1";
     public static String ConfirmOrder   = "http://modha.me.uk/api/api.php?func=confirmorder";
     public static String PlaceOrder   = "http://modha.me.uk/api/api.php?func=place_order";
     public static String PurchasedBooks   = "http://modha.me.uk/api/api.php?func=getorders&customer_id=";

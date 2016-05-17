@@ -23,6 +23,8 @@ public class FragmentYourBooksMain extends Fragment {
 
 
 
+
+
     public FragmentYourBooksMain() {
     }
 
@@ -56,7 +58,7 @@ public class FragmentYourBooksMain extends Fragment {
 
 
     private PagerAdapter buildAdapter() {
-        return(new YourBooksFragmentViewPagerAdapter(getActivity(), getChildFragmentManager()));
+        return(new YourBooksFragmentViewPagerAdapter(getActivity(), getChildFragmentManager() ));
     }
 
 }

@@ -14,6 +14,8 @@ import com.apporio.ebookafrica.constants.CustomVolleyRequestQueue;
 import com.apporio.ebookafrica.database.PurchasedProductManager;
 import com.apporio.ebookafrica.database.Purchasedproducts;
 
+import java.util.ArrayList;
+
 import io.realm.RealmResults;
 
 /**
@@ -23,24 +25,24 @@ public class AdapterOfflineBookList extends BaseAdapter {
 
 
     Context con ;
-    String[] theNamesOfFiles ;
     LayoutInflater inflate;
     ImageLoader mImageLoader;
     RealmResults<Purchasedproducts>  data ;
+    ArrayList<String> booknames = new ArrayList<>();
 
 
-    public AdapterOfflineBookList(Context con , String[] theNamesOfFiles ){
+    public AdapterOfflineBookList(Context con , ArrayList<String> booknames ){
 
         this.con = con ;
-        this.theNamesOfFiles = theNamesOfFiles ;
         mImageLoader = CustomVolleyRequestQueue.getInstance(con).getImageLoader();
         data = new PurchasedProductManager(con).getFullTable() ;
+        this.booknames = booknames ;
     }
 
 
     @Override
     public int getCount() {
-        return theNamesOfFiles.length;
+        return booknames.size();
     }
 
     @Override
@@ -63,7 +65,7 @@ public class AdapterOfflineBookList extends BaseAdapter {
         TextView author_name = (TextView) MyView.findViewById(R.id.author_name);
         TextView pages  = (TextView) MyView.findViewById(R.id.pages);
         TextView hours = (TextView) MyView.findViewById(R.id.hours);
-        text.setText("" + theNamesOfFiles[position].replace("_", " ").replace(".epub" ,""));
+        text.setText("" + booknames.get(position).replace("_", " ").replace(".epub" ,""));
         pages.setText(""+data.get(position).getPages()+" Pages "+" | ");
         hours.setText(""+data.get(position).getHours()+" hours");
         author_name.setText(""+data.get(position).getAuthor());

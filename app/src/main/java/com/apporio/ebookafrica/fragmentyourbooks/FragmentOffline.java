@@ -12,12 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.apporio.ebookafrica.R;
-import com.apporio.ebookafrica.database.PurchasedProductManager;
 import com.apporio.ebookafrica.epubsamir.FileaName;
 import com.apporio.ebookafrica.epubsamir.MainActivityEPUBSamir;
 import com.apporio.ebookafrica.logger.Logger;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by spinnosolutions on 4/9/16.
@@ -28,6 +28,7 @@ public class FragmentOffline extends Fragment {
     ListView list ;
     String[] theNamesOfFiles ;
 
+    ArrayList<String> booknames = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,16 +41,19 @@ public class FragmentOffline extends Fragment {
         File[] filelist = getDataFolder(getActivity()).listFiles();
         theNamesOfFiles = new String[filelist.length];
         for (int i = 0; i < theNamesOfFiles.length; i++) {
-            theNamesOfFiles[i] = filelist[i].getName();
+            if(!filelist[i].getName().equals("sample_book.epub.epub")){
+                booknames.add(""+filelist[i].getName());
+            }
         }
-        list.setAdapter(new AdapterOfflineBookList(getActivity(), theNamesOfFiles));
 
 
-
-        for(int i = 0 ; i< theNamesOfFiles.length ; i++){
-
-            Logger.d("path name " +getDataFolder(getActivity())+"/"+theNamesOfFiles[i]);
+        for(int i = 0 ; i < booknames.size() ; i++){
+            Logger.d("name of books in offline fragment "+booknames.get(i));
         }
+
+
+        list.setAdapter(new AdapterOfflineBookList(getActivity(), booknames));
+
 
 
 

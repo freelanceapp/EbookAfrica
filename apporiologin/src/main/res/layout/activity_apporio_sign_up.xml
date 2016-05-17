@@ -125,6 +125,7 @@
                     android:layout_marginBottom="10dp"
                     android:textColor="#ffffff"
                     android:gravity="center"
+                    android:inputType="textPassword"
                     android:id="@+id/password_edt"
                     android:paddingLeft="10dp"/>
 
@@ -136,7 +137,9 @@
                     android:layout_marginBottom="10dp"
                     android:textColorHint="#d0bcbcbc"
                     android:textColor="#ffffff"
-                    android:gravity="center"                android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:gravity="center"
+                    android:hint="Confirm Password"
                     android:id="@+id/confirm_password_edt"
                     android:paddingLeft="10dp"/>
 

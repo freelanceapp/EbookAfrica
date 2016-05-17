@@ -60,7 +60,7 @@ public class ConfirmOrder extends Activity {
     public static final int progress_bar_type = 0;
     String file_url , BookNAME;
 
-    String BOOKIMAGE  , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE ;
+    String BOOKIMAGE  , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE , PAYMENTID;
     PurchasedProductManager psm ;
 
     @Override
@@ -85,10 +85,6 @@ public class ConfirmOrder extends Activity {
         mImageLoader.get(getIntent().getExtras().getString("image_key"), ImageLoader.getImageListener(imagebook, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
         imagebook.setImageUrl(getIntent().getExtras().getString("image_key"), mImageLoader);
 
-
-
-
-
         BOOKNAME = getIntent().getExtras().getString("name_key");
         BOOKID = getIntent().getExtras().getString("product_id");
         ISBN = getIntent().getExtras().getString("isbn");
@@ -98,10 +94,7 @@ public class ConfirmOrder extends Activity {
         PRICE = getIntent().getExtras().getString("price");
         AUTHOR = getIntent().getExtras().getString("author");
         MANUFACTURE = getIntent().getExtras().getString("manufacturer");
-
-
-
-
+        PAYMENTID = getIntent().getExtras().getString("payment_id");
 
 
         try {
@@ -151,7 +144,7 @@ public class ConfirmOrder extends Activity {
 
         JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, UrlsEbookAfrics.ConfirmOrder,
 
-                new JSONObject("{\"language_id\":1,\"coupon\":\"\",\"voucher\":\"\",\"customer_id\":\""+ sm.getUserDetails().get(SessionManager.CUSTOMER_ID) +"\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":2}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\"pooja\",\"payment_lastname\":\"kailiwal\",\"payment_company\":\"onjection\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\"9999722105\",\"payment_email\":\"18793pooja@gmail.com\"},\"payment_method\":{\"title\":\"Cash on Delivery\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}"),
+                new JSONObject("{\"language_id\":1,\"coupon\":\"\",\"voucher\":\"\",\"customer_id\":\""+ sm.getUserDetails().get(SessionManager.CUSTOMER_ID) +"\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":1}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\""+sm.getUserDetails().get(SessionManager.FIRST_NAME)+"\",\"payment_lastname\":\""+sm.getUserDetails().get(SessionManager.LAST_NAME)+"\",\"payment_company\":\"EbookAfica\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\""+sm.getUserDetails().get(SessionManager.TELEPHONE)+"\",\"payment_email\":\""+ sm.getUserDetails().get(SessionManager.EMAIL)+"\"},\"payment_method\":{\"title\":\"paypal\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -339,6 +332,10 @@ public class ConfirmOrder extends Activity {
         }
 
     }
+
+
+
+
 
     private void savaBookLocaly() {
 

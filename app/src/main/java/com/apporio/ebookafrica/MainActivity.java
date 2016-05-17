@@ -17,11 +17,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.apporio.apporiologin.AppOrioLoginScreen;
+import com.apporio.apporiologin.ApporioSignUpActivity;
+import com.apporio.apporiologin.LoginEvent;
 import com.apporio.ebookafrica.categoryfragment.FragmentCategory;
+import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.fragmentyourbooks.FragmentYourBooksMain;
 import com.apporio.ebookafrica.homefragment.FragmentHome;
 import com.apporio.ebookafrica.logger.Logger;
+import com.apporio.ebookafrica.pojo.LoginSuccess;
+import com.apporio.ebookafrica.pojo.LoginUnSuccess;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
 import com.apporio.ebookafrica.pojo.Search;
 import com.apporio.ebookafrica.specificbook.SpecificBookActivity;
@@ -34,6 +40,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
+
 public class MainActivity extends AppCompatActivity {
 
     FragmentTransaction ft ;
@@ -44,21 +52,20 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     public static MainActivity mainActivity  ;
-    String [] data  = {"adad" ,"adadadd" ,"ddaa" ,"ddddd" ,"aaaa"}  ;
-
-
     private static RequestQueue queue ;
     private static StringRequest sr;
 
     ArrayList<String> search_name  = new ArrayList<>();
     ArrayList<String> search_id  = new ArrayList<>();
+    SessionManager sm ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         queue = com.apporio.apporiologin.VolleySingleton.getInstance(MainActivity.this).getRequestQueue();
-
+        sm = new SessionManager(MainActivity.this);
+        EventBus.getDefault().register(this);
 
         mainActivity = this ;
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
@@ -155,10 +162,14 @@ public class MainActivity extends AppCompatActivity {
                         setfragmentinContainer(new FragmentCategory(), "" + R.string.fragment_category , 1);
                         break;
                     case 2:
-                        setfragmentinContainer(new FragmentYourBooksMain(), "" + R.string.fragment_your_book , 1);
-
-
-
+                        if(sm.isLoggedIn()){
+                            setfragmentinContainer(new FragmentYourBooksMain(), "" + R.string.fragment_your_book , 1);
+                        }else {
+                            Intent in = new Intent(MainActivity.this, AppOrioLoginScreen.class);
+                            in.putExtra("apporio_login_url", UrlsEbookAfrics.Login);
+                            in.putExtra("apporio_sign_url", UrlsEbookAfrics.SighUp);
+                            startActivity(in);
+                        }
                         break;
                     case 3:
 
@@ -294,6 +305,62 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+    public void onEvent(LoginEvent Value){
+        if(Value.LoginDeterminer() == 0 ){
+            Toast.makeText(MainActivity.this, "" + Value.LoginEvent(), Toast.LENGTH_SHORT).show();
+        }else{
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            ResponseChecker rcheck = new ResponseChecker();
+            rcheck = gson.fromJson(Value.LoginEvent(), ResponseChecker.class);
+            if(rcheck.getStatus().equals("success")){
+                LoginSuccess l_success = new LoginSuccess();
+                l_success = gson.fromJson(Value.LoginEvent(), LoginSuccess.class);
+                if(ApporioSignUpActivity.Activity_Is_Open){
+                    Toast.makeText(MainActivity.this, "Welcome" +l_success.getCustomer().getFirstname()+" "+l_success.getCustomer().getLastname(), Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(MainActivity.this, "Welcome" +l_success.getCustomer().getFirstname()+" "+l_success.getCustomer().getLastname(), Toast.LENGTH_SHORT).show();
+                }
+                sm.createLoginSession("" + l_success.getCustomer().getCustomerId(),
+                        "" + l_success.getCustomer().getFirstname(),
+                        "" + l_success.getCustomer().getLastname(),
+                        "" + l_success.getCustomer().getEmail(),
+                        "" + l_success.getCustomer().getTelephone(),
+                        "" + l_success.getCustomer().getFax(),
+                        "" + l_success.getCustomer().getNewsletter(),
+                        "" + l_success.getCustomer().getWishlist(),
+                        "" + l_success.getCustomer().getCart(),
+                        "" + l_success.getCustomer().getTotal());
+
+                if(ApporioSignUpActivity.Activity_Is_Open){
+                    ApporioSignUpActivity.activity.finish();
+                    AppOrioLoginScreen.activity.finish();
+                }else {
+                    AppOrioLoginScreen.activity.finish();
+                }
+                AppOrioLoginScreen.activity.finish();
+
+            }else if (rcheck.getStatus().equals("failed")){
+                LoginUnSuccess l_unsuccess = new LoginUnSuccess();
+                l_unsuccess = gson.fromJson(Value.LoginEvent(), LoginUnSuccess.class);
+                Toast.makeText(MainActivity.this, "" +l_unsuccess.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+
 
 
 
