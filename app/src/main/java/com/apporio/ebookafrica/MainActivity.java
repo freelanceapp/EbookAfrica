@@ -1,7 +1,9 @@
 package com.apporio.ebookafrica;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -21,6 +23,7 @@ import com.apporio.apporiologin.AppOrioLoginScreen;
 import com.apporio.apporiologin.ApporioSignUpActivity;
 import com.apporio.apporiologin.LoginEvent;
 import com.apporio.ebookafrica.categoryfragment.FragmentCategory;
+import com.apporio.ebookafrica.constants.PreviousLoginedStateSessionManager;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.fragmentyourbooks.FragmentYourBooksMain;
@@ -38,6 +41,7 @@ import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView;
 import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItemClickListener;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> search_name  = new ArrayList<>();
     ArrayList<String> search_id  = new ArrayList<>();
     SessionManager sm ;
+    PreviousLoginedStateSessionManager psm ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         queue = com.apporio.apporiologin.VolleySingleton.getInstance(MainActivity.this).getRequestQueue();
         sm = new SessionManager(MainActivity.this);
+        psm = new PreviousLoginedStateSessionManager(MainActivity.this);
         EventBus.getDefault().register(this);
 
         mainActivity = this ;
@@ -142,14 +148,14 @@ public class MainActivity extends AppCompatActivity {
                 ("Category",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.book_category_icon);
         BottomNavigationItem bottomNavigationItem2 = new BottomNavigationItem
                 ("Offline",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.ic_books_library);
-        BottomNavigationItem bottomNavigationItem3 = new BottomNavigationItem
-                ("Profile",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.ic_profile);
+//        BottomNavigationItem bottomNavigationItem3 = new BottomNavigationItem
+//                ("Profile",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.ic_profile);
 
 
         bottomNavigationView.addTab(bottomNavigationItem);
         bottomNavigationView.addTab(bottomNavigationItem1);
         bottomNavigationView.addTab(bottomNavigationItem2);
-        bottomNavigationView.addTab(bottomNavigationItem3);
+      //  bottomNavigationView.addTab(bottomNavigationItem3);
 
         bottomNavigationView.setOnBottomNavigationItemClickListener(new OnBottomNavigationItemClickListener() {
             @Override
@@ -171,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(in);
                         }
                         break;
-                    case 3:
-
-                        break;
+//                    case 3:
+//
+//                        break;
 
                 }
             }
@@ -190,6 +196,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_activity, menu);
@@ -200,9 +225,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        return super.onOptionsItemSelected(item);
-    }
+        switch (item.getItemId())
+        {
+            case R.id.logout:
+                sm.logoutUser();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+}
 
 
     @Override
@@ -338,6 +371,11 @@ public class MainActivity extends AppCompatActivity {
                         "" + l_success.getCustomer().getCart(),
                         "" + l_success.getCustomer().getTotal());
 
+
+                takeActionAccordingToPreviousLogin();
+
+
+
                 if(ApporioSignUpActivity.Activity_Is_Open){
                     ApporioSignUpActivity.activity.finish();
                     AppOrioLoginScreen.activity.finish();
@@ -360,6 +398,80 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    private void takeActionAccordingToPreviousLogin() {
+        deleteFolder();
+            deleteDatabseTable();
+
+
+    }
+
+
+
+
+    public void deleteFolder(){
+        Logger.d("Deleting Previously Downloaded EPUB files " + deleteDir("" + deleteNon_EmptyDir(new File("" + getDataFolder(MainActivity.this)))));
+
+    }
+
+
+    public void deleteDatabseTable(){
+        Logger.d("Deleting Local database of purchased Product because this time is new User");
+
+    }
+
+
+
+
+
+
+
+
+
+    public boolean deleteDir(String dir_path) {
+
+        File del = new File(""+dir_path);
+        Logger.d("Deleting this directory " +del);
+        return del.delete();
+    }
+
+
+
+    public static boolean deleteNon_EmptyDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteNon_EmptyDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
+    }
+
+
+
+
+
+
+    public File getDataFolder(Context context) {
+        File dataDir = null;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            dataDir = new File(Environment.getExternalStorageDirectory(), "ebbok_data");
+            if(!dataDir.isDirectory()) {
+                dataDir.mkdirs();
+            }
+        }
+
+        if(!dataDir.isDirectory()) {
+            dataDir = context.getFilesDir();
+        }
+
+        return dataDir;
+    }
 
 
 

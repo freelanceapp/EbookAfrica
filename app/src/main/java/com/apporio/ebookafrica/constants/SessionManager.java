@@ -3,7 +3,11 @@ package com.apporio.ebookafrica.constants;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Environment;
 
+import com.apporio.ebookafrica.logger.Logger;
+
+import java.io.File;
 import java.util.HashMap;
 
 public class SessionManager {
@@ -23,6 +27,9 @@ public class SessionManager {
     public static String WISHLIST  = "wishlist";
     public static String CART  = "cart";
     public static String TOTAL  = "total";
+
+
+
 
 
 
@@ -51,9 +58,8 @@ public class SessionManager {
         editor.putString(WISHLIST, wishlist);
         editor.putString(CART, cart);
         editor.putString(TOTAL, total);
-
-
         editor.commit();
+
     }
 
 
@@ -92,4 +98,13 @@ public class SessionManager {
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
     }
+
+
+
+
+
+
+
+
+
 }
