@@ -39,7 +39,7 @@ import com.apporio.ebookafrica.order.ConfirmOrder;
 import com.apporio.ebookafrica.pojo.RelatedPRoducts;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
 import com.apporio.ebookafrica.pojo.SpecificBookSuccess;
-import com.apporio.ebookafrica.pojo.tg.PayPalPojo;
+import com.apporio.ebookafrica.pojo.paypalpojo.PayPalPojo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
@@ -201,13 +201,13 @@ public class FragmentSpecificBook extends Fragment {
                 in.putExtra("price", PRICE);
                 in.putExtra("author", AUTHOR);
                 in.putExtra("manufacturer", MANUFACTURE);
-                in.putExtra("payment_id","already purchased");
+                in.putExtra("payment_id", "already purchased");
                 startActivity(in);
             }
         });
 
 
-        SpecificProductExecution();
+
 
 
         return rootView;
@@ -220,8 +220,11 @@ public class FragmentSpecificBook extends Fragment {
     }
 
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        SpecificProductExecution();
+    }
 
     private void DownloadBook() throws JSONException {
 
@@ -240,8 +243,8 @@ public class FragmentSpecificBook extends Fragment {
 
 
     public void SpecificProductExecution(){
-        String url = UrlsEbookAfrics.GetSpecificProduct+product_id+"&customer_id="+sm.getUserDetails().get(SessionManager.CUSTOMER_ID);
-        url=url.replace(" ","%20");
+        String url = UrlsEbookAfrics.GetSpecificProduct+product_id+"&customer_id="+sm.getUserDetails().get(SessionManager.CUSTOMER_ID );
+        url=url.replace(" ","%20").replace("null" , "");
         Logger.d("Executing Specific Product API   " + url);
 
 

@@ -1,5 +1,5 @@
 
-package com.apporio.ebookafrica.pojo.tg;
+package com.apporio.ebookafrica.pojo.paypalpojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -142,7 +142,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 		themes.add(new Theme("brown", Color.BLACK, 0xece3c7, Color.argb(240, 94, 61, 35), Color.argb(255, 255, 255, 255), Color.argb(240, 94, 61, 35), Color.argb(120, 160, 124, 95), Color.DKGRAY, 0x22222222, "Phone-Portrait-Brown.png", "Phone-Landscape-Brown.png", "Phone-Landscape-Double-Brown.png", R.drawable.bookmark2x));
 		themes.add(new Theme("black", Color.LTGRAY, 0x323230, Color.LTGRAY, Color.LTGRAY, Color.LTGRAY, Color.LTGRAY, Color.LTGRAY, 0x77777777, "Phone-Portrait-Black.png", "Phone-Landscape-Black.png", "Phone-Landscape-Double-Black.png", R.drawable.bookmarkgray2x));
 
-		View child = getLayoutInflater().inflate(R.layout.ttttttt, null);
+		View child = getLayoutInflater().inflate(R.layout.book_action_bar_layout, null);
 		ePubView.addView(child);
 		final ImageView option=(ImageView)child.findViewById(R.id.options);
 		ImageView chapters=(ImageView)child.findViewById(R.id.chapters);

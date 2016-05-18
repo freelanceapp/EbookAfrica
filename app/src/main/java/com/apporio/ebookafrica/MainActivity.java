@@ -29,6 +29,7 @@ import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.fragmentyourbooks.FragmentYourBooksMain;
 import com.apporio.ebookafrica.homefragment.FragmentHome;
 import com.apporio.ebookafrica.logger.Logger;
+import com.apporio.ebookafrica.order.PreviousOrdersActivity;
 import com.apporio.ebookafrica.pojo.LoginSuccess;
 import com.apporio.ebookafrica.pojo.LoginUnSuccess;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
@@ -49,6 +50,8 @@ import de.greenrobot.event.EventBus;
 public class MainActivity extends AppCompatActivity {
 
     FragmentTransaction ft ;
+
+    int OPTIONS_TYPE = 0 ;
 
 
 
@@ -194,23 +197,37 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(sm.isLoggedIn()){
+            OPTIONS_TYPE = 1 ;
+        }else {
+            OPTIONS_TYPE = 0 ;
+        }
+    }
+//
+//    @Override
+//    public boolean onPrepareOptionsMenu (Menu menu) {
+//
+//      menu.clear();
+//
+//        if (OPTIONS_TYPE == 0) {
+//            getMenuInflater().inflate(R.menu.menu_login, menu);
+//        }
+//        else {
+//            OPTIONS_TYPE = 1;
+//            getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+//
+//        }
+//
+//        return super.onPrepareOptionsMenu(menu);
+//    }
+//
 
 
 
@@ -229,7 +246,18 @@ public class MainActivity extends AppCompatActivity {
         {
             case R.id.logout:
                 sm.logoutUser();
+                OPTIONS_TYPE = 0 ;
                 return true;
+            case R.id.view_purchases:
+                startActivity(new Intent(MainActivity.this , PreviousOrdersActivity.class));
+                return true;
+            case R.id.login:
+                Intent in = new Intent(MainActivity.this, AppOrioLoginScreen.class);
+                in.putExtra("apporio_login_url", UrlsEbookAfrics.Login);
+                in.putExtra("apporio_sign_url", UrlsEbookAfrics.SighUp);
+                startActivity(in);
+                return true;
+
 
             default:
                 return super.onOptionsItemSelected(item);

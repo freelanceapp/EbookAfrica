@@ -61,8 +61,8 @@ public class FragmentOffline extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                FileaName.FilePath = ""+getDataFolder(getActivity())+"/"+theNamesOfFiles[position];
-                FileaName.FileNAME = ""+theNamesOfFiles[position];
+                FileaName.FilePath = ""+getDataFolder(getActivity())+"/"+booknames.get(position).replace(" " ,"_");
+                FileaName.FileNAME = ""+booknames.get(position).replace(" " ,"_");
                 startActivity(new Intent(getActivity() , MainActivityEPUBSamir.class));
             }
         });

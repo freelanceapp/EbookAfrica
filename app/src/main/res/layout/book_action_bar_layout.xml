@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@color/colorPrimary"
+    android:background="@color/icons_8_muted_green_1"
     >
 
     <LinearLayout
@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/chapters"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/chapters"
             android:layout_gravity="center"
@@ -35,8 +35,8 @@
 
       <ImageView
           android:id="@+id/options"
-          android:layout_width="40dp"
-          android:layout_height="40dp"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
           android:background="@drawable/c_menu"
           android:layout_gravity="center"
           android:padding="5dp"
