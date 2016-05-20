@@ -168,12 +168,12 @@ public class MainActivity extends AppCompatActivity {
                         setfragmentinContainer(new FragmentHome(), "" + R.string.fragment_home, 1);
                         break;
                     case 1:
-                        setfragmentinContainer(new FragmentCategory(), "" + R.string.fragment_category , 1);
+                        setfragmentinContainer(new FragmentCategory(), "" + R.string.fragment_category, 1);
                         break;
                     case 2:
-                        if(sm.isLoggedIn()){
-                            setfragmentinContainer(new FragmentYourBooksMain(), "" + R.string.fragment_your_book , 1);
-                        }else {
+                        if (sm.isLoggedIn()) {
+                            setfragmentinContainer(new FragmentYourBooksMain(), "" + R.string.fragment_your_book, 1);
+                        } else {
                             Intent in = new Intent(MainActivity.this, AppOrioLoginScreen.class);
                             in.putExtra("apporio_login_url", UrlsEbookAfrics.Login);
                             in.putExtra("apporio_sign_url", UrlsEbookAfrics.SighUp);
@@ -189,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        setfragmentinContainer(new FragmentHome(), "" + R.string.fragment_home, 1);
 
 
 
@@ -205,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
         }else {
             OPTIONS_TYPE = 0 ;
         }
+        setfragmentinContainer(new FragmentHome(), "" + R.string.fragment_home, 1);
+
     }
 //
 //    @Override

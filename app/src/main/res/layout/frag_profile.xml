@@ -1,8 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/icons_8_muted_green_1">
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dim_250"
+            android:id="@+id/banner"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_banner"/>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/down_to_top_gradient"></RelativeLayout>
+
+
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ebook Africa"
+            android:layout_gravity="bottom|left"
+            android:paddingLeft="10dp"
+            android:textSize="45dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="#ffffff"/>
+
+
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/top_to_down_gradient"></RelativeLayout>
+
+
+
+
+
+/////////  when user is login
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/when_loged_in">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left"
+            android:paddingLeft="30dp"
+            android:id="@+id/logout">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_logout_green"/>
+
+            <views.TypefaceTextView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="Logout"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/icons_8_muted_grey"
+            android:layout_marginLeft="30dp"/>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left"
+            android:paddingLeft="30dp"
+            android:id="@+id/changepassword">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_password_green"/>
+
+            <views.TypefaceTextView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="Change password"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/icons_8_muted_grey"
+            android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left"
+            android:paddingLeft="30dp"
+            android:id="@+id/viewpurchases">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_books_green"/>
+
+            <views.TypefaceTextView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="View Purchases"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/icons_8_muted_grey"
+            android:layout_marginLeft="30dp"/>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left"
+            android:paddingLeft="30dp"
+            android:id="@+id/giftcard">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_gift_green"/>
+
+            <views.TypefaceTextView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="Gift card "
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/icons_8_muted_grey"
+            android:layout_marginLeft="30dp"/>
+
+    </LinearLayout>
+
+
+
+
+///////// when user is logged out
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/when_log_out">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left"
+            android:paddingLeft="30dp"
+            android:id="@+id/login">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/_ic_user_green"/>
+
+            <views.TypefaceTextView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="Login"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

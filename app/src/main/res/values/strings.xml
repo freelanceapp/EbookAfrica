@@ -20,6 +20,7 @@
         ActivityBannerAndSpecialCategory
     </string>
     <string name="title_activity_previous_orders">PreviousOrdersActivity</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
 
 
 

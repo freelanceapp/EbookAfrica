@@ -21,6 +21,7 @@ public class UrlsEbookAfrics {
     public static String ConfirmOrder   = "http://modha.me.uk/api/api.php?func=confirmorder";
     public static String PlaceOrder   = "http://modha.me.uk/api/api.php?func=place_order";
     public static String PurchasedBooks   = "http://modha.me.uk/api/api.php?func=getorders&customer_id=";
+    public static String ChangePassword = "http://modha.me.uk/api/api.php?func=changepassword";
 
 
 }

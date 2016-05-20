@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.epubsamir.FileaName;
 import com.apporio.ebookafrica.epubsamir.MainActivityEPUBSamir;
@@ -33,7 +34,7 @@ public class FragmentOffline extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_offline, container, false);
-
+        FragmentStatus.GetOpenfragment = "FragmentOffline";
 
         list = (ListView) v.findViewById(R.id.list);
 
@@ -88,6 +89,7 @@ public class FragmentOffline extends Fragment {
 
         return f;
     }
+
 
 
 

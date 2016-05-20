@@ -30,6 +30,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
 
+
         pref_directory = SplashScreen.this.getSharedPreferences("directory_prefrence", PRIVATE_MODE);
         editor = pref_directory.edit();
 

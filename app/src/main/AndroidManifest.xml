@@ -104,6 +104,10 @@
             android:name=".order.PreviousOrdersActivity"
             android:label="@string/title_activity_previous_orders" >
         </activity>
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/title_activity_change_password" >
+        </activity>
     </application>
 
 </manifest>
