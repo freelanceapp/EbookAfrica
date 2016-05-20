@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class FragmentCategory extends Fragment {
     TextView specialcategory_one , specialcategory_two ;
     ArrayList<List<String>> categories_id_Array  = new ArrayList<>();
     ArrayList<String> banner_names = new ArrayList<>();
+    LinearLayout loader;
 
 
 
@@ -74,13 +76,14 @@ public class FragmentCategory extends Fragment {
         list  = (ListView) rootView.findViewById(R.id.list);
         specialcategory_one = (TextView) rootView.findViewById(R.id.specialcategory_one);
         specialcategory_two = (TextView) rootView.findViewById(R.id.specialcategory_two);
+        loader = (LinearLayout) rootView.findViewById(R.id.loader);
 
 
         imageone.setImageResource(R.drawable.editor_choise_banner);
         imagetwo.setImageResource(R.drawable.top_books_banner);
 
         SpecialCategoryExecution();
-        CategoryApiExecution();
+
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -166,6 +169,7 @@ public class FragmentCategory extends Fragment {
 
 
                 if(rcheck.getStatus().equals("success")){
+                    loader.setVisibility(View.GONE);
                     AllCategories allcategories = new AllCategories();
                     allcategories = gson.fromJson(response, AllCategories.class);
 
@@ -222,8 +226,9 @@ public class FragmentCategory extends Fragment {
                 rcheck = gson.fromJson(response, ResponseChecker.class);
 
 
-                if (rcheck.getStatus().equals("success")){
 
+                if (rcheck.getStatus().equals("success")){
+                    CategoryApiExecution();
                     SpecialCategory sc = new SpecialCategory();
                     sc = gson.fromJson(response, SpecialCategory.class);
 
@@ -255,6 +260,7 @@ public class FragmentCategory extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(sr);
+        loader.setVisibility(View.VISIBLE);
 
     }
 

@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -47,7 +47,7 @@ public class FragmentHome extends Fragment {
 
     public  SliderLayout image_slider;
     public ListView list ;
-    TextView loader ;
+    LinearLayout loader ;
 
 
     public FragmentHome(){}
@@ -81,7 +81,7 @@ public class FragmentHome extends Fragment {
         context  = getActivity() ;
         image_slider = (SliderLayout)rootView.findViewById(R.id.slider);
         list  = (ListView) rootView.findViewById(R.id.list);
-        loader = (TextView) rootView.findViewById(R.id.loader);
+        loader = (LinearLayout) rootView.findViewById(R.id.loader);
 
 
 

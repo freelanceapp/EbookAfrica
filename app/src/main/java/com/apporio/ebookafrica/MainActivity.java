@@ -26,10 +26,10 @@ import com.apporio.ebookafrica.categoryfragment.FragmentCategory;
 import com.apporio.ebookafrica.constants.PreviousLoginedStateSessionManager;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
+import com.apporio.ebookafrica.fragmentProfile.FragmentProfile;
 import com.apporio.ebookafrica.fragmentyourbooks.FragmentYourBooksMain;
 import com.apporio.ebookafrica.homefragment.FragmentHome;
 import com.apporio.ebookafrica.logger.Logger;
-import com.apporio.ebookafrica.order.PreviousOrdersActivity;
 import com.apporio.ebookafrica.pojo.LoginSuccess;
 import com.apporio.ebookafrica.pojo.LoginUnSuccess;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
@@ -151,14 +151,14 @@ public class MainActivity extends AppCompatActivity {
                 ("Category",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.book_category_icon);
         BottomNavigationItem bottomNavigationItem2 = new BottomNavigationItem
                 ("Offline",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.ic_books_library);
-//        BottomNavigationItem bottomNavigationItem3 = new BottomNavigationItem
-//                ("Profile",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.ic_profile);
+        BottomNavigationItem bottomNavigationItem3 = new BottomNavigationItem
+                ("Profile",  ContextCompat.getColor(this,R.color.icons_8_muted_green_1), R.drawable.ic_profile);
 
 
         bottomNavigationView.addTab(bottomNavigationItem);
         bottomNavigationView.addTab(bottomNavigationItem1);
         bottomNavigationView.addTab(bottomNavigationItem2);
-      //  bottomNavigationView.addTab(bottomNavigationItem3);
+        bottomNavigationView.addTab(bottomNavigationItem3);
 
         bottomNavigationView.setOnBottomNavigationItemClickListener(new OnBottomNavigationItemClickListener() {
             @Override
@@ -180,17 +180,13 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(in);
                         }
                         break;
-//                    case 3:
-//
-//                        break;
+                    case 3:
+                        setfragmentinContainer(new FragmentProfile(), "" + R.string.fragment_home, 1);
+                        break;
 
                 }
             }
         });
-
-
-
-
 
 
         setfragmentinContainer(new FragmentHome(), "" + R.string.fragment_home, 1);
@@ -244,13 +240,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case R.id.logout:
-                sm.logoutUser();
-                OPTIONS_TYPE = 0 ;
-                return true;
-            case R.id.view_purchases:
-                startActivity(new Intent(MainActivity.this , PreviousOrdersActivity.class));
-                return true;
+//            case R.id.logout:
+//                sm.logoutUser();
+//                OPTIONS_TYPE = 0 ;
+//                return true;
+//            case R.id.view_purchases:
+//                startActivity(new Intent(MainActivity.this , PreviousOrdersActivity.class));
+//                return true;
             case R.id.login:
                 Intent in = new Intent(MainActivity.this, AppOrioLoginScreen.class);
                 in.putExtra("apporio_login_url", UrlsEbookAfrics.Login);

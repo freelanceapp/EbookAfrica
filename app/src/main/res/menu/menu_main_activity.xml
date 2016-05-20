@@ -18,16 +18,16 @@
         tools:ignore="AppCompatResource"/>
 
 
-    <item android:id="@+id/logout"
-        android:title="Logout"
-        android:showAsAction="always"
-        tools:ignore="AppCompatResource" />
+    <!--<item android:id="@+id/logout"-->
+        <!--android:title="Logout"-->
+        <!--android:showAsAction="always"-->
+        <!--tools:ignore="AppCompatResource" />-->
 
 
-    <item android:id="@+id/view_purchases"
-        android:title="View Purchases"
-        android:showAsAction="always"
-        tools:ignore="AppCompatResource" />
+    <!--<item android:id="@+id/view_purchases"-->
+        <!--android:title="View Purchases"-->
+        <!--android:showAsAction="always"-->
+        <!--tools:ignore="AppCompatResource" />-->
 
 
 

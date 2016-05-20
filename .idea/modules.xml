@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/apporiologin/apporiologin.iml" filepath="$PROJECT_DIR$/apporiologin/apporiologin.iml" />
       <module fileurl="file://$PROJECT_DIR$/drawme/drawme.iml" filepath="$PROJECT_DIR$/drawme/drawme.iml" />
       <module fileurl="file://$PROJECT_DIR$/fillingprogressbar/fillingprogressbar.iml" filepath="$PROJECT_DIR$/fillingprogressbar/fillingprogressbar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gifview/gifview.iml" filepath="$PROJECT_DIR$/gifview/gifview.iml" />
       <module fileurl="file://$PROJECT_DIR$/imageslider/imageslider.iml" filepath="$PROJECT_DIR$/imageslider/imageslider.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialsearchview/materialsearchview.iml" filepath="$PROJECT_DIR$/materialsearchview/materialsearchview.iml" />
       <module fileurl="file://$PROJECT_DIR$/stickyheader/stickyheader.iml" filepath="$PROJECT_DIR$/stickyheader/stickyheader.iml" />

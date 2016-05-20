@@ -68,7 +68,7 @@ import views.HorizontalListView;
 public class FragmentSpecificBook extends Fragment {
     HorizontalListView horizintal_list ;
   //  CustomRatingBarGreen  rating_bar_top;
-    LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader  ,already_purchased  ,download_if_purchased , preview;
+    LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader  ,already_purchased  ,download_if_purchased , preview  , no_previe_available;
     SessionManager   sm  ;
 
     NetworkImageView imagebook ,button_iimage ;
@@ -140,6 +140,7 @@ public class FragmentSpecificBook extends Fragment {
         price  = (TextView) rootView.findViewById(R.id.price);
         download_if_purchased = (LinearLayout) rootView.findViewById(R.id.download_if_purchased);
         preview = (LinearLayout) rootView.findViewById(R.id.preview);
+        no_previe_available  = (LinearLayout) rootView.findViewById(R.id.no_previe_available);
 
         psm = new PurchasedProductManager(getActivity());
 
@@ -279,11 +280,20 @@ public class FragmentSpecificBook extends Fragment {
                         buy_now.setVisibility(View.VISIBLE);
                         already_purchased.setVisibility(View.GONE);
                         download_if_purchased.setVisibility(View.GONE);
-                       preview.setVisibility(View.VISIBLE);
+                       if(SAMPLE_FILE_URL.equals("http://modha.me.uk/admin/")){
+
+                           no_previe_available.setVisibility(View.VISIBLE);
+                           preview.setVisibility(View.GONE);
+                       }else {
+                           no_previe_available.setVisibility(View.GONE);
+                           preview.setVisibility(View.VISIBLE);
+                       }
+
                     }else{
                         buy_now.setVisibility(View.GONE);
                         already_purchased.setVisibility(View.VISIBLE);
                         download_if_purchased.setVisibility(View.VISIBLE);
+                       no_previe_available.setVisibility(View.GONE);
                        preview.setVisibility(View.GONE);
                     }
 
