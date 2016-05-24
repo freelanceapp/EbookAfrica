@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dim_250"
+            android:id="@+id/banner"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_banner"/>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/down_to_top_gradient"></RelativeLayout>
+
+
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ebook Africa"
+            android:layout_gravity="bottom|left"
+            android:paddingLeft="10dp"
+            android:textSize="45dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="#ffffff"/>
+
+
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/top_to_down_gradient"></RelativeLayout>
+
+
+
+
+    <views.TypefaceTextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Please Login to store books Offline"
+        android:layout_gravity="bottom|left"
+        android:paddingLeft="10dp"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:textColor="@color/icons_8_muted_green_1"/>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/when_log_out">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/login">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/_ic_user_green"/>
+
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Login"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                geekui:customTypeface="fonts/Confessions Font.otf"
+                android:textColor="@color/icons_8_muted_greydark"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

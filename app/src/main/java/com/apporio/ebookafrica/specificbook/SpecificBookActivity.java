@@ -1,5 +1,6 @@
 package com.apporio.ebookafrica.specificbook;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -27,6 +28,7 @@ public class SpecificBookActivity extends FragmentActivity {
     FragmentTransaction ft ;
     SessionManager  sm ;
     TextView bookname ;
+    public static Activity activity ;
 
 
 
@@ -37,6 +39,7 @@ public class SpecificBookActivity extends FragmentActivity {
         bookname = (TextView) findViewById(R.id.bookname);
         EventBus.getDefault().register(this);
         sm = new SessionManager(SpecificBookActivity.this);
+        activity = this ;
 
         bookname.setText(""+getIntent().getExtras().getString("product_name"));
 

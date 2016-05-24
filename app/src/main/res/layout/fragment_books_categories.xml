@@ -1,187 +1,206 @@
-<com.nirhart.parallaxscroll.views.ParallaxScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:geekui="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="vertical">
+
+
+
+
+    <include layout="@layout/no_internet_layout"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:id="@+id/no_internet_view"/>
+
+    <com.nirhart.parallaxscroll.views.ParallaxScrollView
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:parallax_factor="1.9"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+        android:id="@+id/mainview">
+
+
+
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
 
 
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+    <FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:gravity="center"
+    android:orientation="horizontal">
 
-                <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
+    <FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1">
 
-                    <ImageView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:id="@+id/im1"
-                        android:scaleType="centerCrop"/>
+    <ImageView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/im1"
+    android:scaleType="centerCrop"/>
 
-                    <RelativeLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:background="#BD000000"
-                        android:id="@+id/special_one"></RelativeLayout>
-
-
-                    <views.TypefaceTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        geekui:customTypeface="fonts/AllerDisplay.ttf"
-                        android:layout_gravity="center"
-                        android:textColor="#ffffff"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:id="@+id/specialcategory_one"/>
-                </FrameLayout>
+    <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#BD000000"
+    android:id="@+id/special_one"></RelativeLayout>
 
 
+    <views.TypefaceTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text=""
+    geekui:customTypeface="fonts/AllerDisplay.ttf"
+    android:layout_gravity="center"
+    android:textColor="#ffffff"
+    android:gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:id="@+id/specialcategory_one"/>
+    </FrameLayout>
 
 
 
 
-                <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:id="@+id/im2"
-                        android:scaleType="centerCrop"/>
-
-                    <RelativeLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:background="#bd000000"
-                        android:id="@+id/special_two"></RelativeLayout>
 
 
-                    <views.TypefaceTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        geekui:customTypeface="fonts/AllerDisplay.ttf"
-                        android:layout_gravity="center"
-                        android:textColor="#ffffff"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:id="@+id/specialcategory_two"/>
+    <FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1">
+
+    <ImageView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/im2"
+    android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#bd000000"
+    android:id="@+id/special_two"></RelativeLayout>
 
 
-                </FrameLayout>
+    <views.TypefaceTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text=""
+    geekui:customTypeface="fonts/AllerDisplay.ttf"
+    android:layout_gravity="center"
+    android:textColor="#ffffff"
+    android:gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:id="@+id/specialcategory_two"/>
 
 
-            </LinearLayout>
-
-            
-            <View
-                android:layout_width="0.3dp"
-                android:layout_height="70dp"
-                android:background="#ffffff"
-                android:layout_gravity="center"
-                android:layout_marginBottom="50dp"/>
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/white_circle_book_icon"/>
+    </FrameLayout>
 
 
-            <View
-                android:layout_width="0.3dp"
-                android:layout_height="70dp"
-                android:background="#ffffff"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"/>
-        </FrameLayout>
+    </LinearLayout>
 
 
+    <View
+    android:layout_width="0.3dp"
+    android:layout_height="70dp"
+    android:background="#ffffff"
+    android:layout_gravity="center"
+    android:layout_marginBottom="50dp"/>
+
+    <ImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_gravity="center"
+    android:background="@drawable/white_circle_book_icon"/>
 
 
-        <views.TypefaceTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="What is Your Gener ? "
-            geekui:customTypeface="fonts/AllerDisplay.ttf"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/icons_8_muted_green_1"/>
+    <View
+    android:layout_width="0.3dp"
+    android:layout_height="70dp"
+    android:background="#ffffff"
+    android:layout_gravity="center"
+    android:layout_marginTop="50dp"/>
+    </FrameLayout>
 
 
 
 
-        <ListView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/list"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="2dp"></ListView>
+    <views.TypefaceTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="What is Your Gener ? "
+    geekui:customTypeface="fonts/AllerDisplay.ttf"
+    android:layout_gravity="center"
+    android:layout_marginTop="5dp"
+    android:textColor="@color/icons_8_muted_green_1"/>
 
 
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:orientation="vertical"
-            android:background="@drawable/white_circle"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/loader">
-
-            <com.cunoraz.gifview.library.GifView
-                android:id="@+id/gif1"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                custom:gif="@drawable/loading_book"
-                android:paddingTop="-20dp"
-                android:paddingBottom="-40dp"
-                android:background="@android:color/transparent"/>
-
-
-            <views.TypefaceTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                geekui:customTypeface="fonts/Confessions Font.otf"
-                android:textSize="15dp"
-                android:text="Loading..."
-                android:id="@+id/bookname"
-                android:textColor="@color/icons_8_muted_green_1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="-30dp"/>
+    <ListView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="2dp"></ListView>
 
 
 
-        </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|bottom"
+    android:orientation="vertical"
+    android:background="@drawable/white_circle"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:id="@+id/loader">
+
+    <com.cunoraz.gifview.library.GifView
+    android:id="@+id/gif1"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    custom:gif="@drawable/loading_book"
+    android:paddingTop="-20dp"
+    android:paddingBottom="-40dp"
+    android:background="@android:color/transparent"/>
+
+
+    <views.TypefaceTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    geekui:customTypeface="fonts/Confessions Font.otf"
+    android:textSize="15dp"
+    android:text="Loading..."
+    android:id="@+id/bookname"
+    android:textColor="@color/icons_8_muted_green_1"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="-30dp"/>
+
+
+
+    </LinearLayout>
 
 
 
@@ -189,4 +208,7 @@
 
     </LinearLayout>
 
-</com.nirhart.parallaxscroll.views.ParallaxScrollView>
+    </com.nirhart.parallaxscroll.views.ParallaxScrollView>
+
+
+    </LinearLayout>

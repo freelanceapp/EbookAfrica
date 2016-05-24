@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.VolleySingleton;
 import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.constants.CheckNetwork;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.fragmentspecificcategory.SpecificCategoryActivity;
 import com.apporio.ebookafrica.homefragment.ActivityBannerAndSpecialCategory;
@@ -33,6 +34,7 @@ import com.apporio.ebookafrica.pojo.ResponseChecker;
 import com.apporio.ebookafrica.pojo.SpecialCategory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nirhart.parallaxscroll.views.ParallaxScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,8 @@ public class FragmentCategory extends Fragment {
     ArrayList<List<String>> categories_id_Array  = new ArrayList<>();
     ArrayList<String> banner_names = new ArrayList<>();
     LinearLayout loader;
+    View no_internet_view ;
+    ParallaxScrollView mainview ;
 
 
 
@@ -77,12 +81,14 @@ public class FragmentCategory extends Fragment {
         specialcategory_one = (TextView) rootView.findViewById(R.id.specialcategory_one);
         specialcategory_two = (TextView) rootView.findViewById(R.id.specialcategory_two);
         loader = (LinearLayout) rootView.findViewById(R.id.loader);
+        no_internet_view = rootView.findViewById(R.id.no_internet_view);
+        mainview = (ParallaxScrollView) rootView.findViewById(R.id.mainview);
 
 
         imageone.setImageResource(R.drawable.editor_choise_banner);
         imagetwo.setImageResource(R.drawable.top_books_banner);
 
-        SpecialCategoryExecution();
+
 
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,15 +108,15 @@ public class FragmentCategory extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ArrayList<String> categories =new ArrayList<String>();
-                for(int j = 0 ; j< categories_id_Array.get(0).size() ; j++){
+                ArrayList<String> categories = new ArrayList<String>();
+                for (int j = 0; j < categories_id_Array.get(0).size(); j++) {
                     categories.add(categories_id_Array.get(0).get(j));
                 }
 
 
-                Intent in  = new Intent(getActivity() ,ActivityBannerAndSpecialCategory.class);
-                in.putStringArrayListExtra("array" ,categories);
-                in.putExtra("fragment_name" , ""+banner_names.get(0));
+                Intent in = new Intent(getActivity(), ActivityBannerAndSpecialCategory.class);
+                in.putStringArrayListExtra("array", categories);
+                in.putExtra("fragment_name", "" + banner_names.get(0));
                 startActivity(in);
             }
         });
@@ -132,11 +138,50 @@ public class FragmentCategory extends Fragment {
             }
         });
 
+        rootView.findViewById(R.id.got_to_offline_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getActivity(), "Go to the offline section", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        rootView.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doExecutionAccordingToNetworkState();
+            }
+        });
+
+
+
+        doExecutionAccordingToNetworkState();
 
 
 
         return rootView;
     }
+
+
+
+
+    public void doExecutionAccordingToNetworkState(){
+        if(new CheckNetwork(getActivity()).isNetworkOnline()){
+            mainview.setVisibility(View.VISIBLE);
+            no_internet_view.setVisibility(View.GONE);
+            SpecialCategoryExecution();
+        }else {
+
+            Toast.makeText(getActivity() , "No Internet Connection available" , Toast.LENGTH_SHORT).show();
+            mainview.setVisibility(View.GONE);
+            no_internet_view.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+
+
 
     @Override
     public void onDestroyView() {

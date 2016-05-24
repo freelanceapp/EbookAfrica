@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private MaterialSearchView searchView;
-    BottomNavigationView bottomNavigationView;
+    public static BottomNavigationView bottomNavigationView;
 
     public static MainActivity mainActivity  ;
     private static RequestQueue queue ;
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainActivity = this ;
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -160,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.addTab(bottomNavigationItem2);
         bottomNavigationView.addTab(bottomNavigationItem3);
 
+
+
         bottomNavigationView.setOnBottomNavigationItemClickListener(new OnBottomNavigationItemClickListener() {
             @Override
             public void onNavigationItemClick(int index) {
@@ -171,14 +174,7 @@ public class MainActivity extends AppCompatActivity {
                         setfragmentinContainer(new FragmentCategory(), "" + R.string.fragment_category, 1);
                         break;
                     case 2:
-                        if (sm.isLoggedIn()) {
                             setfragmentinContainer(new FragmentYourBooksMain(), "" + R.string.fragment_your_book, 1);
-                        } else {
-                            Intent in = new Intent(MainActivity.this, AppOrioLoginScreen.class);
-                            in.putExtra("apporio_login_url", UrlsEbookAfrics.Login);
-                            in.putExtra("apporio_sign_url", UrlsEbookAfrics.SighUp);
-                            startActivity(in);
-                        }
                         break;
                     case 3:
                         setfragmentinContainer(new FragmentProfile(), "" + R.string.fragment_home, 1);

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_no_internet"/>
+
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Internet Connection !"
+            android:gravity="center"
+            android:id="@+id/text"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_grey"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retry"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:id="@+id/retry"
+            android:textColor="@color/icons_8_muted_green_2_dark"/>
+        
+        <View
+            android:layout_width="65dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/icons_8_muted_green_2_dark"/>
+
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go To Offline"
+            android:gravity="center"
+            android:textSize="20dp"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_green_1"
+            android:id="@+id/got_to_offline_text"/>
+
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

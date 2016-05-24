@@ -30,6 +30,7 @@ import com.apporio.ebookafrica.database.PurchasedProductManager;
 import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.PlaceOrder;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
+import com.apporio.ebookafrica.specificbook.SpecificBookActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -329,6 +330,8 @@ public class ConfirmOrder extends Activity {
             Toast.makeText(ConfirmOrder.this ,"File Downloaded Successfully  , now available in offline section " ,Toast.LENGTH_LONG).show();
             savaBookLocaly();
             finish();
+            SpecificBookActivity.activity.finish();
+
         }
 
     }
@@ -339,7 +342,7 @@ public class ConfirmOrder extends Activity {
 
     private void savaBookLocaly() {
 
-        psm.addtoPurchasedProductTable(BOOKNAME , BOOKID , ISBN , BOOKIMAGE , PAGES , HOURS , PRICE , AUTHOR , MANUFACTURE);
+        psm.addtoPurchasedProductTable(BOOKNAME, BOOKID, ISBN, BOOKIMAGE, PAGES, HOURS, PRICE, AUTHOR, MANUFACTURE);
 
     }
 

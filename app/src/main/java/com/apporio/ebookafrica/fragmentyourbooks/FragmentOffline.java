@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.apporio.apporiologin.AppOrioLoginScreen;
 import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.constants.SessionManager;
+import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.epubsamir.FileaName;
 import com.apporio.ebookafrica.epubsamir.MainActivityEPUBSamir;
 import com.apporio.ebookafrica.logger.Logger;
@@ -28,6 +31,8 @@ public class FragmentOffline extends Fragment {
 
     ListView list ;
     String[] theNamesOfFiles ;
+    View loginlayout;
+    SessionManager sm ;
 
     ArrayList<String> booknames = new ArrayList<>();
 
@@ -35,8 +40,10 @@ public class FragmentOffline extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_offline, container, false);
         FragmentStatus.GetOpenfragment = "FragmentOffline";
+        sm = new SessionManager(getActivity());
 
         list = (ListView) v.findViewById(R.id.list);
+        loginlayout = v.findViewById(R.id.loginlayout);
 
 
         File[] filelist = getDataFolder(getActivity()).listFiles();
@@ -53,7 +60,18 @@ public class FragmentOffline extends Fragment {
         }
 
 
-        list.setAdapter(new AdapterOfflineBookList(getActivity(), booknames));
+
+        if(sm.isLoggedIn()){
+            loginlayout.setVisibility(View.GONE);
+            list.setVisibility(View.VISIBLE);
+            list.setAdapter(new AdapterOfflineBookList(getActivity(), booknames));
+        }else {
+            loginlayout.setVisibility(View.VISIBLE);
+            list.setVisibility(View.GONE);
+        }
+
+
+
 
 
 
@@ -61,15 +79,25 @@ public class FragmentOffline extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                FileaName.FilePath = ""+getDataFolder(getActivity())+"/"+booknames.get(position).replace(" " ,"_");
-                FileaName.FileNAME = ""+booknames.get(position).replace(" " ,"_");
-                startActivity(new Intent(getActivity() , MainActivityEPUBSamir.class));
+                FileaName.FilePath = "" + getDataFolder(getActivity()) + "/" + booknames.get(position).replace(" ", "_");
+                FileaName.FileNAME = "" + booknames.get(position).replace(" ", "_");
+                startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
             }
         });
 
 
 
+
+
+        v.findViewById(R.id.loginlayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getActivity(), AppOrioLoginScreen.class);
+                in.putExtra("apporio_login_url", UrlsEbookAfrics.Login);
+                in.putExtra("apporio_sign_url", UrlsEbookAfrics.SighUp);
+                startActivity(in);
+            }
+        });
 
 
 

@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.VolleySingleton;
 import com.apporio.ebookafrica.FragmentStatus;
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.constants.CheckNetwork;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.AllCategories;
@@ -48,6 +50,8 @@ public class FragmentHome extends Fragment {
     public  SliderLayout image_slider;
     public ListView list ;
     LinearLayout loader ;
+    View NoInterNetView ;
+    ScrollView main_scroll_view ;
 
 
     public FragmentHome(){}
@@ -82,11 +86,14 @@ public class FragmentHome extends Fragment {
         image_slider = (SliderLayout)rootView.findViewById(R.id.slider);
         list  = (ListView) rootView.findViewById(R.id.list);
         loader = (LinearLayout) rootView.findViewById(R.id.loader);
+        NoInterNetView = rootView.findViewById(R.id.no_internet_view);
+        main_scroll_view = (ScrollView) rootView.findViewById(R.id.main_scroll_view);
 
 
 
-        BannerApiExecution();
-        AllCategoriesIncludingProductsExecution();
+        doExecutionAccordingToNetworkState();
+
+
 
 
         image_slider.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +103,24 @@ public class FragmentHome extends Fragment {
             }
         });
 
+
+        rootView.findViewById(R.id.got_to_offline_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getActivity(), "Go to the offline section", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+        rootView.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doExecutionAccordingToNetworkState();
+            }
+        });
 
 
         return rootView;
@@ -143,6 +168,20 @@ public class FragmentHome extends Fragment {
 
 
 
+
+    public void doExecutionAccordingToNetworkState(){
+        if(new CheckNetwork(getActivity()).isNetworkOnline()){
+            main_scroll_view.setVisibility(View.VISIBLE);
+            NoInterNetView.setVisibility(View.GONE);
+            BannerApiExecution();
+            AllCategoriesIncludingProductsExecution();
+        }else {
+
+            Toast.makeText(getActivity() , "No Internet Connection available" , Toast.LENGTH_SHORT).show();
+            main_scroll_view.setVisibility(View.GONE);
+            NoInterNetView.setVisibility(View.VISIBLE);
+        }
+    }
 
 
 
@@ -312,7 +351,9 @@ public class FragmentHome extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        queue.cancelAll(sr);
+        if(sr!= null){
+            queue.cancelAll(sr);
+        }
     }
 
 

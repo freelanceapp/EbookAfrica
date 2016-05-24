@@ -6,6 +6,12 @@
     android:gravity="center">
 
 
+    <include layout="@layout/login_layout_for_offline_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/loginlayout"/>
+
+
 <ListView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"

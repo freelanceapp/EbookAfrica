@@ -10,8 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:layout_marginTop="49dp"
-        android:layout_marginBottom="49dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginBottom="55dp"
         android:id="@+id/main_container"></FrameLayout>
 
 
@@ -56,18 +56,12 @@
 
 
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.6dp"
-        android:background="@color/icons_8_muted_green_1"
-        android:layout_marginBottom="50dp"/>
-
-
     <com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/icons_8_muted_grey"
         android:layout_gravity="bottom"/>
 
 

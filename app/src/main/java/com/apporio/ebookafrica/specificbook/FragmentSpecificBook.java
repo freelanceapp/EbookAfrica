@@ -566,7 +566,7 @@ public class FragmentSpecificBook extends Fragment {
 
             startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
 
-            Toast.makeText(getActivity(),"File Downloaded Successfully  , now available in offline section " ,Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(),"File Downloaded Successfully  , now available in offline section " ,Toast.LENGTH_LONG).show();
         }
 
     }
