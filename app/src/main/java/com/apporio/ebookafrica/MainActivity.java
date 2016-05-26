@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+            setfragmentinContainer(new FragmentHome(), "" + R.string.fragment_home, 1);
 
 
 
@@ -200,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
         }else {
             OPTIONS_TYPE = 0 ;
         }
-        setfragmentinContainer(new FragmentHome(), "" + R.string.fragment_home, 1);
 
     }
 //

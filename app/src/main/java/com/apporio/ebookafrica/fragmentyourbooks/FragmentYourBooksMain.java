@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.apporio.ebookafrica.FragmentStatus;
+import com.apporio.ebookafrica.constants.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 

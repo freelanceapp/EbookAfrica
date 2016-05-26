@@ -21,7 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.apporio.apporiologin.AppOrioLoginScreen;
 import com.apporio.apporiologin.VolleySingleton;
-import com.apporio.ebookafrica.FragmentStatus;
+import com.apporio.ebookafrica.constants.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.CheckNetwork;
 import com.apporio.ebookafrica.constants.SessionManager;

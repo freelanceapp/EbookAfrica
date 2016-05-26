@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.apporio.apporiologin.AppOrioLoginScreen;
-import com.apporio.ebookafrica.FragmentStatus;
+import com.apporio.ebookafrica.constants.FragmentStatus;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;

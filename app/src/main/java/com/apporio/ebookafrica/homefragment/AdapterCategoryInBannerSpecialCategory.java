@@ -1,9 +1,11 @@
 package com.apporio.ebookafrica.homefragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.AllCategories;
 import com.apporio.ebookafrica.pojo.Product;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
+import com.apporio.ebookafrica.specificbook.SpecificBookActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -75,6 +78,34 @@ public class AdapterCategoryInBannerSpecialCategory extends BaseAdapter {
         HorizontalListView h_view = (HorizontalListView) MyView.findViewById(R.id.horizintal_list);
         TextView categoryname  = (TextView) MyView.findViewById(R.id.heading_horizontal_list);
         CategoryExecutionInadapter(category_urls.get(position) , h_view , categoryname);
+
+
+//        h_view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                v.get
+//
+//                Intent in = new Intent(con, SpecificBookActivity.class);
+//                in.putExtra("product_id", "" + products.get(position).getProductId());
+//                in.putExtra("product_name", "" + products.get(position).getName());
+//                con.startActivity(in);
+//            }
+//        });
+
+
+        h_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                TextView productid = (TextView) view.findViewById(R.id.productid);
+                TextView productname = (TextView) view.findViewById(R.id.productname);
+                Intent in = new Intent(con, SpecificBookActivity.class);
+                in.putExtra("product_id", "" + productid.getText().toString() );
+                in.putExtra("product_name", "" + productname.getText().toString() );
+                con.startActivity(in);
+
+            }});
+
         return MyView;
     }
 
@@ -176,8 +207,14 @@ public class AdapterCategoryInBannerSpecialCategory extends BaseAdapter {
             inflate = (LayoutInflater) con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             MyView_h_list = inflate.inflate(R.layout.horizontal_list_items, parent, false);
             NetworkImageView imagebook = (NetworkImageView) MyView_h_list.findViewById(R.id.imagebook);
+            TextView productid = (TextView) MyView_h_list.findViewById(R.id.productid);
+            TextView productname = (TextView) MyView_h_list.findViewById(R.id.productname);
             mImageLoader.get(products.get(position).getImage(), ImageLoader.getImageListener(imagebook, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
             imagebook.setImageUrl(products.get(position).getImage(), mImageLoader);
+            productid.setText("" + products.get(position).getProductId());
+            productname.setText(""+products.get(position).getName());
+
+
 
             return MyView_h_list;
         }

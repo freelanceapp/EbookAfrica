@@ -1,118 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-
-    xmlns:geekui="http://schemas.android.com/apk/res-auto"
     android:paddingTop="10dp">
 
 
 
-    <LinearLayout
+    <include layout="@layout/no_internet_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingTop="10dp">
-
-
-
+        android:id="@+id/no_internet_layout"/>
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/main_layout">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/mainlayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:gravity="center|top">
-            <include layout="@layout/specific_bookinfo_one"/>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="0.1dp"
-                android:background="@color/title"
-                android:layout_marginTop="5dp"/>
-
-            <include layout="@layout/specific_bookinfo_two"/>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="0.1dp"
-                android:background="@color/title"
-                android:layout_marginTop="5dp"/>
+            android:gravity="center"
+            android:paddingTop="10dp">
 
 
 
-
-            <!--<include layout="@layout/specific_bookinfo_three"/>-->
-
-            <!--<View-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="0.1dp"-->
-                <!--android:background="@color/title"-->
-                <!--android:layout_marginTop="5dp"/>-->
-
-
-
-
-
-            <!--<include layout="@layout/specific_bookinfo_four"/>-->
-
-            <!--<View-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="0.1dp"-->
-                <!--android:background="@color/title"-->
-                <!--android:layout_marginTop="5dp"/>-->
-
-
-
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <include layout="@layout/item_related_list_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/relatedproductlayout"/>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:id="@+id/related_loader">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Loading Related..."
-                        />
-                </LinearLayout>
-
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/loadingbar"
-            android:orientation="vertical">
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loading..."
-                android:textColor="@color/icons_8_muted_green_1"/>
+                android:id="@+id/mainlayout"
+                android:orientation="vertical"
+                android:gravity="center|top">
+                <include layout="@layout/specific_bookinfo_one"/>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/title"
+                    android:layout_marginTop="5dp"/>
+
+                <include layout="@layout/specific_bookinfo_two"/>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/title"
+                    android:layout_marginTop="5dp"/>
+
+
+
+
+                <!--<include layout="@layout/specific_bookinfo_three"/>-->
+
+                <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="0.1dp"-->
+                <!--android:background="@color/title"-->
+                <!--android:layout_marginTop="5dp"/>-->
+
+
+
+
+
+                <!--<include layout="@layout/specific_bookinfo_four"/>-->
+
+                <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="0.1dp"-->
+                <!--android:background="@color/title"-->
+                <!--android:layout_marginTop="5dp"/>-->
+
+
+
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/item_related_list_view"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/relatedproductlayout"/>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/related_loader">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Loading Related..."
+                            />
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loadingbar"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <com.cunoraz.gifview.library.GifView
+                    android:id="@+id/gif1"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    custom:gif="@drawable/loading_book"
+                    android:paddingTop="-20dp"
+                    android:paddingBottom="-40dp"
+                    android:background="@android:color/transparent"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
+    </ScrollView>
 
 
-</ScrollView>
+
+
+</LinearLayout>

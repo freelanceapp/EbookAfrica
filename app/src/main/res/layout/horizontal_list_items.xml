@@ -22,6 +22,18 @@
             android:background="#000000"
             android:scaleType="fitXY"/>
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/productid"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/productname"/>
+
         <!--<TextView-->
             <!--android:id="@+id/namebook"-->
             <!--android:layout_width="match_parent"-->

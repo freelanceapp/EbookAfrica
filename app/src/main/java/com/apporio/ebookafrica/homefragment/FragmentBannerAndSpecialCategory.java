@@ -11,7 +11,7 @@ import android.widget.ListView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.VolleySingleton;
-import com.apporio.ebookafrica.FragmentStatus;
+import com.apporio.ebookafrica.constants.FragmentStatus;
 import com.apporio.ebookafrica.R;
 
 import java.util.ArrayList;

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.apporio.ebookafrica.R;
 
@@ -12,11 +13,13 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
 
     FragmentTransaction ft ;
+   public static  TextView category_name   ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_category);
+        category_name = (TextView) findViewById(R.id.category_name);
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,3 +44,6 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
     }
 }
+
+
+

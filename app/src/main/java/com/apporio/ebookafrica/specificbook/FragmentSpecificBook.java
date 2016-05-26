@@ -18,6 +18,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.apporio.apporiologin.AppOrioLoginScreen;
 import com.apporio.apporiologin.VolleySingleton;
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.constants.CheckNetwork;
 import com.apporio.ebookafrica.constants.CustomVolleyRequestQueue;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
@@ -93,6 +95,8 @@ public class FragmentSpecificBook extends Fragment {
     TextView price ;
     String BOOKIMAGE , SAMPLE_FILE_URL , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE ;
     PurchasedProductManager psm ;
+    View no_internet_layout ;
+    ScrollView main_layout  ;
 
 
 
@@ -146,12 +150,14 @@ public class FragmentSpecificBook extends Fragment {
         preview = (CircularProgressButton) rootView.findViewById(R.id.preview);
         no_previe_available  = (LinearLayout) rootView.findViewById(R.id.no_previe_available);
         gradientlayout = (RelativeLayout) rootView.findViewById(R.id.gradientlayout);
+        no_internet_layout  = rootView.findViewById(R.id.no_internet_layout);
+        main_layout  = (ScrollView) rootView.findViewById(R.id.main_layout);
         psm = new PurchasedProductManager(getActivity());
 
      //   rating_bar_top.setScore(3);
 
         preview.setText("Preview");
-        preview.setBackgroundColor(Color.parseColor("#2ecc71"));
+        preview.setBackgroundColor(Color.parseColor("#3498db"));
         preview.setIdleText("Preview");
         preview.setCompleteText("Open");
         preview.setErrorText("Error");
@@ -163,7 +169,7 @@ public class FragmentSpecificBook extends Fragment {
                 if (preview.getProgress() == 0) {
                     new DownloadFileFromURL().execute("" + SAMPLE_FILE_URL);
                 } else {
-                      startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
+                    startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
                 }
 
             }
@@ -197,6 +203,7 @@ public class FragmentSpecificBook extends Fragment {
                 getActivity().finish();
                 Intent in = new Intent(getActivity(), SpecificBookActivity.class);
                 in.putExtra("product_id", "" + book_id.get(position));
+                in.putExtra("product_name", "" + book_name.get(position));
                 getActivity().startActivity(in);
             }
         });
@@ -224,6 +231,15 @@ public class FragmentSpecificBook extends Fragment {
 
 
 
+        rootView.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setViewAccordingtotheInternetState();
+            }
+        });
+
+
+
 
 
         return rootView;
@@ -239,7 +255,7 @@ public class FragmentSpecificBook extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        SpecificProductExecution();
+        setViewAccordingtotheInternetState();
     }
 
     private void DownloadBook() throws JSONException {
@@ -255,6 +271,20 @@ public class FragmentSpecificBook extends Fragment {
     }
 
 
+
+
+
+    public void setViewAccordingtotheInternetState(){
+        if(new CheckNetwork(getActivity()).isNetworkOnline()){
+            main_layout.setVisibility(View.VISIBLE);
+            no_internet_layout.setVisibility(View.GONE);
+            SpecificProductExecution();
+        }else {
+            Toast.makeText(getActivity() , "No Internet Connection available" , Toast.LENGTH_SHORT).show();
+            main_layout.setVisibility(View.GONE);
+            no_internet_layout.setVisibility(View.VISIBLE);
+        }
+    }
 
 
 

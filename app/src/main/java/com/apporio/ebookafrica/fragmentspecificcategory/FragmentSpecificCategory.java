@@ -1,11 +1,13 @@
 package com.apporio.ebookafrica.fragmentspecificcategory;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.AllCategories;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
+import com.apporio.ebookafrica.specificbook.SpecificBookActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,6 +42,11 @@ public class FragmentSpecificCategory  extends Fragment {
     private static RequestQueue queue ;
     private static StringRequest sr;
     String categoryid ;
+
+
+    ArrayList<String> product_image = new ArrayList<>();
+    ArrayList<String> product_id = new ArrayList<>();
+    ArrayList<String> product_name = new ArrayList<>();
 
 
     @SuppressLint("ValidFragment")
@@ -65,6 +73,22 @@ public class FragmentSpecificCategory  extends Fragment {
         loader = (LinearLayout) rootView.findViewById(R.id.loader);
 
         SpecificCategoryExecution();
+
+
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                    Intent in = new Intent(getActivity(), SpecificBookActivity.class);
+                           in.putExtra("product_id", "" + product_id.get(position));
+                           in.putExtra("product_name" , ""+product_name.get(position));
+                           getActivity().startActivity(in);
+
+
+            }
+        });
 
 
         return rootView;
@@ -98,9 +122,13 @@ public class FragmentSpecificCategory  extends Fragment {
                     AllCategories allcategories = new AllCategories();
                     allcategories = gson.fromJson(response, AllCategories.class);
 
-                    ArrayList<String> product_image = new ArrayList<>();
-                    ArrayList<String> product_id = new ArrayList<>();
-                    ArrayList<String> product_name = new ArrayList<>();
+                    SpecificCategoryActivity.category_name.setText(""+allcategories.getCategories().get(0).getName());
+
+                    product_image.clear();
+                     product_id .clear();
+                    product_name.clear();
+
+
                     for(int i = 0 ; i< allcategories.getCategories().get(0).getProduct().size() ; i++){
                         product_image.add(""+allcategories.getCategories().get(0).getProduct().get(i).getImage());
                         product_id.add(""+allcategories.getCategories().get(0).getProduct().get(i).getProductId());

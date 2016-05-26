@@ -34,17 +34,11 @@
             android:id="@+id/retry"
             android:textColor="@color/icons_8_muted_green_2_dark"/>
         
-        <View
-            android:layout_width="65dp"
-            android:layout_height="1dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/icons_8_muted_green_2_dark"/>
-
 
 
         <views.TypefaceTextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="Go To Offline"
             android:gravity="center"
             android:textSize="20dp"
