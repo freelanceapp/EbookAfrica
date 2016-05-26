@@ -1,9 +1,11 @@
 package com.apporio.ebookafrica.specificbook;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +44,7 @@ import com.apporio.ebookafrica.pojo.RelatedPRoducts;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
 import com.apporio.ebookafrica.pojo.SpecificBookSuccess;
 import com.apporio.ebookafrica.pojo.paypalpojo.PayPalPojo;
+import com.dd.CircularProgressButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
@@ -67,15 +72,15 @@ import views.HorizontalListView;
 @SuppressLint("ValidFragment")
 public class FragmentSpecificBook extends Fragment {
     HorizontalListView horizintal_list ;
-  //  CustomRatingBarGreen  rating_bar_top;
-    LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader  ,already_purchased  ,download_if_purchased , preview  , no_previe_available;
+    LinearLayout buy_now  , loadingbar , mainlayout  ,  related_loader  ,already_purchased  ,download_if_purchased   , no_previe_available;
     SessionManager   sm  ;
 
     NetworkImageView imagebook ,button_iimage ;
     TextView bookname_txt, authorname_txt, pages_txt, hours_txt, summary_txt;
     ImageLoader mImageLoader;
+    RelativeLayout gradientlayout ;
 
-
+    CircularProgressButton preview ;
     private static RequestQueue queue ;
     private static StringRequest sr;
      String product_id ;
@@ -119,7 +124,6 @@ public class FragmentSpecificBook extends Fragment {
         sm = new SessionManager(getActivity());
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         mImageLoader = CustomVolleyRequestQueue.getInstance(getActivity()).getImageLoader();
-        Toast.makeText(getActivity() , "" , Toast.LENGTH_SHORT).show();
 
         View rootView = inflater.inflate(R.layout.fragment_specific_book, container, false);
         horizintal_list = (HorizontalListView) rootView.findViewById(R.id.horizintal_list);
@@ -139,18 +143,29 @@ public class FragmentSpecificBook extends Fragment {
         already_purchased = (LinearLayout) rootView.findViewById(R.id.already_purchased);
         price  = (TextView) rootView.findViewById(R.id.price);
         download_if_purchased = (LinearLayout) rootView.findViewById(R.id.download_if_purchased);
-        preview = (LinearLayout) rootView.findViewById(R.id.preview);
+        preview = (CircularProgressButton) rootView.findViewById(R.id.preview);
         no_previe_available  = (LinearLayout) rootView.findViewById(R.id.no_previe_available);
-
+        gradientlayout = (RelativeLayout) rootView.findViewById(R.id.gradientlayout);
         psm = new PurchasedProductManager(getActivity());
 
      //   rating_bar_top.setScore(3);
 
-
+        preview.setText("Preview");
+        preview.setBackgroundColor(Color.parseColor("#2ecc71"));
+        preview.setIdleText("Preview");
+        preview.setCompleteText("Open");
+        preview.setErrorText("Error");
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadFileFromURL().execute("" + SAMPLE_FILE_URL);
+
+
+                if (preview.getProgress() == 0) {
+                    new DownloadFileFromURL().execute("" + SAMPLE_FILE_URL);
+                } else {
+                      startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
+                }
+
             }
         });
 
@@ -245,7 +260,7 @@ public class FragmentSpecificBook extends Fragment {
 
     public void SpecificProductExecution(){
         String url = UrlsEbookAfrics.GetSpecificProduct+product_id+"&customer_id="+sm.getUserDetails().get(SessionManager.CUSTOMER_ID );
-        url=url.replace(" ","%20").replace("null" , "");
+        url=url.replace(" ", "%20").replace("null" , "");
         Logger.d("Executing Specific Product API   " + url);
 
 
@@ -287,6 +302,8 @@ public class FragmentSpecificBook extends Fragment {
                        }else {
                            no_previe_available.setVisibility(View.GONE);
                            preview.setVisibility(View.VISIBLE);
+                           gradientlayout.setVisibility(View.GONE);
+                           button_iimage.setVisibility(View.GONE);
                        }
 
                     }else{
@@ -336,7 +353,7 @@ public class FragmentSpecificBook extends Fragment {
 
     public void relatedproducts(){
         String url = UrlsEbookAfrics.relatedproducts +product_id;
-        url=url.replace(" ","%20");
+        url=url.replace(" ", "%20");
         Logger.d("Executing Related Product API   " + url);
 
 
@@ -483,9 +500,6 @@ public class FragmentSpecificBook extends Fragment {
 
 
 
-
-
-
 //////////////////////// code for downloading sample epub
 
 
@@ -557,14 +571,14 @@ public class FragmentSpecificBook extends Fragment {
 
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
+            preview.setProgress(Integer.parseInt(progress[0]));
         }
+
 
 
         @Override
         protected void onPostExecute(String file_url) {
-
-
-            startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
+          //  startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
 
 //            Toast.makeText(getActivity(),"File Downloaded Successfully  , now available in offline section " ,Toast.LENGTH_LONG).show();
         }
@@ -694,6 +708,18 @@ public class FragmentSpecificBook extends Fragment {
 
 
 
-
+    private void simulateSuccessProgress(final CircularProgressButton button) {
+        ValueAnimator widthAnimation = ValueAnimator.ofInt(1, 100);
+        widthAnimation.setDuration(1500);
+        widthAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        widthAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer value = (Integer) animation.getAnimatedValue();
+                button.setProgress(value);
+            }
+        });
+        widthAnimation.start();
+    }
 
 }

@@ -229,39 +229,55 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#a8000000"></RelativeLayout>
+                android:background="#a8000000"
+                android:id="@+id/gradientlayout"></RelativeLayout>
 
 
 
-            <LinearLayout
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="45dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="10dp"-->
+                <!--android:id="@+id/preview">-->
+
+
+                <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:background="@drawable/ic_read_book_preview"/>-->
+
+
+
+
+                <!--<views.TypefaceTextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Preview"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="@color/icons_8_muted_offWhite"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                    <!--geekui:customTypeface="fonts/AllerDisplay.ttf"/>-->
+
+
+            <!--</LinearLayout>-->
+
+
+
+
+
+            <com.dd.CircularProgressButton
+                android:id="@+id/preview"
                 android:layout_width="fill_parent"
-                android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:padding="10dp"
-                android:id="@+id/preview">
-
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_read_book_preview"/>
+                android:layout_height="47dp"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                />
 
 
 
-
-                <views.TypefaceTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Preview"
-                    android:gravity="center"
-                    android:textColor="@color/icons_8_muted_offWhite"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    geekui:customTypeface="fonts/AllerDisplay.ttf"/>
-
-
-            </LinearLayout>
 
 
 
@@ -302,7 +318,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:background="@color/icons_8_muted_red"
@@ -321,6 +337,7 @@
 
 
             </LinearLayout>
+
 
 
 

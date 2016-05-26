@@ -43,7 +43,7 @@ import java.util.Map;
 public class FragmentProfile extends Fragment {
 
     SessionManager sm ;
-    Dialog dialogPassword  ;
+    Dialog dialogCustom;
 
     private static RequestQueue queue ;
 
@@ -61,14 +61,11 @@ public class FragmentProfile extends Fragment {
         when_logged_in_layout = (LinearLayout) v.findViewById(R.id.when_loged_in);
 
         FragmentStatus.GetOpenfragment = "FragmentProfile";
-        if(sm.isLoggedIn()){
 
-            when_logged_in_layout.setVisibility(View.VISIBLE);
-            when_log_out_layout.setVisibility(View.GONE);
-        }else {
-            when_logged_in_layout.setVisibility(View.GONE);
-            when_log_out_layout.setVisibility(View.VISIBLE);
-        }
+        setViewAccordingToTheLoginStateOfUser();
+
+
+
 
 
 
@@ -76,7 +73,31 @@ public class FragmentProfile extends Fragment {
         v.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sm.logoutUser();
+
+                dialogCustom = new MyDialog(getActivity()).getMyDialog(R.layout.dialog_logout);
+
+                final Button logout ,btncancel ;
+                logout = (Button) dialogCustom.findViewById(R.id.btnlogout);
+                btncancel = (Button) dialogCustom.findViewById(R.id.btncancel);
+
+                logout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                          sm.logoutUser();
+                        setViewAccordingToTheLoginStateOfUser();
+                        dialogCustom.dismiss();
+                    }
+                });
+
+                btncancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogCustom.dismiss();
+                    }
+                });
+                dialogCustom.show();
+
+
             }
         });
 
@@ -98,16 +119,16 @@ public class FragmentProfile extends Fragment {
 
 
 
-                dialogPassword = new MyDialog(getActivity()).getMyDialog(R.layout.dialog_password);
+                dialogCustom = new MyDialog(getActivity()).getMyDialog(R.layout.dialog_password);
 
                 TextView title;
                 final EditText edtOld, edtNew, edtConfirm;
                 final Button ChangePassword;
-                title = (TextView) dialogPassword.findViewById(R.id.txtTitle);
-                edtOld = (EditText) dialogPassword.findViewById(R.id.edtoldPassword);
-                edtNew = (EditText) dialogPassword.findViewById(R.id.edtnewPassword);
-                edtConfirm = (EditText) dialogPassword.findViewById(R.id.edtagainPassword);
-                ChangePassword = (Button) dialogPassword.findViewById(R.id.btnPassword);
+                title = (TextView) dialogCustom.findViewById(R.id.txtTitle);
+                edtOld = (EditText) dialogCustom.findViewById(R.id.edtoldPassword);
+                edtNew = (EditText) dialogCustom.findViewById(R.id.edtnewPassword);
+                edtConfirm = (EditText) dialogCustom.findViewById(R.id.edtagainPassword);
+                ChangePassword = (Button) dialogCustom.findViewById(R.id.btnPassword);
 
                 ChangePassword.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -133,7 +154,7 @@ public class FragmentProfile extends Fragment {
                 title.setText("Change Password");
 
 
-                dialogPassword.show();
+                dialogCustom.show();
 
 
 
@@ -172,11 +193,16 @@ public class FragmentProfile extends Fragment {
         return v;
     }
 
+    private void setViewAccordingToTheLoginStateOfUser() {
+        if(sm.isLoggedIn()){
 
-
-
-
-
+            when_logged_in_layout.setVisibility(View.VISIBLE);
+            when_log_out_layout.setVisibility(View.GONE);
+        }else {
+            when_logged_in_layout.setVisibility(View.GONE);
+            when_log_out_layout.setVisibility(View.VISIBLE);
+        }
+    }
 
 
     private void ChangePasswordExecution(String oldpassword , String newpassword) {
@@ -196,7 +222,7 @@ public class FragmentProfile extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        dialogPassword.dismiss();
+                        dialogCustom.dismiss();
                         Logger.d("response of change password API " + response);
                         GsonBuilder gsonBuilder = new GsonBuilder();
                         Gson gson = gsonBuilder.create();
