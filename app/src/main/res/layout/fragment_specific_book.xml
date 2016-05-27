@@ -11,8 +11,9 @@
     <include layout="@layout/no_internet_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/no_internet_layout"/>
-    
+        android:id="@+id/no_internet_layout"
+        />
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

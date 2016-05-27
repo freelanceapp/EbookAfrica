@@ -1,8 +1,6 @@
 package com.apporio.ebookafrica.order;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +29,7 @@ import com.apporio.ebookafrica.logger.Logger;
 import com.apporio.ebookafrica.pojo.PlaceOrder;
 import com.apporio.ebookafrica.pojo.ResponseChecker;
 import com.apporio.ebookafrica.specificbook.SpecificBookActivity;
+import com.daasuu.ahp.AnimateHorizontalProgressBar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -54,15 +53,20 @@ public class ConfirmOrder extends Activity {
     Button download   , openbook;
 
 
-    TextView capturedownloadlink ;
+    TextView capturedownloadlink  , book_name  ,author_name ;
     NetworkImageView imagebook ;
     ImageLoader mImageLoader;
-    private ProgressDialog pDialog;
-    public static final int progress_bar_type = 0;
     String file_url , BookNAME;
 
     String BOOKIMAGE  , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE , PAYMENTID;
     PurchasedProductManager psm ;
+
+    AnimateHorizontalProgressBar animate_progress_bar ;
+    TextView percentage_text ;
+    Button cancel ;
+    DownloadFileFromURL epubdowloadtas ;
+    File cacheFile ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,7 @@ public class ConfirmOrder extends Activity {
         setContentView(R.layout.activity_confirm_order);
         sm = new SessionManager(ConfirmOrder.this);
         psm = new PurchasedProductManager(ConfirmOrder.this);
+        epubdowloadtas = new DownloadFileFromURL();
 
 
 
@@ -77,14 +82,22 @@ public class ConfirmOrder extends Activity {
 
         capturedownloadlink = (TextView) findViewById(R.id.capturedownloadlink);
         openbook = (Button) findViewById(R.id.openbook);
-
+        author_name = (TextView) findViewById(R.id.author_name);
+        book_name = (TextView) findViewById(R.id.book_name);
         download = (Button) findViewById(R.id.download);
         imagebook = (NetworkImageView)findViewById(R.id.image_book);
+        animate_progress_bar = (AnimateHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
+        percentage_text = (TextView) findViewById(R.id.percentage_text);
+        cancel = (Button) findViewById(R.id.cancel);
         queue = VolleySingleton.getInstance(ConfirmOrder.this).getRequestQueue();
 
 
         mImageLoader.get(getIntent().getExtras().getString("image_key"), ImageLoader.getImageListener(imagebook, R.color.icons_8_muted_green_1, R.color.icons_8_muted_yellow));
         imagebook.setImageUrl(getIntent().getExtras().getString("image_key"), mImageLoader);
+
+        book_name.setText("" + getIntent().getExtras().getString("name_key"));
+        author_name.setText(""+getIntent().getExtras().getString("author"));
+
 
         BOOKNAME = getIntent().getExtras().getString("name_key");
         BOOKID = getIntent().getExtras().getString("product_id");
@@ -112,24 +125,22 @@ public class ConfirmOrder extends Activity {
             }
         });
 
-    }
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(epubdowloadtas != null){
+                    epubdowloadtas.cancel(true);
+                    File file_to_be_deleted  = new File(""+cacheFile );
+                    file_to_be_deleted.delete();
+                    finish();
+                }
+            }
+        });
 
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case progress_bar_type: // we set this to 0
-                pDialog = new ProgressDialog(this);
-                pDialog.setMessage("Downloading file. Please wait...");
-                pDialog.setIndeterminate(false);
-                pDialog.setMax(100);
-                pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                pDialog.setCancelable(true);
-                pDialog.show();
-                return pDialog;
-            default:
-                return null;
-        }
+        animate_progress_bar.setMax(100);
+
     }
 
 
@@ -219,7 +230,7 @@ public class ConfirmOrder extends Activity {
                             download.setEnabled(true);
                             download.setText("Start Downloading");
                             openbook.setVisibility(View.VISIBLE);
-                            new DownloadFileFromURL().execute(file_url);
+                            epubdowloadtas.execute(file_url);
                         }else {
 
                         }
@@ -250,13 +261,10 @@ public class ConfirmOrder extends Activity {
 
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
-
-
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showDialog(progress_bar_type);
+            animate_progress_bar.setProgress(0);
         }
 
         @Override
@@ -270,43 +278,29 @@ public class ConfirmOrder extends Activity {
 
                 // download the file
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
-
-
-
-
                 File cacheDir = getDataFolder(ConfirmOrder.this);
                 String newbookname = BookNAME.replace(" " , "_");
-                File cacheFile = new File(cacheDir, newbookname+".epub");
+                cacheFile= new File(cacheDir, newbookname+".epub");
                 Logger.d("file path " + cacheFile);
                 FileOutputStream output = new FileOutputStream(cacheFile);
-
-
-
                 byte data[] = new byte[1024];
-
                 long total = 0;
-
                 while ((count = input.read(data)) != -1) {
                     total += count;
                     // publishing the progress....
                     // After this onProgressUpdate will be called
                     publishProgress(""+(int)((total*100)/lenghtOfFile));
-
                     // writing data to file
                     output.write(data, 0, count);
                 }
-
                 // flushing output
                 output.flush();
-
                 // closing streams
                 output.close();
                 input.close();
-
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
             }
-
             return null;
         }
 
@@ -316,14 +310,13 @@ public class ConfirmOrder extends Activity {
 
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
-            pDialog.setProgress(Integer.parseInt(progress[0]));
+            percentage_text.setText(""+progress[0] + " %");
+            animate_progress_bar.setProgress(Integer.parseInt(progress[0]));
         }
 
 
         @Override
         protected void onPostExecute(String file_url) {
-            dismissDialog(progress_bar_type);
-
 //            FileaName.FilePath = ""+getDataFolder(ConfirmOrder.this)+"/"+BookNAME.replace(" " , "_")+".epub";
 //            FileaName.FileNAME = ""+BookNAME.replace(" " , "_"+".epub");
 //            startActivity(new Intent(ConfirmOrder.this, MainActivityEPUBSamir.class));
@@ -331,9 +324,7 @@ public class ConfirmOrder extends Activity {
             savaBookLocaly();
             finish();
             SpecificBookActivity.activity.finish();
-
         }
-
     }
 
 
@@ -341,25 +332,21 @@ public class ConfirmOrder extends Activity {
 
 
     private void savaBookLocaly() {
-
         psm.addtoPurchasedProductTable(BOOKNAME, BOOKID, ISBN, BOOKIMAGE, PAGES, HOURS, PRICE, AUTHOR, MANUFACTURE);
-
     }
 
 
     public File getDataFolder(Context context) {
         File dataDir = null;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            dataDir = new File(Environment.getExternalStorageDirectory(), "ebbok_data");
+            dataDir = new File(Environment.getExternalStorageDirectory(), "ebook_data");
             if(!dataDir.isDirectory()) {
                 dataDir.mkdirs();
             }
         }
-
         if(!dataDir.isDirectory()) {
             dataDir = context.getFilesDir();
         }
-
         return dataDir;
     }
 

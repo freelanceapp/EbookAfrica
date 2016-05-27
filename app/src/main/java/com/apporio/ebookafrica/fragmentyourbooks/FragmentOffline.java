@@ -126,7 +126,7 @@ public class FragmentOffline extends Fragment {
     public File getDataFolder(Context context) {
         File dataDir = null;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            dataDir = new File(Environment.getExternalStorageDirectory(), "ebbok_data");
+            dataDir = new File(Environment.getExternalStorageDirectory(), "ebook_data");
             if(!dataDir.isDirectory()) {
                 dataDir.mkdirs();
             }

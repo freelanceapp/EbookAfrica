@@ -92,12 +92,12 @@ public class FragmentSpecificBook extends Fragment {
     ArrayList<String> book_id = new ArrayList<>();
     ArrayList<String> book_image = new ArrayList<>();
 
-    TextView price ;
+    TextView price  , open_text;
     String BOOKIMAGE , SAMPLE_FILE_URL , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE ;
     PurchasedProductManager psm ;
     View no_internet_layout ;
     ScrollView main_layout  ;
-
+    ArrayList<String> booknames ;
 
 
     private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_NO_NETWORK;
@@ -152,6 +152,7 @@ public class FragmentSpecificBook extends Fragment {
         gradientlayout = (RelativeLayout) rootView.findViewById(R.id.gradientlayout);
         no_internet_layout  = rootView.findViewById(R.id.no_internet_layout);
         main_layout  = (ScrollView) rootView.findViewById(R.id.main_layout);
+        open_text = (TextView) rootView.findViewById(R.id.open_text);
         psm = new PurchasedProductManager(getActivity());
 
      //   rating_bar_top.setScore(3);
@@ -238,6 +239,12 @@ public class FragmentSpecificBook extends Fragment {
             }
         });
 
+        open_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
 
 
@@ -322,26 +329,37 @@ public class FragmentSpecificBook extends Fragment {
 
 
                    if (sbs.getSpecificBookSuccessProduct().getPurchaseStatus().equals("0")){
-                        buy_now.setVisibility(View.VISIBLE);
+                       open_text.setVisibility(View.GONE);
+                        buy_now.setVisibility(View.VISIBLE);      // if file is not purchased
                         already_purchased.setVisibility(View.GONE);
                         download_if_purchased.setVisibility(View.GONE);
-                       if(SAMPLE_FILE_URL.equals("http://modha.me.uk/admin/")){
-
+                       if(SAMPLE_FILE_URL.equals("http://modha.me.uk/admin/")){  // if sample is not available
                            no_previe_available.setVisibility(View.VISIBLE);
                            preview.setVisibility(View.GONE);
-                       }else {
+                           open_text.setVisibility(View.GONE);
+                       }else {                                        // if preview is available
                            no_previe_available.setVisibility(View.GONE);
                            preview.setVisibility(View.VISIBLE);
                            gradientlayout.setVisibility(View.GONE);
                            button_iimage.setVisibility(View.GONE);
+                           open_text.setVisibility(View.GONE);
                        }
-
-                    }else{
+                    }else{                                          // if book is already purchased
                         buy_now.setVisibility(View.GONE);
                         already_purchased.setVisibility(View.VISIBLE);
                         download_if_purchased.setVisibility(View.VISIBLE);
-                       no_previe_available.setVisibility(View.GONE);
-                       preview.setVisibility(View.GONE);
+                        no_previe_available.setVisibility(View.GONE);
+                        preview.setVisibility(View.GONE);
+                       open_text.setVisibility(View.GONE);
+                       if(checkBookAvailableInOnline("" + sbs.getSpecificBookSuccessProduct().getName() + ".epub")){
+                           buy_now.setVisibility(View.GONE);
+                           already_purchased.setVisibility(View.GONE);
+                           download_if_purchased.setVisibility(View.GONE);
+                           no_previe_available.setVisibility(View.GONE);
+                           preview.setVisibility(View.GONE);
+                           open_text.setVisibility(View.VISIBLE);
+                       }
+
                     }
 
 
@@ -358,7 +376,7 @@ public class FragmentSpecificBook extends Fragment {
                     relatedproducts();
 
                 } else {
-                    Toast.makeText(getActivity(), "Failurre", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
                 }
 
                 loader(1);
@@ -554,9 +572,6 @@ public class FragmentSpecificBook extends Fragment {
                 // download the file
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-
-
-
                 File cacheDir = getDataFolder(getActivity());
                 String newbookname = "sample_book.epub";
                 File cacheFile = new File(cacheDir, newbookname+".epub");
@@ -722,7 +737,7 @@ public class FragmentSpecificBook extends Fragment {
     public File getDataFolder(Context context) {
         File dataDir = null;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            dataDir = new File(Environment.getExternalStorageDirectory(), "ebbok_data");
+            dataDir = new File(Environment.getExternalStorageDirectory(), "ebook_data");
             if(!dataDir.isDirectory()) {
                 dataDir.mkdirs();
             }
@@ -752,4 +767,27 @@ public class FragmentSpecificBook extends Fragment {
         widthAnimation.start();
     }
 
+
+
+
+
+    public boolean checkBookAvailableInOnline(String bookname){
+        boolean returningvalue ;
+        String[] theNamesOfFiles ;                   // code for checking that checks weather this book is already in downloaded section or not
+        booknames = new ArrayList<>();
+        File[] filelist = getDataFolder(getActivity()).listFiles();
+        theNamesOfFiles = new String[filelist.length];
+        for (int i = 0; i < theNamesOfFiles.length; i++) {
+            if(!filelist[i].getName().equals("sample_book.epub.epub")){
+                booknames.add(""+filelist[i].getName());
+            }
+        }
+        if(booknames.contains(""+bookname)){
+
+            returningvalue =true ;
+        }else {
+            returningvalue = false ;
+        }
+        return  returningvalue ;
+    }
 }

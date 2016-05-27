@@ -342,6 +342,18 @@
 
 
 
+            <views.TypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available In Offline Section"
+                android:layout_gravity="center"
+                android:textColor="@color/icons_8_muted_offWhite"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                geekui:customTypeface="fonts/AllerDisplay.ttf"
+                android:id="@+id/open_text"/>
+
+
+
 
 
 

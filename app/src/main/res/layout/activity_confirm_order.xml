@@ -1,7 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     tools:context="com.apporio.ebookafrica.order.ConfirmOrder">
 
@@ -59,12 +61,82 @@
             android:scaleType="fitXY"/>
 
 
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name Of the book Goes here"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/title"
+            android:id="@+id/book_name"/>
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_green_1" />
+
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Author Name"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_green_1"
+            android:id="@+id/author_name"/>
+
+
+
         <Button
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:text="Open Book "
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/openbook"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 %"
+            android:id="@+id/percentage_text"/>
+        <com.daasuu.ahp.AnimateHorizontalProgressBar
+            android:id="@+id/animate_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            app:ahp_backgroundColor="@color/icons_8_muted_grey"
+            app:ahp_progressColor="@color/icons_8_muted_green_1" />
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Downloading"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textColor="@color/icons_8_muted_green_1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="cancel"
+            android:id="@+id/cancel"/>
+
     </LinearLayout>
 
 
