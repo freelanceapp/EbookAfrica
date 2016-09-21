@@ -106,6 +106,12 @@
             android:id="@+id/openbook"/>
 
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:id="@+id/trialimage"/>
+
+
 
         <TextView
             android:layout_width="wrap_content"

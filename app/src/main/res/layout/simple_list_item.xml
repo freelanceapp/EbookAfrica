@@ -11,7 +11,7 @@
 
 
 
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:id="@+id/imagebook"
         android:layout_width="85dp"
         android:layout_height="125dp"

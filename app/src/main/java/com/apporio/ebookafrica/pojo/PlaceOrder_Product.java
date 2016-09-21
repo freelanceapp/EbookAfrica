@@ -46,6 +46,20 @@ public class PlaceOrder_Product {
     @Expose
     private String downloadLink;
 
+
+
+    @SerializedName("file_type")
+    @Expose
+    private String filetypedownloadLink;
+
+    public String getFiletypedownloadLink() {
+        return filetypedownloadLink;
+    }
+
+    public void setFiletypedownloadLink(String filetypedownloadLink) {
+        this.filetypedownloadLink = filetypedownloadLink;
+    }
+
     /**
      * 
      * @return

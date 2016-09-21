@@ -1,13 +1,19 @@
 package com.apporio.ebookafrica.order;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +28,8 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.apporio.apporiologin.VolleySingleton;
 import com.apporio.ebookafrica.R;
 import com.apporio.ebookafrica.constants.CustomVolleyRequestQueue;
+import com.apporio.ebookafrica.constants.FileTypes;
+import com.apporio.ebookafrica.constants.FragmentStatus;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.database.PurchasedProductManager;
@@ -37,6 +45,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -58,7 +67,7 @@ public class ConfirmOrder extends Activity {
     ImageLoader mImageLoader;
     String file_url , BookNAME;
 
-    String BOOKIMAGE  , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE , PAYMENTID;
+    String BOOKIMAGE  , BOOKNAME = "" , BOOKID , ISBN  ,PAGES , HOURS ,PRICE , AUTHOR , MANUFACTURE , PAYMENTID , VOUCHERID , IMAGEBITMAP , FILETYPE;
     PurchasedProductManager psm ;
 
     AnimateHorizontalProgressBar animate_progress_bar ;
@@ -67,6 +76,8 @@ public class ConfirmOrder extends Activity {
     DownloadFileFromURL epubdowloadtas ;
     File cacheFile ;
 
+
+    ImageView trialimage ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +100,7 @@ public class ConfirmOrder extends Activity {
         animate_progress_bar = (AnimateHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
         percentage_text = (TextView) findViewById(R.id.percentage_text);
         cancel = (Button) findViewById(R.id.cancel);
+        trialimage = (ImageView) findViewById(R.id.trialimage);
         queue = VolleySingleton.getInstance(ConfirmOrder.this).getRequestQueue();
 
 
@@ -109,6 +121,22 @@ public class ConfirmOrder extends Activity {
         AUTHOR = getIntent().getExtras().getString("author");
         MANUFACTURE = getIntent().getExtras().getString("manufacturer");
         PAYMENTID = getIntent().getExtras().getString("payment_id");
+        VOUCHERID = getIntent().getExtras().getString("voucher_id");
+        FILETYPE = getIntent().getExtras().getString("file_type");
+
+
+
+
+        BitmapDrawable drawable = (BitmapDrawable)imagebook.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        String encodedimage = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+        IMAGEBITMAP = encodedimage ;
+        Bitmap decodedimage  = decodeBase64(encodedimage);
+        trialimage.setImageBitmap(decodedimage);
+
+
+
 
 
         try {
@@ -129,12 +157,7 @@ public class ConfirmOrder extends Activity {
             @Override
             public void onClick(View v) {
 
-                if(epubdowloadtas != null){
-                    epubdowloadtas.cancel(true);
-                    File file_to_be_deleted  = new File(""+cacheFile );
-                    file_to_be_deleted.delete();
-                    finish();
-                }
+                cacendownload();
             }
         });
 
@@ -150,13 +173,14 @@ public class ConfirmOrder extends Activity {
 
     private void confirmOrderApiExecution( String product_idd) throws JSONException {
 
+        Logger.d("Voucher ID "+VOUCHERID);
 
-        Logger.d("Customer Id That i am sending before placing order for book "+sm.getUserDetails().get(SessionManager.CUSTOMER_ID));
-
-
+        Logger.d(" Script Sending in Confirm Order API   "+ "{\"language_id\":1,\"coupon\":\"\",\"voucher\": "+"\""+VOUCHERID +"\""+",\"customer_id\":\""+ sm.getUserDetails().get(SessionManager.CUSTOMER_ID) +"\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":1}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\""+sm.getUserDetails().get(SessionManager.FIRST_NAME)+"\",\"payment_lastname\":\""+sm.getUserDetails().get(SessionManager.LAST_NAME)+"\",\"payment_company\":\"EbookAfica\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\""+sm.getUserDetails().get(SessionManager.TELEPHONE)+"\",\"payment_email\":\""+ sm.getUserDetails().get(SessionManager.EMAIL)+"\"},\"payment_method\":{\"title\":\"paypal\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}");
         JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, UrlsEbookAfrics.ConfirmOrder,
 
-                new JSONObject("{\"language_id\":1,\"coupon\":\"\",\"voucher\":\"\",\"customer_id\":\""+ sm.getUserDetails().get(SessionManager.CUSTOMER_ID) +"\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":1}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\""+sm.getUserDetails().get(SessionManager.FIRST_NAME)+"\",\"payment_lastname\":\""+sm.getUserDetails().get(SessionManager.LAST_NAME)+"\",\"payment_company\":\"EbookAfica\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\""+sm.getUserDetails().get(SessionManager.TELEPHONE)+"\",\"payment_email\":\""+ sm.getUserDetails().get(SessionManager.EMAIL)+"\"},\"payment_method\":{\"title\":\"paypal\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}"),
+
+
+                new JSONObject("{\"language_id\":1,\"coupon\":\"\",\"voucher\": "+"\""+VOUCHERID +"\""+",\"customer_id\":\""+ sm.getUserDetails().get(SessionManager.CUSTOMER_ID) +"\",\"products\":[{\"product_id\":"+product_idd+","+ "\"quantity\":1}],\"language_id\":1,\"payment_address\":{\"address_id\":14,\"payment_firstname\":\""+sm.getUserDetails().get(SessionManager.FIRST_NAME)+"\",\"payment_lastname\":\""+sm.getUserDetails().get(SessionManager.LAST_NAME)+"\",\"payment_company\":\"EbookAfica\",\"payment_address_1\":\"Gurgaon\",\"payment_address_2\":\"\",\"payment_city\":\"Gurgaon\",\"payment_postcode\":\"122001\",\"payment_country\":\"India\",\"payment_country_id\":\"99\",\"payment_zone\":\"Haryana\",\"payment_zone_id\":\"1486\",\"payment_telephone\":\""+sm.getUserDetails().get(SessionManager.TELEPHONE)+"\",\"payment_email\":\""+ sm.getUserDetails().get(SessionManager.EMAIL)+"\"},\"payment_method\":{\"title\":\"paypal\",\"code\": \"cod\",\"terms\": \"\",\"sort_order\": \"5\"},\"shipping_method\":{\"title\":\"Flat Rate Shipping\",\"code\": \"flat\",\"cost\": \"5.00\",\"tax_class_id\": \"9\",\"sort_order\": \"5\"}}"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -170,7 +194,11 @@ public class ConfirmOrder extends Activity {
                             com.apporio.ebookafrica.pojo.ConfirmOrder co = new com.apporio.ebookafrica.pojo.ConfirmOrder();
                             co = gson.fromJson("" + response, com.apporio.ebookafrica.pojo.ConfirmOrder.class);
                             BookNAME = co.getOrderInfo().getConfirmOrderProducts().get(0).getName();
-                            placeorderApiExecution("" + co.getOrderInfo().getOrderId());
+                            try {
+                                placeorderApiExecution("" + co.getOrderInfo().getOrderId());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
 
                         }else {
@@ -204,18 +232,18 @@ public class ConfirmOrder extends Activity {
 
 
 
-    private void placeorderApiExecution( String order_id) {
-        Map<String, String> jsonParams = new HashMap<String, String>();
+    private void placeorderApiExecution(String order_id) throws JSONException {
 
-        jsonParams.put("order_id", ""+order_id);
-        jsonParams.put("order_status_id", "1");
+        Logger.d("Voucher ID "+VOUCHERID);
 
+        Logger.d(" Script Sending in Place Order API   "+ "{\"order_id\": "+"\""+order_id +"\""+",\"order_status_id\":1}");
         JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, UrlsEbookAfrics.PlaceOrder,
-
-                new JSONObject(jsonParams),
+                new JSONObject("{\"order_id\": "+"\""+order_id +"\""+",\"order_status_id\":1}"),
                 new Response.Listener<JSONObject>() {
+                    @SuppressLint("LongLogTag")
                     @Override
                     public void onResponse(JSONObject response) {
+
 
                         GsonBuilder gsonBuilder = new GsonBuilder();
                         Gson gson = gsonBuilder.create();
@@ -225,8 +253,12 @@ public class ConfirmOrder extends Activity {
                         if(rcheck.getStatus().equals("success")){
                             PlaceOrder po = new PlaceOrder();
                             po = gson.fromJson("" + response, PlaceOrder.class);
+
+                            Log.d("Response after placing order ",""+response);
                             capturedownloadlink.setText("" + po.getPlaceOrderOrderDetail().getPlaceOrderProducts().get(0).getDownloadLink());
                             file_url  =  po.getPlaceOrderOrderDetail().getPlaceOrderProducts().get(0).getDownloadLink() ;
+                          Logger.d("URL for downloading book "+file_url);
+                            FILETYPE = po.getPlaceOrderOrderDetail().getPlaceOrderProducts().get(0).getFiletypedownloadLink() ;
                             download.setEnabled(true);
                             download.setText("Start Downloading");
                             openbook.setVisibility(View.VISIBLE);
@@ -252,15 +284,72 @@ public class ConfirmOrder extends Activity {
             }
         };
         queue.add(postRequest);
+        download.setEnabled(false);
+        download.setText("Loading");
+        openbook.setVisibility(View.GONE);
     }
 
 
 
 
 
+//    private void placeorderApiExecution( String order_id) {
+//        Map<String, String> jsonParams = new HashMap<String, String>();
+//
+//        jsonParams.put("order_id", ""+order_id);
+//        jsonParams.put("order_status_id", "1");
+//
+//        JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, UrlsEbookAfrics.PlaceOrder,
+//
+//                new JSONObject(jsonParams),
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//
+//
+//                        GsonBuilder gsonBuilder = new GsonBuilder();
+//                        Gson gson = gsonBuilder.create();
+//                        ResponseChecker rcheck = new ResponseChecker();
+//                        rcheck = gson.fromJson("" + response, ResponseChecker.class);
+//
+//                        if(rcheck.getStatus().equals("success")){
+//                            PlaceOrder po = new PlaceOrder();
+//                            po = gson.fromJson("" + response, PlaceOrder.class);
+//
+//                            Log.d("Response after placing order ",""+response);
+//                            capturedownloadlink.setText("" + po.getPlaceOrderOrderDetail().getPlaceOrderProducts().get(0).getDownloadLink());
+//                            file_url  =  po.getPlaceOrderOrderDetail().getPlaceOrderProducts().get(0).getDownloadLink() ;
+//                          Logger.d("URL for downloading book "+file_url);
+//                            download.setEnabled(true);
+//                            download.setText("Start Downloading");
+//                            openbook.setVisibility(View.VISIBLE);
+//                            epubdowloadtas.execute(file_url);
+//                        }else {
+//
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(ConfirmOrder.this , "" +error, Toast.LENGTH_SHORT).show();
+//                    }
+//                }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<String, String>();
+//                headers.put("Content-Type", "application/json; charset=utf-8");
+//                headers.put("User-agent", System.getProperty("http.agent"));
+//                return headers;
+//            }
+//        };
+//        queue.add(postRequest);
+//    }
+
+
 
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -271,6 +360,13 @@ public class ConfirmOrder extends Activity {
         protected String doInBackground(String... f_url) {
             int count;
             try {
+                Logger.d("Book Downloading with this URL "+f_url[0]);
+
+                if(f_url[0].contains(".pdf")){
+                    Logger.d("this is a PDF file");
+                }else{
+                    Logger.d("This is EPUB file");
+                }
                 URL url = new URL(f_url[0]);
                 URLConnection conection = url.openConnection();
                 conection.connect();
@@ -279,8 +375,13 @@ public class ConfirmOrder extends Activity {
                 // download the file
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
                 File cacheDir = getDataFolder(ConfirmOrder.this);
-                String newbookname = BookNAME.replace(" " , "_");
-                cacheFile= new File(cacheDir, newbookname+".epub");
+                String newbookname = BookNAME.replace(" ", "_");
+                if(FILETYPE.equals(""+ FileTypes.EPUB_FILE_TYPE)){
+                    cacheFile= new File(cacheDir, newbookname+".epub");
+                }if(FILETYPE.equals(""+FileTypes.PDF_FILE_TYPE)){
+                    cacheFile= new File(cacheDir, newbookname+".pdf");
+                }
+
                 Logger.d("file path " + cacheFile);
                 FileOutputStream output = new FileOutputStream(cacheFile);
                 byte data[] = new byte[1024];
@@ -304,10 +405,6 @@ public class ConfirmOrder extends Activity {
             return null;
         }
 
-
-
-
-
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
             percentage_text.setText(""+progress[0] + " %");
@@ -323,16 +420,19 @@ public class ConfirmOrder extends Activity {
             Toast.makeText(ConfirmOrder.this ,"File Downloaded Successfully  , now available in offline section " ,Toast.LENGTH_LONG).show();
             savaBookLocaly();
             finish();
-            SpecificBookActivity.activity.finish();
+            if(FragmentStatus.LastOpenActivity.equals("AlreadyPurchasedActivity")){
+                // do not need to other finishing
+            }else {
+                SpecificBookActivity.activity.finish();
+            }
+
         }
     }
 
 
-
-
-
     private void savaBookLocaly() {
-        psm.addtoPurchasedProductTable(BOOKNAME, BOOKID, ISBN, BOOKIMAGE, PAGES, HOURS, PRICE, AUTHOR, MANUFACTURE);
+
+        psm.addtoPurchasedProductTable(BOOKNAME, BOOKID, ISBN, BOOKIMAGE, PAGES, HOURS, PRICE, AUTHOR, MANUFACTURE , IMAGEBITMAP , FILETYPE);
     }
 
 
@@ -348,6 +448,43 @@ public class ConfirmOrder extends Activity {
             dataDir = context.getFilesDir();
         }
         return dataDir;
+    }
+
+
+
+    public void cacendownload(){
+        if(epubdowloadtas != null){
+            epubdowloadtas.cancel(true);
+            File file_to_be_deleted  = new File(""+cacheFile );
+            file_to_be_deleted.delete();
+            finish();
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        cacendownload();
+
+    }
+
+
+
+
+
+
+    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality)
+    {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedBytes = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
 

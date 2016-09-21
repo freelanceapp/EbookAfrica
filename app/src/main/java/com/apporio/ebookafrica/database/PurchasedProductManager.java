@@ -26,13 +26,15 @@ public class PurchasedProductManager {
 
 
 
-    public  void addtoPurchasedProductTable(  String name, String productid, String isbn, String image, String pages, String hours, String price, String author, String manufacturer){
+    public  void addtoPurchasedProductTable(  String name, String productid, String isbn, String image, String pages, String hours, String price, String author, String manufacturer , String prodctbitmap , String filetype){
 
         if(checkproductExsistance(productid)){
-            updateexsistingRow( name,  productid,  isbn,  image,  pages,  hours,  price,  author,  manufacturer);
+            updateexsistingRow( name,  productid,  isbn,  image,  pages,  hours,  price,  author,  manufacturer ,prodctbitmap , filetype);
         }else {
-            createNewRowInTable( name,  productid,  isbn,  image,  pages,  hours,  price,  author,  manufacturer);
+            createNewRowInTable( name,  productid,  isbn,  image,  pages,  hours,  price,  author,  manufacturer , prodctbitmap , filetype);
         }
+
+        Logger.d("bitmap image that we are saving in database " +prodctbitmap);
     }
 
 
@@ -41,7 +43,7 @@ public class PurchasedProductManager {
 
 
 
-    public  void updateexsistingRow (String name, String productid, String isbn, String image, String pages, String hours, String price, String author, String manufacturer){
+    public  void updateexsistingRow (String name, String productid, String isbn, String image, String pages, String hours, String price, String author, String manufacturer , String prodctbitmap , String filetype){
 
         Purchasedproducts tobechangedelement =
                 myRealm.where(Purchasedproducts.class)
@@ -59,6 +61,8 @@ public class PurchasedProductManager {
         tobechangedelement.setPrice(price);
         tobechangedelement.setAuthor(author);
         tobechangedelement.setManufacturer(manufacturer);
+        tobechangedelement.setProdctbitmap(prodctbitmap);
+        tobechangedelement.setFiletype(filetype);
         myRealm.commitTransaction();
 
         Logger.d("Row Updated");
@@ -66,7 +70,7 @@ public class PurchasedProductManager {
 
 
 
-    public  void createNewRowInTable(String name, String productid, String isbn, String image, String pages, String hours, String price, String author, String manufacturer){
+    public  void createNewRowInTable(String name, String productid, String isbn, String image, String pages, String hours, String price, String author, String manufacturer , String prodctbitmap , String filetype){
 
         myRealm.beginTransaction();
 
@@ -82,6 +86,8 @@ public class PurchasedProductManager {
         pd.setPrice(price);
         pd.setAuthor(author);
         pd.setManufacturer(manufacturer);
+        pd.setProdctbitmap(prodctbitmap);
+        pd.setFiletype(filetype);
         myRealm.commitTransaction();
 
         Logger.d("New Row Created");
@@ -103,7 +109,7 @@ public class PurchasedProductManager {
 
         RealmResults<Purchasedproducts> results1 =
                 myRealm.where(Purchasedproducts.class)
-                        .equalTo("productid", ""+product_id)
+                        .equalTo("productid", "" + product_id)
                         .findAll();
 
         if(results1.size() >0){
@@ -112,6 +118,15 @@ public class PurchasedProductManager {
             value = false ;
         }
         return  value ;
+    }
+
+
+    public String getFileTypeAccordingToProductId(String product_id){
+        RealmResults<Purchasedproducts> results1 =
+                myRealm.where(Purchasedproducts.class)
+                        .equalTo("productid", ""+product_id)
+                        .findAll();
+                 return results1.get(0).getFiletype();
     }
 
 

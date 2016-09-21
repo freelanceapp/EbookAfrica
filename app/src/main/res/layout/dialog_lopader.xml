@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:orientation="vertical"
+        android:background="@drawable/white_circle"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/loader">
+
+        <com.cunoraz.gifview.library.GifView
+            android:id="@+id/gif1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            custom:gif="@drawable/loading_book"
+            android:paddingTop="-20dp"
+            android:paddingBottom="-40dp"
+            android:background="@android:color/transparent"/>
+
+
+        <views.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            geekui:customTypeface="fonts/Confessions Font.otf"
+            android:textSize="15dp"
+            android:text="Loading..."
+            android:id="@+id/bookname"
+            android:textColor="@color/icons_8_muted_green_1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="-30dp"/>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -6,4 +6,5 @@ package com.apporio.ebookafrica.constants;
 public class FragmentStatus {
 
     public static String GetOpenfragment = "";
+    public static String LastOpenActivity = "";
 }

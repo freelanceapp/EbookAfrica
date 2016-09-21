@@ -46,11 +46,10 @@ import java.util.Stack;
 
 public class BookViewActivityEPUBSamir extends Activity {
 
-	ReflowableControl rv;
+	ReflowableControl reflowableview;
 	LinearLayout ePubView;
 	Button debugButton1;
 	Button markButton;
-
 	int textsize;
 
 
@@ -128,7 +127,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 		highlights = new Highlights();
 		String fileName = new String();
 		fileName = ""+FileaName.FileNAME;
-		textsize=18;
+		textsize=15;
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		float density = metrics.density;
 
@@ -169,64 +168,61 @@ public class BookViewActivityEPUBSamir extends Activity {
 		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 
 
-		rv = new ReflowableControl(this);
+		reflowableview = new ReflowableControl(this);
 
 		if (this.getOSVersion()>=11) {
-			rv = new ReflowableControl(this);						// in case that device supports transparent webkit, the background image under the content can be shown. in some devices, content may be overlapped.
+			reflowableview = new ReflowableControl(this);						// in case that device supports transparent webkit, the background image under the content can be shown. in some devices, content may be overlapped.
 		}else {
-			rv = new ReflowableControl(this,getCurrentTheme().backgroundColor);			// in case that device can not support transparent webkit, the background color will be set in one color.
+			reflowableview = new ReflowableControl(this,getCurrentTheme().backgroundColor);			// in case that device can not support transparent webkit, the background color will be set in one color.
 		}
 
 		String baseDirectory = getFilesDir().getAbsolutePath() + "/books";
-		rv.setBaseDirectory(baseDirectory);
-		rv.setBookName(fileName);
-		rv.setLicenseKey("1221-1132-1334-1243");
+		reflowableview.setBaseDirectory(baseDirectory);
+		reflowableview.setBookName(fileName);
+		//reflowableview.setLicenseKey("1221-1132-1334-1243");
 
-		rv.setGlobalPaging(true);
-		rv.setDoublePagedForLandscape(true);
-		rv.setFont("TimesRoman", textsize);
-		rv.setLineSpacing(135); // the value is supposed to be percent(%).
-		rv.setHorizontalGapRatio(0.30);
-		rv.setVerticalGapRatio(0.22);
+		reflowableview.setGlobalPaging(true);
+		reflowableview.setDoublePagedForLandscape(true);
+		reflowableview.setFont("TimesRoman", textsize);
+		reflowableview.setLineSpacing(135); // the value is supposed to be percent(%).
+		reflowableview.setHorizontalGapRatio(0.30);
+		reflowableview.setVerticalGapRatio(0.22);
 
-		rv.setPageMovedListener(new PageMovedDelegate());
 
-		rv.setPagingListener(new PagingDelegate());
-
-		rv.setMaxSizeForBackground(1024);
+		reflowableview.setPageMovedListener(new PageMovedDelegate());
+		reflowableview.setPagingListener(new PagingDelegate());
+		reflowableview.setMaxSizeForBackground(1024);
 		if (this.isDoublePagedForLandscape) {
-			rv.setBackgroundForLandscape(this.getBackgroundForLandscape(), 	new Rect(0,0,2004,1506),	new Rect(32	,0,2004-32,1506)); 			// Android Rect - left,top,right,bottom
+			reflowableview.setBackgroundForLandscape(this.getBackgroundForLandscape(), 	new Rect(0,0,2004,1506),	new Rect(32	,0,2004-32,1506)); 			// Android Rect - left,top,right,bottom
 		}else {
-			rv.setBackgroundForLandscape(this.getBackgroundForLandscape(), 	new Rect(0,0,2004,1506),	new Rect(0	,0,2004-32,1506)); 			// Android Rect - left,top,right,bottom
+			reflowableview.setBackgroundForLandscape(this.getBackgroundForLandscape(), 	new Rect(0,0,2004,1506),	new Rect(0	,0,2004-32,1506)); 			// Android Rect - left,top,right,bottom
 		}
-		Log.e("chapter index", "" + rv.getChapterIndex());
+		Log.e("chapter index", "" + reflowableview.getChapterIndex());
 
-		Log.e("number of pages", "" + rv.getNumberOfPagesInBook());
+		Log.e("number of pages", "" + reflowableview.getNumberOfPagesInBook());
 
 
 
-		rv.setPageTransition(PageTransition.Curl);
-
-		rv.setLayoutParams(params);
-
+		reflowableview.setPageTransition(PageTransition.Curl);
+		reflowableview.setLayoutParams(params);
 		SkyProvider skyProvider = new SkyProvider();
-		rv.setContentProvider(skyProvider);
-		rv.setBackgroundColor(getCurrentTheme().backgroundColor);
-		rv.setForegroundColor(getCurrentTheme().foregroundColor);
+		reflowableview.setContentProvider(skyProvider);
+		reflowableview.setBackgroundColor(getCurrentTheme().backgroundColor);
+		reflowableview.setForegroundColor(getCurrentTheme().foregroundColor);
 
-		rv.setFingerTractionForSlide(true);
-		rv.setSendingEventsToIFrameEnabled(false);
-		rv.setGlobalOffset(true);
+		reflowableview.setFingerTractionForSlide(true);
+		reflowableview.setSendingEventsToIFrameEnabled(false);
+		reflowableview.setGlobalOffset(true);
 
 		//  params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
 		//  params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
 		params.width = LayoutParams.WRAP_CONTENT; // 400;
 		params.height = LayoutParams.WRAP_CONTENT; // 600;
-		rv.setStartPositionInBook(pagePositionInBook);
+		reflowableview.setStartPositionInBook(pagePositionInBook);
 
-		rv.useDOMForHighlight(false);
-		rv.setNavigationAreaWidthRatio(0.4f); // both left and right side.
-		ePubView.addView(rv);
+		reflowableview.useDOMForHighlight(false);
+		reflowableview.setNavigationAreaWidthRatio(0.4f); // both left and right side.
+		ePubView.addView(reflowableview);
 
 		RelativeLayout.LayoutParams debugButton1Param = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -293,12 +289,12 @@ public class BookViewActivityEPUBSamir extends Activity {
 
 				int index = view.getId();
 
-				NavPoints nps = rv.getNavPoints();
+				NavPoints nps = reflowableview.getNavPoints();
 				targetNavPoint = nps.getNavPoint(position);
 				new Handler().postDelayed(new Runnable() {
 					public void run() {
-						rv.showPages();
-						rv.gotoPageByNavPoint(targetNavPoint);
+						reflowableview.showPages();
+						reflowableview.gotoPageByNavPoint(targetNavPoint);
 					}
 				}, 200);
 
@@ -331,23 +327,23 @@ public class BookViewActivityEPUBSamir extends Activity {
 			public boolean onMenuItemClick(MenuItem item) {
 				String t = (String) item.getTitle();
 				if (t.equals("text size 15")) {
-					rv.changeFontSize(15);
+					reflowableview.changeFontSize(15);
 
 				}
 				if (t.equals("text size 18")) {
-					rv.changeFontSize(18);
+					reflowableview.changeFontSize(18);
 				}
 				if (t.equals("text size 20")) {
-					rv.changeFontSize(20);
+					reflowableview.changeFontSize(20);
 				}
 
 				if (t.equals("text size 23")) {
-					rv.changeFontSize(23);
+					reflowableview.changeFontSize(23);
 
 				}
 
 				if (t.equals("text size 25")) {
-					rv.changeFontSize(25);
+					reflowableview.changeFontSize(25);
 
 				}
 				return true;
@@ -365,7 +361,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 			} else if (arg.getId() == 8081) {
 				finish();
 			} else if (arg.getId() == 8082) {
-				rv.debug2("");
+				reflowableview.debug2("");
 			} else if (arg.getId() == 8083) {
 				hideButton();
 				mark();
@@ -374,7 +370,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 	};
 
 	private void displayNavPoints() {
-		NavPoints nps = rv.getNavPoints();
+		NavPoints nps = reflowableview.getNavPoints();
 
 		for (int i=0; i<nps.getSize(); i++) {
 			NavPoint np = nps.getNavPoint(i);
@@ -400,7 +396,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 	}
 
 	private void mark() {
-		rv.markSelection(0x66FFFF00, "");
+		reflowableview.markSelection(0x66FFFF00, "");
 
 	}
 
@@ -415,7 +411,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 
 		public void onPaged(PagingInformation pagingInformation) {
 			int ci = pagingInformation.chapterIndex;
-			int cn = rv.getNumberOfChapters();
+			int cn = reflowableview.getNumberOfChapters();
 			int value = (int)((float)ci*100/(float)cn);
 			//changePagingView(value);
 
@@ -447,8 +443,8 @@ public class BookViewActivityEPUBSamir extends Activity {
 	public void disableControlBeforePagination() {
 
 
-		int pi = rv.getPageIndexInChapter();
-		int tn = rv.getNumberOfPagesInChapter();
+		int pi = reflowableview.getPageIndexInChapter();
+		int tn = reflowableview.getNumberOfPagesInChapter();
 		setIndexLabelsText(-1,-1); // do not display.
 
 		Log.e("page index in chapter"+pi,"no. of pages in chapter"+tn);
@@ -457,8 +453,8 @@ public class BookViewActivityEPUBSamir extends Activity {
 
 	public void enableControlAfterPagination() {
 
-		int pi = rv.getPageIndexInBook();
-		int tn = rv.getNumberOfPagesInBook();
+		int pi = reflowableview.getPageIndexInBook();
+		int tn = reflowableview.getNumberOfPagesInBook();
 		setIndexLabelsText(pi,tn);
 
 
@@ -473,15 +469,15 @@ public class BookViewActivityEPUBSamir extends Activity {
 		public void onPageMoved(PageInformation pi) {
 			double ppb = pi.pagePositionInBook;
 			double pageDelta = ((1.0f/pi.numberOfChaptersInBook)/pi.numberOfPagesInChapter);
-			if (rv.isRTL()) {
+			if (reflowableview.isRTL()) {
 				ppb +=pageDelta;
 			}
 
 			int progress = (int)((double)999.0f * (ppb));
 			int pib = pi.pageIndexInBook;
 
-			if (rv.isGlobalPagination()) {
-				if (!rv.isPaging()) {
+			if (reflowableview.isGlobalPagination()) {
+				if (!reflowableview.isPaging()) {
 
 					setIndexLabelsText(pi.pageIndexInBook,pi.numberOfPagesInBook);
 				}else {
@@ -516,10 +512,10 @@ public class BookViewActivityEPUBSamir extends Activity {
 		public void onChapterLoaded(int chapterIndex) {
 			// TODO Auto-generated method stub
 
-			if (rv.isMediaOverlayAvailable()) {
+			if (reflowableview.isMediaOverlayAvailable()) {
 
 				if (autoStartPlayingWhenNewPagesLoaded) {
-					if (isAutoPlaying) rv.playFirstParallelInPage();
+					if (isAutoPlaying) reflowableview.playFirstParallelInPage();
 				}
 			}else {
 
@@ -546,7 +542,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 		pi = 0;
 		int si = 0;
 		int pc;
-		if (rv.isDoublePaged()) {
+		if (reflowableview.isDoublePaged()) {
 			pc = pageCount*2;
 			pi = pageIndex*2+1;
 			si = pageIndex*2+2;
@@ -554,7 +550,7 @@ public class BookViewActivityEPUBSamir extends Activity {
 			pc = pageCount;
 			pi = pageIndex+1;
 			si = pageIndex+2;
-			if (rv.isRTL()) {
+			if (reflowableview.isRTL()) {
 				pi = pc-pi+1;
 				si = pc-si+1;
 			}

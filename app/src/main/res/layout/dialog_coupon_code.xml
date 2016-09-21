@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dim_280"
+    android:layout_height="wrap_content"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_white_curve"
+    android:orientation="vertical"
+    android:padding="@dimen/dim_3">
+
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="5dp">
+        <ImageView
+            android:layout_width="@dimen/dim_20"
+            android:layout_height="@dimen/dim_20"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_coupons_green" />
+
+    </LinearLayout>
+
+    <views.TypefaceTextView
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dim_30"
+        geekui:customTypeface="fonts/Confessions Font.otf"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dim_7"
+        android:text="Enter Coupon Code"
+        android:textSize="@dimen/dim_18" />
+
+
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:hint="Coupon Code"
+        android:textColor="#ffffff"
+        android:textColorHint="#ebbdbdbd"
+        android:id="@+id/coupon_code_edt"
+        android:background="@color/icons_8_muted_green_1"/>
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_40"
+            android:layout_below="@+id/btnLogOut"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dim_10"
+            android:background="@color/icons_8_muted_green_1_dark"
+            android:text="Cancel"
+            android:layout_weight="1"
+            android:textColor="#fff" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#ffffff"/>
+
+        <Button
+            android:id="@+id/apply_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_40"
+            android:layout_below="@+id/btnLogOut"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dim_10"
+            android:background="@color/icons_8_muted_green_1_dark"
+            android:text="Apply"
+            android:layout_weight="1"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.constants.FragmentStatus;
 import com.apporio.ebookafrica.constants.SessionManager;
 
 public class PreviousOrdersActivity extends FragmentActivity {
@@ -45,4 +46,16 @@ public class PreviousOrdersActivity extends FragmentActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FragmentStatus.LastOpenActivity = "AlreadyPurchasedActivity";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FragmentStatus.LastOpenActivity = "";
+
+    }
 }

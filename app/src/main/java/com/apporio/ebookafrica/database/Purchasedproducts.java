@@ -17,6 +17,22 @@ public class Purchasedproducts extends RealmObject {
     private String price;
     private String author;
     private String manufacturer;
+    private String prodctbitmap;
+    private String filetype ;
+
+
+
+
+
+
+
+    public String getProdctbitmap() {
+        return prodctbitmap;
+    }
+
+    public void setProdctbitmap(String prodctbitmap) {
+        this.prodctbitmap = prodctbitmap;
+    }
 
 
     public String getName() {
@@ -92,6 +108,13 @@ public class Purchasedproducts extends RealmObject {
     }
 
 
+    public String getFiletype() {
+        return filetype;
+    }
+
+    public void setFiletype(String filetype) {
+        this.filetype = filetype;
+    }
 
 
 }

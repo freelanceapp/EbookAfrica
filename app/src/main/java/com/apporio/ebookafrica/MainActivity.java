@@ -1,9 +1,13 @@
 package com.apporio.ebookafrica;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -76,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         psm = new PreviousLoginedStateSessionManager(MainActivity.this);
         EventBus.getDefault().register(this);
 
+
+        isStoragePermissionGranted();
         mainActivity = this ;
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -94,12 +100,15 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, "query   " + query, Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(MainActivity.this, SpecificBookActivity.class);
-                int l = search_name.indexOf(query);
-                in.putExtra("product_id" , "" + search_id.get(l));
-                in.putExtra("product_name" , "" +query);
-                startActivity(in);
+                if(search_name.indexOf(query) != -1){
+                    Intent in = new Intent(MainActivity.this, SpecificBookActivity.class);
+                    int l = search_name.indexOf(query);
+                    in.putExtra("product_id" , "" + search_id.get(l));
+                    in.putExtra("product_name" , "" +query);
+                    startActivity(in);
+                }else {
+                  Toast.makeText(MainActivity.this , "No Such related content available!" , Toast.LENGTH_SHORT).show();
+                }
 
 
                 return false;
@@ -189,6 +198,26 @@ public class MainActivity extends AppCompatActivity {
             setfragmentinContainer(new FragmentHome(), "" + R.string.fragment_home, 1);
 
 
+
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Logger.d( "Permission is granted");
+                return true;
+            } else {
+
+                Logger.d("Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Logger.d("Permission is granted");
+            return true;
+        }
 
     }
 
@@ -353,8 +382,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_container
-                , fragment);
+        ft.replace(R.id.main_container, fragment);
         ft.commit();
 
 

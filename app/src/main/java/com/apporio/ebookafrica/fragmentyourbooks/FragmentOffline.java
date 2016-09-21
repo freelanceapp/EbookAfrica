@@ -12,8 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.apporio.apporiologin.AppOrioLoginScreen;
-import com.apporio.ebookafrica.constants.FragmentStatus;
+import com.apporio.ebookafrica.PDFViewerActivity;
 import com.apporio.ebookafrica.R;
+import com.apporio.ebookafrica.constants.FragmentStatus;
 import com.apporio.ebookafrica.constants.SessionManager;
 import com.apporio.ebookafrica.constants.UrlsEbookAfrics;
 import com.apporio.ebookafrica.epubsamir.FileaName;
@@ -54,7 +55,7 @@ public class FragmentOffline extends Fragment {
             }
         }
 
-
+        Logger.d("Total numbers of books  "+booknames.size());
         for(int i = 0 ; i < booknames.size() ; i++){
             Logger.d("name of books in offline fragment "+booknames.get(i));
         }
@@ -81,7 +82,11 @@ public class FragmentOffline extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FileaName.FilePath = "" + getDataFolder(getActivity()) + "/" + booknames.get(position).replace(" ", "_");
                 FileaName.FileNAME = "" + booknames.get(position).replace(" ", "_");
-                startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
+                if(FileaName.FileNAME.contains(".pdf")){
+                    startActivity(new Intent(getActivity(), PDFViewerActivity.class));
+                }if(FileaName.FileNAME.contains(".epub")){
+                    startActivity(new Intent(getActivity(), MainActivityEPUBSamir.class));
+                }
             }
         });
 

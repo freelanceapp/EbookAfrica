@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class FragmentPurchasedBooks extends Fragment {
     private static RequestQueue queue ;
     private static StringRequest sr;
 
+    LinearLayout no_books_layout ;
+
     @SuppressLint("ValidFragment")
     public FragmentPurchasedBooks(){
 
@@ -54,24 +57,22 @@ public class FragmentPurchasedBooks extends Fragment {
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         View rootView = inflater.inflate(R.layout.fragment_purchased_books, container, false);
         list = (ListView) rootView.findViewById(R.id.list);
-
-
-        PreviousOrderExecution();
-
-
+        no_books_layout = (LinearLayout) rootView.findViewById(R.id.no_books_layout);
         return rootView;
     }
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+        PreviousOrderExecution();
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
-
-
-
-
-
 
 
 
@@ -90,13 +91,19 @@ public class FragmentPurchasedBooks extends Fragment {
                 rcheck = gson.fromJson(response, ResponseChecker.class);
 
                 if(rcheck.getStatus().equals("success")){
+
                     PurchasedBooks pb = new PurchasedBooks();
                     pb = gson.fromJson(response, PurchasedBooks.class);
 
-                    Toast.makeText(getActivity() , "Total no of purchases "+pb.getPurchasedBooksOrders().get(0).getPurchasedBooksOrderTotals(), Toast.LENGTH_SHORT).show();
-
-                    list.setAdapter(new AdapterPurchasedBooks(getActivity() , pb.getPurchasedBooksOrders()));
-
+                    if(pb.getPurchasedBooksOrders().size() == 0 ){
+                        Toast.makeText(getActivity() , "Not Yet Purchased Any Book", Toast.LENGTH_SHORT).show();
+                        no_books_layout.setVisibility(View.VISIBLE);
+                        list.setVisibility(View.GONE);
+                    }else if (pb.getPurchasedBooksOrders().size()>0){
+                        no_books_layout.setVisibility(View.GONE);
+                        list.setVisibility(View.VISIBLE);
+                        list.setAdapter(new AdapterPurchasedBooks(getActivity() , pb.getPurchasedBooksOrders()));
+                    }
                 } else {
                 }
 

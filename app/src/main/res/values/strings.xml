@@ -21,6 +21,11 @@
     </string>
     <string name="title_activity_previous_orders">PreviousOrdersActivity</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_book_view_sample">BookViewSample</string>
+    <string name="title_activity_download_already_purchased_books">
+        DownloadAlreadyPurchasedBooksActivity
+    </string>
+    <string name="title_activity_pdfviewer">PDFViewerActivity</string>
 
 
 
