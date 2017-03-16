@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
+// via bhuvnesh pc
 import com.apporio.ebookafrica.R;
 
 /**
